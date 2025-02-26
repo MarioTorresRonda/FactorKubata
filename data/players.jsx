@@ -16,7 +16,6 @@ export const players = [
     name: "FK Archer",
     role: top,
     imgSrc : jorgePlayer
-
 },
 {
     name: "FK Cabra",

@@ -1,3 +1,5 @@
+'use client'
+
 import {Roboto_Condensed} from "next/font/google";
 import Image from "next/image";
 

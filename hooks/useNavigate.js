@@ -1,8 +1,6 @@
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
 
-export function useNavigate( MenuContext ) {
-
+export function useNavigate() {
     
     const router = useRouter();
     
