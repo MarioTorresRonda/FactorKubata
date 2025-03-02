@@ -12,7 +12,11 @@ import { useState } from "react";
 import ExpandedView from "./ExpandedView";
 
 export default function Match({match}) {
-    const [shown, setShown] = useState(false)
+    const [shown, setShown] = useState(false);
+
+    const bluePlayers = [];
+    const redPlayers = [];
+    let result = "";
 
     let timeLeft = null;
     if ( match.win == null ) {
@@ -32,14 +36,27 @@ export default function Match({match}) {
         }else{
             backgroundColor = "bg-red-300"
         }
+
+        match.info.participants.forEach(element => {
+            if ( element.TEAM == "100" ) {
+                bluePlayers.push( element );
+            }
+            if ( element.TEAM == "200" ) {
+                redPlayers.push( element );
+            }
+        });
+        
+        result += bluePlayers.map( player => player.CHAMPIONS_KILLED ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
+        result += "-";
+        result += redPlayers.map( player => player.CHAMPIONS_KILLED ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
     }
+
+    const blueSide = { team: match.blue, players: bluePlayers };
+    const redSide ={ team: match.red, players: redPlayers };
 
     function onHandleShown() {
         setShown( prevShown => !prevShown );
     }
-    
-    const blueTeam = match.expandedView.blue.team;
-    const redTeam = match.expandedView.red.team;
 
     return (
         <div className={` ${backgroundColor}  lg:w-2/3 shadow-md shadow-gray-800 dark:shadow-black text-stone-900 hover:rotate-y-6 transition-all duration-300`}>
@@ -51,9 +68,9 @@ export default function Match({match}) {
             <HorizontalBar className="w-full h-[2px]" />
             <div className="h-20 flex flex-row gap-2 justify-center items-center w-full">
                 <div className={`h-12 ${ match.win == null ? "w-[44%]" : "w-[48%]" } flex flex-row gap-2 justify-end items-center`}>
-                    <div> {blueTeam.name} </div>
+                    <div> {blueSide.team.name} </div>
                     <div>
-                        <Image height={48} width={48} src={blueTeam.icon} alt={blueTeam.name}></Image>
+                        <Image height={48} width={48} src={blueSide.team.icon} alt={blueSide.team.name}></Image>
                     </div>
                 </div>
                 { match.win === null && <div className="w-[12%]">quedan: { timeLeft }</div>}
@@ -63,15 +80,15 @@ export default function Match({match}) {
                         { <FAI className="h-4" icon={showIcon}></FAI> }
                     </button>
                 </div> }
-                { shown && <div className="w-[4%]"> {match.result} </div>}
+                { shown && <div className="w-[4%]"> {result} </div>}
                 <div className={`h-12 ${ match.win == null ? "w-[44%]" : "w-[48%]" } flex flex-row gap-2 justify-start items-center`}>
                     <div>
-                        <Image height={48} width={48} src={redTeam.icon} alt={redTeam.name}></Image>
+                        <Image height={48} width={48} src={redSide.team.icon} alt={redSide.team.name}></Image>
                     </div>
-                    <div> {redTeam.name} </div>
+                    <div> {redSide.team.name} </div>
                 </div>
             </div>
-            { shown && <ExpandedView expandedView={match.expandedView} /> }
+            { shown && <ExpandedView  blue={blueSide} red={redSide} /> }
             <div className="h-12 px-4 flex flex-row justify-center items-center text-xl w-full">
                 <div> { parseMatchDate( match.date ) } </div>
             </div>

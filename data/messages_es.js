@@ -17,6 +17,8 @@ let messages = {
         },
         matches: {
             title: "Partidos",
+            side0: "Azul",
+            side1: "Rojo",
             matchList: {
                 "23022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 3 ",
                 "16022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 2 ",
