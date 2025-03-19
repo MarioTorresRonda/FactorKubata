@@ -17,8 +17,8 @@ import { itemsIDS } from "@/data/formattedItems";
 
 export default function TeamView( { team, side } ) {
 
-    const [infoShown, setInfoShown] = useState( { name: "GOLD_EARNED", icon: goldIcon } )
-
+    const [infoShownIndex, setInfoShownIndex] = useState(0)
+    const infoArray = [ { name: "GOLD_EARNED", icon: goldIcon }, { name : "MINIONS_KILLED", icon: csIcon }, { name: "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS", icon: damageIcon } ]
     const getText = useMessageText();
     const router = useRouter()
 
@@ -44,19 +44,26 @@ export default function TeamView( { team, side } ) {
 	}
 
     function onHandleChangeInfoUp() {
-        if ( infoShown.name == "GOLD_EARNED" ) {
-            setInfoShown( { name : "MINIONS_KILLED", icon: csIcon } )
-        }else if ( infoShown.name == "MINIONS_KILLED" )  {
-            setInfoShown( { name: "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS", icon: damageIcon } )
-        }else{
-            setInfoShown( { name: "GOLD_EARNED", icon: goldIcon } )
-        }
+        setInfoShownIndex( prevInfoShownIndex => {
+            if ( prevInfoShownIndex == infoArray.length-1 ) {
+                return 0;
+            }
+            return prevInfoShownIndex + 1
+        } )
+    }
+
+    function onHandleChangeInfoDown() {
+        setInfoShownIndex( prevInfoShownIndex => {
+            if ( prevInfoShownIndex == 0 ) {
+                return infoArray.length - 1;
+            }
+            return prevInfoShownIndex -1
+        } )
     }
 
     function getPlayerName( puuid ) {
         let playerName;
         Object.values( team.team.players ).forEach(player => {
-            console.log( player.puuid, puuid )
             if ( player.puuid == puuid ) {
                 playerName = player.name;
                 return;
@@ -65,20 +72,12 @@ export default function TeamView( { team, side } ) {
         return playerName
     }
 
-    function onHandleChangeInfoDown() {
-        if ( infoShown.name == "cs" ) {1
-            setInfoShown( { name : "gold", icon: goldIcon } )
-        }else if ( infoShown.name == "csMin" )  {
-            setInfoShown( { name: "cs", icon: csIcon } )
-        }else{
-            setInfoShown( { name: "csMin", icon: csMinIcon } )
-        }
-    }
-
     let teamKills = team.players.map( player => player.CHAMPIONS_KILLED ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
     let teamDeaths = team.players.map( player => player.NUM_DEATHS ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
     let teamAssists = team.players.map( player => player.ASSISTS ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
-    
+    console.log( infoShownIndex );
+    let infoShown = infoArray[ infoShownIndex ];
+
     return (
     <div className={mainClass}>
         <div className={headerClass}>
@@ -92,19 +91,22 @@ export default function TeamView( { team, side } ) {
             </div>
         </div>
         { team.players.map((player) => {
+            
+            const items = [ player.ITEM0, player.ITEM1, player.ITEM2, player.ITEM3, player.ITEM4, player.ITEM5, player.ITEM6 ];
+
             return (
                 <div key={player.PUUID} className={tableClass}>
                     <div className={"w-[7%] " + table[0] }> <Image src={ champions[player.SKIN].image }></Image> </div>
                     <div className={"w-[27%] px-2 flex flex-row items-center gap-2 " + table[1] }> 
                         <p className={playerName[0]} > { getPlayerName( player.PUUID ) } </p> 
-                        { <button onClick={() => { onHandleSubmit() } } className={playerName[1]}> <FAI  className={"h-4 w-full hover:animate-pulse "} icon={povIcon}></FAI> </button> }
+                        { player.POV && <button onClick={() => { onHandleSubmit(player.POV) } } className={playerName[1]}> <FAI  className={"h-4 w-full hover:animate-pulse "} icon={povIcon}></FAI> </button> }
                     </div>
                     <KDA kills={player.CHAMPIONS_KILLED} deaths={player.NUM_DEATHS} assists={player.ASSISTS} className={"w-[12%] justify-center " + table[2] } />
                     <div className={"w-[14%] text-center " + table[3] }> 
                         <p> { player[infoShown.name] } </p> 
                     </div>
                     <div className={"w-[35%] bg-stone-900/10 flex "+ table[4] }>
-                        { [ player.ITEM0, player.ITEM1, player.ITEM2, player.ITEM3, player.ITEM4, player.ITEM5, player.ITEM6 ].map( (item) => {
+                        { items.map( (item) => {
                             return (
                                 <div className="flex-1" key={item}>
                                     { item != 0 && <Image src={itemsIDS[item].image}></Image> }

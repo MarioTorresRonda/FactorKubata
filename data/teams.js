@@ -2,6 +2,12 @@ import diverbot from "@/public/teams/Diverbot Papea.jpeg";
 import kubata from "@/public/teams/factorKubata.png";
 import skyfox from "@/public/teams/OGS Skyfox.png";
 import raimon from "@/public/teams/Raimon.png";
+import starGaming from "@/public/teams/StarGaming.png";
+import irk from "@/public/teams/IRK.png";
+import tsc from "@/public/teams/TSC.png";
+import sch from "@/public/teams/SCH.png";
+import pdp from "@/public/teams/PDP.jpg";
+import rht from "@/public/teams/RHT.png";
 
 export const teams = {
     factorKubata : {
@@ -46,6 +52,72 @@ export const teams = {
             mid : { name : "FOX Panita" },
             adc : { name : "DJ FUMAD0TE" },
             supp : { name : "Kottl1n" },
+        }
+    },
+    starGaming : {
+        name: "StarGaming",
+        icon: starGaming,        
+        players: {
+            top : { name : "ERY asiyeh" },
+            jungle : { name : "RozaKled" },
+            mid : { name : "Soto Nil" },
+            adc : { name : "SH DobleGunn" },
+            supp : { name : "SG Mystic" },
+        }
+    },
+    irk : {
+        name: "IRK",
+        icon: irk,        
+        players: {
+            top : { name : "AlesitoSFC" },
+            jungle : { name : "leeseetheban" },
+            mid : { name : "Hati" },
+            adc : { name : "Riolu" },
+            supp : { name : "IRK Kirahh" },
+        }
+    },
+    TSC : {
+        name: "Team Solo Clownn",
+        icon: tsc,        
+        players: {
+            top : { name : "Trk" },
+            jungle : { name : "Flama" },
+            mid : { name : "Daunter" },
+            adc : { name : "FOX pegasus" },
+            supp : { name : "Harry el Pajas" },
+        }
+    },
+    Synchronyzed: {
+        name: "Synchronyzed",
+        icon: sch,        
+        players: {
+            top : { name : "Sedarium22" },
+            jungle : { name : "PPGroyale" },
+            mid : { name : "Paellero69" },
+            adc : { name : "FinalCimpo17" },
+            supp : { name : "Steapid" },
+        }
+    },
+    PDP: {
+        name: "PanDePueblo",
+        icon: pdp,        
+        players: {
+            top : { name : "Andorov" },
+            jungle : { name : "TheMaskedSaiyan" },
+            mid : { name : "ercarlo" },
+            adc : { name : "Naserio8" },
+            supp : { name : "AlcaudonVIII" },
+        }
+    },
+    RHT: {
+        name: "Remenants Hyper Tryhard",
+        icon: rht,        
+        players: {
+            top : { name : "VICENTS" },
+            jungle : { name : "sergii224" },
+            mid : { name : "EL JUSSTICIER0" },
+            adc : { name : "Adripann" },
+            supp : { name : "Ori0n635" },
         }
     }
 }

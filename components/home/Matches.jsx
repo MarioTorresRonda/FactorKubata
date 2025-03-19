@@ -3,9 +3,9 @@
 import {Roboto_Condensed} from "next/font/google";
 
 import Message from "@/components/fragments/Message";
-import {matches} from "@/data/matches";
-import Match from "@/components/home/Match";
+import {matches} from "@/data/matchList";
 import { useNavigate } from "@/hooks/useNavigate";
+import Match from "../matches/Match";
 
 const font = Roboto_Condensed({subsets: ["latin"]});
 
@@ -24,7 +24,7 @@ export default function Matches() {
                 <Message code={["home", "matches", "title"]} />
             </p>
             {matches.map((match) => {
-                return <Match key={match.expandedView.name} match={match} />
+                return <Match key={match.name} match={match} mainPanel={false} />
             })}
             <div className="h-12 py-2 px-6 flex justify-center items-center border-2 transition-all duration-300
             text-stone-900  mt-2 bg-stone-300 border-stone-500  hover:bg-stone-400

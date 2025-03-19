@@ -10,10 +10,22 @@ let messages = {
         goals: "Nuestros logros",
         goalList: { 
             CTD6S12024: "División 6 | Split 1 | Periodo 1",
-            CTD5S12024: "División 5 | Split 1 | Periodo 2"
+            CTD5S12024: "División 5 | Split 1 | Periodo 2",
+            CTD5S22025: "División 5 | Split 2 | Periodo 1"
         },
         team: {
-            title: "Equipo"
+            title: "Equipo",
+            players: {
+                better: "Mejor",
+                total: "Total",
+                kills: "Asesinatos",
+                deaths: "Muertes",
+                assists: "Asistencias",
+                damage: "Daño",
+                taken: "Tanqueado",
+                heal: "Curado",
+                KDA: "KDA",
+            }
         },
         matches: {
             title: "Partidos",

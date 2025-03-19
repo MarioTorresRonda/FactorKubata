@@ -1,5 +1,10 @@
 export const goalList = [
     {
+        date: "23/02/2025",
+        name: "CTD5S22025",
+        pos: "5-8"
+    },
+    {
         date: "03/12/2024",
         name: "CTD5S12024",
         pos: "3-4"
