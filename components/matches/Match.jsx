@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Message from "@/components/fragments/Message";
-import HorizontalBar from "@/components/fragments/horizontalBar";
+import HorizontalBar from "@/components/fragments/HorizontalBar";
 import {teams} from "@/data/teams";
 import FAI from "@/components/fragments/FAI";
 

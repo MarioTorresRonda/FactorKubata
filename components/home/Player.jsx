@@ -25,7 +25,7 @@ export default function Player({elem}) {
 			<div className={`px-4 py-2 bg-stone-300 text-black w-full ${font.className} items-center flex flex-col gap-2 z-10`}>
 				<p className="text-2xl font-bold">{elem.name}</p>
 				<div className="p-2 bg-stone-900">
-					<Image src={elem.role} alt={elem.name}></Image>
+					<Image src={elem.role.icon} alt={elem.name}></Image>
 				</div>
 			</div>
 		</div>

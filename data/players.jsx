@@ -2,14 +2,12 @@
 import yulPlayer from "@/public/Yul.png"
 import jorgePlayer from "@/public/Jorge.png"
 import marioPlayer from "@/public/Mario.png"
-import noImg from "@/public/NoImg.png"
+import moiPlayer from "@/public/Moi.png"
+import hacterPlayer from "@/public/Hacter.png"
 
-import top from "@/public/roles/Top_icon.webp"
-import jungle from "@/public/roles/Jungle_icon.webp"
-import mid from "@/public/roles/Middle_icon.webp"
-import bottom from "@/public/roles/Bottom_icon.webp"
-import support from "@/public/roles/Support_icon.webp"
+
 import { teams } from "./teams"
+import { adc, jungle, mid, supp, top } from "./roles"
 
 
 export const players = [ 
@@ -33,14 +31,14 @@ export const players = [
 },
 {
     name: "Bor Hacter",
-    role: bottom,
-    imgSrc : noImg,
+    role: adc,
+    imgSrc : hacterPlayer,
     player: teams.factorKubata.players.adc
 },
 {
     name: "FK Moi",
-    role: support,
-    imgSrc : noImg,
+    role: supp,
+    imgSrc : moiPlayer,
     player: teams.factorKubata.players.supp
 },
 ];

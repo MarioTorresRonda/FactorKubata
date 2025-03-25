@@ -3,7 +3,7 @@
 import {Roboto_Condensed} from "next/font/google";
 
 import Message from "@/components/fragments/Message";
-import {matches} from "@/data/matchList";
+import { matchList } from "@/data/matchList";
 import { useNavigate } from "@/hooks/useNavigate";
 import Match from "../matches/Match";
 
@@ -23,7 +23,7 @@ export default function Matches() {
             <p className={`text-[52px] font-bold  ${font.className} mt-14`}>
                 <Message code={["home", "matches", "title"]} />
             </p>
-            {matches.map((match) => {
+            { matchList.slice( 0, 3).map((match) => {
                 return <Match key={match.name} match={match} mainPanel={false} />
             })}
             <div className="h-12 py-2 px-6 flex justify-center items-center border-2 transition-all duration-300

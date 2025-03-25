@@ -8,6 +8,7 @@ import tsc from "@/public/teams/TSC.png";
 import sch from "@/public/teams/SCH.png";
 import pdp from "@/public/teams/PDP.jpg";
 import rht from "@/public/teams/RHT.png";
+import rtg from "@/public/teams/RTG.png";
 
 export const teams = {
     factorKubata : {
@@ -18,7 +19,8 @@ export const teams = {
             jungle : { name : "FK Cabra", puuid: "30819fe3-5431-5fa8-a998-2a77b5313948" },
             mid : { name : "FK LvdiK", puuid: "e1b3b9c6-8aca-5d1c-a67d-19751b6f377f" },
             adc : { name : "Bor Hacter", puuid: "342f6cda-c141-5546-aa20-e708f6e61707" },
-            supp : { name : "FK Moi", puuid: "c0351b6b-bcd8-5209-8575-e74995dd0a99" }
+            supp : { name : "FK Moi", puuid: "c0351b6b-bcd8-5209-8575-e74995dd0a99" },
+            oldSupp : { name : "FK Rulo", puuid: "e0b0febc-b371-5ac7-a2c3-0926537a3848" },
         }
     },
     diverbot : {
@@ -118,6 +120,17 @@ export const teams = {
             mid : { name : "EL JUSSTICIER0" },
             adc : { name : "Adripann" },
             supp : { name : "Ori0n635" },
+        }
+    },
+    RTG: {
+        name: "RTG ACADEMY",
+        icon: rtg,        
+        players: {
+            top : { name : "IBAI OF LEGENDS", puuid: "5c507ea3-e61c-5332-a2a4-285eace04730" },
+            jungle : { name : "Crespo", puuid: "001fe246-25c9-50bf-9203-f793b2d5268a" },
+            mid : { name : "manolocabezagueb", puuid: "f4cf2bf3-05fd-5183-b278-3e62c6b88f7e" },
+            adc : { name : "JC ARIES XXIX", puuid: "7ccec3d1-5edd-5887-a5dd-666388b949ea" },
+            supp : { name : "El Oso Latinoso", puuid: "965d21e8-2218-5f17-85e3-0b27c2afef2a" },
         }
     }
 }

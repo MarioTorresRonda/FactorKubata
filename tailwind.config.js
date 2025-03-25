@@ -42,6 +42,10 @@ module.exports = {
           '0%': { "opacity": "0%", "transform": "translateY(-30%)" },
           '100%': { "opacity": "100%", "transform": "translateY(0)" },
         },
+        toBottom: {
+          '0%': { "opacity": "100%", "transform": "translateY(0)" },
+          '100%': { "opacity": "0%", "transform": "translateY(30%)" },
+        },
         highlight: {
           '0%': { "background-color" : "transparent", "transform": "scale(1)" },
           '25%': { "background-color" : "var(--myColorStartSimple)", "transform": "scale(103%)" },
@@ -58,7 +62,8 @@ module.exports = {
       animation: {
         opacityLoad: 'opacityLoad 4s',
         overflowLoad: 'overflowLoad 4s',
-        fromTop: 'fromTop 400ms',
+        fromTop: 'fromTop 300ms',
+        toBottom: 'toBottom 200ms',
         highlight : 'highlight 1200ms',
         tooltipAnimation : 'tooltipAnimation 800ms',
       }

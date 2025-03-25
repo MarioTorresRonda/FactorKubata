@@ -25,6 +25,11 @@ let messages = {
                 taken: "Tanqueado",
                 heal: "Curado",
                 KDA: "KDA",
+                minions: "Minions",
+                min: "Minuto",
+                gold: "Oro",
+                games: "Partidos",
+                game: "Partido",
             }
         },
         matches: {
@@ -32,9 +37,18 @@ let messages = {
             side0: "Azul",
             side1: "Rojo",
             matchList: {
+                "23032025" : "División 5 | Split 2 | Periodo 2 | Hextech Series 2024/25 Etapa: GRUPO C  Grupo: 1  Ronda: 1 ",
                 "23022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 3 ",
                 "16022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 2 ",
                 "09022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 1 ",
+                "cale community 4 Stargaming" : "Cale Community | Playoffs | Ronda 4 ",
+                "cale community 3 IRK" : "Cale Community | Playoffs | Ronda 3 ",
+                "cale community 2 Team Solo Clowns" : "Cale Community | Playoffs | Ronda 2 ",
+                "cale communnity 1 diverbot papea" : "Cale Community | Playoffs | Ronda 1 ",
+                "forgotten 3 synchronyzed" : "Forgotten Tournament | Playoffs | Ronda 3 ",
+                "forgotten 2 pandepueblo" : "Forgotten Tournament | Playoffs | Ronda 2 ",
+                "forgotten 1 remenants" : "Forgotten Tournament | Playoffs | Ronda 1 ",
+
             }
         }
     },

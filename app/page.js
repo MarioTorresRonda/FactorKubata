@@ -2,12 +2,12 @@ import {Roboto_Condensed} from "next/font/google";
 
 import Image from "next/image";
 import homeImage from "@/public/FrontImage.jpg";
-import Player from "@/components/home/player";
+import Player from "@/components/home/Player";
 import {players} from "@/data/players";
 import Message from "@/components/fragments/Message";
-import HorizontalBar from "@/components/fragments/horizontalBar";
+import HorizontalBar from "@/components/fragments/HorizontalBar";
 import {goalList} from "@/data/goals";
-import GoalTrophy from "@/components/home/goalTrophy";
+import GoalTrophy from "@/components/home/GoalTrophy";
 import Matches from "@/components/home/Matches";
 
 const font = Roboto_Condensed({subsets: ["latin"]});

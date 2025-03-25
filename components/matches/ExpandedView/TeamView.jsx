@@ -5,7 +5,7 @@ import FAI from "../../fragments/FAI";
 import { faFlag as scoreIcon } from "@fortawesome/free-regular-svg-icons"
 import { faEye as povIcon } from "@fortawesome/free-regular-svg-icons"
 import { useMessageText } from "@/hooks/useMessageText";
-import KDA from "./Kda";
+import KDA from "./KDA";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 
@@ -61,21 +61,27 @@ export default function TeamView( { team, side } ) {
         } )
     }
 
-    function getPlayerName( puuid ) {
+    function getPlayerName( player ) {
+        const puuid = player.PUUID;
         let playerName;
-        Object.values( team.team.players ).forEach(player => {
-            if ( player.puuid == puuid ) {
-                playerName = player.name;
+        
+        Object.values( team.team.players ).forEach( teamPlayer => {
+            if ( teamPlayer.puuid == puuid ) {
+                playerName = teamPlayer.name;
                 return;
             }
         });
+
+        if ( !playerName ) {
+            playerName = player.NAME;
+            return playerName
+        }
         return playerName
     }
 
     let teamKills = team.players.map( player => player.CHAMPIONS_KILLED ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
     let teamDeaths = team.players.map( player => player.NUM_DEATHS ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
     let teamAssists = team.players.map( player => player.ASSISTS ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
-    console.log( infoShownIndex );
     let infoShown = infoArray[ infoShownIndex ];
 
     return (
@@ -96,9 +102,9 @@ export default function TeamView( { team, side } ) {
 
             return (
                 <div key={player.PUUID} className={tableClass}>
-                    <div className={"w-[7%] " + table[0] }> <Image src={ champions[player.SKIN].image }></Image> </div>
+                    <div className={"w-[7%] " + table[0] }> <Image alt={player.SKIN} src={ champions[player.SKIN].image }></Image> </div>
                     <div className={"w-[27%] px-2 flex flex-row items-center gap-2 " + table[1] }> 
-                        <p className={playerName[0]} > { getPlayerName( player.PUUID ) } </p> 
+                        <p className={playerName[0]} > { getPlayerName( player ) } </p> 
                         { player.POV && <button onClick={() => { onHandleSubmit(player.POV) } } className={playerName[1]}> <FAI  className={"h-4 w-full hover:animate-pulse "} icon={povIcon}></FAI> </button> }
                     </div>
                     <KDA kills={player.CHAMPIONS_KILLED} deaths={player.NUM_DEATHS} assists={player.ASSISTS} className={"w-[12%] justify-center " + table[2] } />
@@ -109,7 +115,7 @@ export default function TeamView( { team, side } ) {
                         { items.map( (item) => {
                             return (
                                 <div className="flex-1" key={item}>
-                                    { item != 0 && <Image src={itemsIDS[item].image}></Image> }
+                                    { item != 0 && <Image alt={item} src={itemsIDS[item].image}></Image> }
                                 </div>
                             )
                         } ) }
