@@ -12,8 +12,9 @@ import PlayerPanels from "./PlayerPanels";
 import PlayerChamps from "./PlayerChamps";
 import Message from "../fragments/Message";
 import { stats } from "@/data/playerStats";
-import {faCalculator as KDAIcon} from "@fortawesome/free-solid-svg-icons";
 import FAI from "../fragments/FAI";
+import { badges } from "@/data/badges";
+import Tooltip from "../fragments/Tooltip";
 
 export default function TeamPlayer({player}) {
 
@@ -59,9 +60,17 @@ export default function TeamPlayer({player}) {
 				</div>
 				<p className="text-4xl font-bold">{ statsObject.playedTotalGames } { gameText }</p>
 				{ statsObject.badges.map( ( badge) => {
-					return <div key={badge} className="bg-stone-900 text-white/40 rounded-full h-12 w-12 flex justify-center items-center"> 
-						<FAI className="h-6" icon={ KDAIcon }></FAI> 
-					</div>
+					return (
+						<div key={badge} className="relative h-12 w-12 hover:scale-[120%] transition-all duration-300">
+							<div className={`mt-[3px] ml-[3px] scale-105 absolute h-12 w-12 bg-stone-900/90 rounded-full flex justify-center items-center`}> 
+							</div>
+							<div className={`h-12 w-12 absolute ${badges[badge].color} text-white/40 rounded-full flex justify-center items-center`}> 
+								<Tooltip className="text-base p-4" text={["home", "team", "badges", badge]}>
+									<FAI className="h-6" icon={ badges[badge].icon }></FAI> 
+								</Tooltip>
+							</div>
+						</div>
+					)
 				}) }
 			</div>
 		</div>

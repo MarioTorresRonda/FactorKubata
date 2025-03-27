@@ -16,6 +16,7 @@ export const stats = {
 		mostFarm: 269,
 		mostFarmMin: 7.04,
 		mostGold: 15365,
+		mostTowerDamage: 4964,
 		playedChamps: [
 			{name: "Gragas", times: 1, wins: 0},
 			{name: "Ornn", times: 2, wins: 1},
@@ -24,6 +25,7 @@ export const stats = {
 			{name: "TahmKench", times: 1, wins: 0},
 		],
 		playedTotalGames: 6,
+		totalTowerDamage: 11111,
 		badges: ["tanked"],
 	},
 	"FK Cabra": {
@@ -43,6 +45,7 @@ export const stats = {
 		mostFarm: 208,
 		mostFarmMin: 6.47,
 		mostGold: 14728,
+		mostTowerDamage: 2494,
 		playedChamps: [
 			{name: "JarvanIV", times: 2, wins: 1},
 			{name: "MonkeyKing", times: 1, wins: 0},
@@ -53,7 +56,8 @@ export const stats = {
 			{name: "Amumu", times: 1, wins: 0},
 		],
 		playedTotalGames: 10,
-		badges: [],
+		totalTowerDamage: 9501,
+		badges: ["games", "heal"],
 	},
 	"FK LvdiK": {
 		kills: 48,
@@ -72,6 +76,7 @@ export const stats = {
 		mostFarm: 305,
 		mostFarmMin: 8.42,
 		mostGold: 16475,
+		mostTowerDamage: 7861,
 		playedChamps: [
 			{name: "Yone", times: 1, wins: 0},
 			{name: "Viktor", times: 2, wins: 0},
@@ -81,6 +86,7 @@ export const stats = {
 			{name: "Vladimir", times: 1, wins: 0},
 		],
 		playedTotalGames: 10,
+		totalTowerDamage: 20006,
 		badges: [],
 	},
 	"Bor Hacter": {
@@ -100,6 +106,7 @@ export const stats = {
 		mostFarm: 372,
 		mostFarmMin: 8.64,
 		mostGold: 20691,
+		mostTowerDamage: 10048,
 		playedChamps: [
 			{name: "Mel", times: 1, wins: 0},
 			{name: "Xayah", times: 1, wins: 0},
@@ -107,7 +114,8 @@ export const stats = {
 			{name: "Sivir", times: 1, wins: 0},
 		],
 		playedTotalGames: 5,
-		badges: ["kills", "damage"],
+		totalTowerDamage: 22326,
+		badges: ["kills", "damage", "towerDamage", "kda"],
 	},
 	"FK Moi": {
 		kills: 7,
@@ -126,6 +134,7 @@ export const stats = {
 		mostFarm: 42,
 		mostFarmMin: 1.22,
 		mostGold: 10663,
+		mostTowerDamage: 664,
 		playedChamps: [
 			{name: "Renata", times: 1, wins: 0},
 			{name: "Milio", times: 1, wins: 0},
@@ -135,6 +144,7 @@ export const stats = {
 			{name: "Rell", times: 1, wins: 0},
 		],
 		playedTotalGames: 7,
+		totalTowerDamage: 1550,
 		badges: ["assists"],
 	},
 };

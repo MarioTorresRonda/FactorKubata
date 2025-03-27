@@ -30,6 +30,16 @@ let messages = {
                 gold: "Oro",
                 games: "Partidos",
                 game: "Partido",
+            },
+            badges: {
+                kills: "¡Mayor asesino de una partida!",
+                damage: "¡Mayor daño en una partida!",
+                assists: "¡Mayor asistencias en una partida!",
+                tanked: "¡Mayor cantidad de daño recibido en una partida!",
+                kda: "¡Mejor KDA del equipo!",
+                games: "¡Jugador con más partida jugadas!",
+                heal: "¡Mayor curacion en una partida!",
+                towerDamage : "¡Mayor daño a torres en una partida!"
             }
         },
         matches: {

@@ -1,22 +1,21 @@
 import { NextResponse } from "next/server";
 import { matchList } from "@/data/matchList";
 import { players } from "@/data/players";
+import { badges } from "@/data/badges";
 
 export async function GET(request) {
 
   const finalObj = {};
-  const most = {
-    kills : { name: "", value: 0, id: "mostKills" },
-    damage : { name: "", value: 0, id: "mostDamage" },
-    assists : { name: "", value: 0, id: "mostAssists" },
-    tanked : { name: "", value: 0, id: "mostTaken" },
-  }
+  const most = {...badges }
 
   players.forEach( player => {
     finalObj[player.name] = statsObj({player});
     Object.keys(most).forEach( stat => {
-      most[stat] = most[stat].value < finalObj[player.name][most[stat].id] ? { name: player.name, value: finalObj[player.name][most[stat].id], id: most[stat].id } : most[stat]
-    } )
+	  if ( !most[stat].value || most[stat].value < finalObj[player.name][most[stat].id] ) {
+		most[stat].value = finalObj[player.name][most[stat].id];
+		most[stat].name = player.name;
+	  }
+	} )
   } );
 
   console.log( most );
@@ -44,26 +43,28 @@ function statsObj({player}) {
 		})
 		.filter((notUndefined) => notUndefined !== undefined);
 
-  //Totals
-  const kills = sumOf( playedGames, "CHAMPIONS_KILLED" );
+  	//Totals
+  	const kills = sumOf( playedGames, "CHAMPIONS_KILLED" );
 	const deaths = sumOf( playedGames, "NUM_DEATHS" );
 	const assists = sumOf( playedGames, "ASSISTS" );
-  const KDA = Math.round( ( kills + assists ) / ( deaths / 100 ) ) / 100;
+  	const KDA = Math.round( ( kills + assists ) / ( deaths / 100 ) ) / 100;
 	const totalDamage = sumOf( playedGames, "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS" );
 	const totalTaken = sumOf( playedGames, "TOTAL_DAMAGE_TAKEN" );
 	const totalHeal = sumOf( playedGames, "TOTAL_HEAL" );
+	const totalTowerDamage = sumOf( playedGames, "TOTAL_DAMAGE_DEALT_TO_TURRETS");
 
     //Betters
 
 	let mostKills = 0;
 	let mostDeaths = 9999;
 	let mostAssists = 0;
-  let mostDamage = 0;
+  	let mostDamage = 0;
 	let mostTaken = 0;
 	let mostHeal = 0;
 	let mostFarm = 0;
 	let mostFarmMin = 0;
 	let mostGold = 0;
+	let mostTowerDamage = 0;
 	let playedChampsObj = {}
 	let playedChamps = []
 	let playedTotalGames = 0;
@@ -75,6 +76,7 @@ function statsObj({player}) {
 		mostDamage = mostDamage < Number(player.TOTAL_DAMAGE_DEALT_TO_CHAMPIONS) ? Number(player.TOTAL_DAMAGE_DEALT_TO_CHAMPIONS) : mostDamage;
 		mostTaken = mostTaken < Number(player.TOTAL_DAMAGE_TAKEN) ? Number(player.TOTAL_DAMAGE_TAKEN) : mostTaken;
 		mostHeal = mostHeal < Number(player.TOTAL_HEAL) ? Number(player.TOTAL_HEAL) : mostHeal;
+		mostTowerDamage = mostTowerDamage < Number(player.TOTAL_DAMAGE_DEALT_TO_TURRETS) ? Number(player.TOTAL_DAMAGE_DEALT_TO_TURRETS) : mostTowerDamage;
 
 		let minionsKilled = Number( player.MINIONS_KILLED ) + Number( player.NEUTRAL_MINIONS_KILLED );
 		let minionsMin =  Math.round( minionsKilled / ( player.gameDuration / 6000000 ) ) / 100;
@@ -106,7 +108,6 @@ function statsObj({player}) {
 		});
 	});
 
-
 	return {
 		kills,
 		deaths,
@@ -124,9 +125,11 @@ function statsObj({player}) {
 		mostFarm,
 		mostFarmMin,
 		mostGold,
+		mostTowerDamage,
 		playedChamps,
 		playedTotalGames,
-    badges: []
+		totalTowerDamage,
+    	badges: []
 	};
 }
 
