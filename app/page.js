@@ -47,7 +47,7 @@ export default function Home() {
 			</div>
 			<div className="flex w-full justify-center mt-8">
 				<div className="w-2/3 flex flex-wrap justify-center gap-y-5">
-					{players.map((p, index) => {
+					{players.map( (p, index) => {
 						return (
 							<div key={p.name} className="w-full md:w-1/2 xl:w-1/4 px-3">
 								<Player elem={p} />
@@ -64,9 +64,9 @@ export default function Home() {
 					return (
 						<>
 							<HorizontalBar className="w-[70%] h-[2px]" />
-							<div className="flex flex-row gap-2 justify-between w-2/3 text-xl">
+							<div className="flex flex-col md:flex-row gap-2 md:justify-between w-2/3 items-center justify-center text-xl">
 								<div> {goal.date} </div>
-								<div className="flex flex-row w-1/2 gap-10">
+								<div className="flex flex-col md:flex-row md:w-1/2 gap-10 w-full items-center justify-center">
 									<GoalTrophy pos={goal.pos} />
 									<p>
 										<Message code={["home", "goalList", goal.name]} />

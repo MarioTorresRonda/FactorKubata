@@ -4,6 +4,7 @@ import jorgePlayer from "@/public/Jorge.png"
 import marioPlayer from "@/public/Mario.png"
 import moiPlayer from "@/public/Moi.png"
 import hacterPlayer from "@/public/Hacter.png"
+import noImg from "@/public/NoImg.png"
 
 
 import { teams } from "./teams"
@@ -40,5 +41,26 @@ export const players = [
     role: supp,
     imgSrc : moiPlayer,
     player: teams.factorKubata.players.supp
+},
+{
+    name: "FK Rulo",
+    role: supp,
+    imgSrc : noImg,
+    old: true,
+    player: teams.factorKubata.players.oldSupp
+},
+{
+    name: "FK Arcadic",
+    role: jungle,
+    imgSrc : noImg,
+    sub: true,
+    player: teams.factorKubata.players.jungleSub
+},
+{
+    name: "FK Bubazila",
+    role: adc,
+    imgSrc : noImg,
+    sub: true,
+    player: teams.factorKubata.players.adcSub
 },
 ];

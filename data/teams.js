@@ -21,6 +21,10 @@ export const teams = {
             adc : { name : "Bor Hacter", puuid: "342f6cda-c141-5546-aa20-e708f6e61707" },
             supp : { name : "FK Moi", puuid: "c0351b6b-bcd8-5209-8575-e74995dd0a99" },
             oldSupp : { name : "FK Rulo", puuid: "e0b0febc-b371-5ac7-a2c3-0926537a3848" },
+            jungleSub : { name : "FK Arcadic", puuid: "8fdd7eea-eb1f-5148-b033-b90ab757a654" },
+            adcSub : { name : "FK Bubazila", puuid: "865a1e8d-74b7-5055-a95b-4c959996664d" },
+
+            
         }
     },
     diverbot : {

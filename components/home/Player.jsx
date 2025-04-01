@@ -24,8 +24,16 @@ export default function Player({elem}) {
 			</div>
 			<div className={`px-4 py-2 bg-stone-300 text-black w-full ${font.className} items-center flex flex-col gap-2 z-10`}>
 				<p className="text-2xl font-bold">{elem.name}</p>
-				<div className="p-2 bg-stone-900">
-					<Image src={elem.role.icon} alt={elem.name}></Image>
+				<div className="p-2 bg-stone-900 relative h-12 w-12">
+					{  elem.old &&
+					<div className="absolute text-white font-extrabold h-8 w-8 text-2xl top-2 bg-stone-900/30 select-none">
+						X
+					</div> }
+					{  elem.sub &&
+					<div className="absolute text-white font-extrabold h-8 w-8 text-2xl top-2 bg-stone-900/30 select-none">
+						S
+					</div> }
+					<div> <Image src={elem.role.icon} alt={elem.name}></Image> </div>
 				</div>
 			</div>
 		</div>

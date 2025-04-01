@@ -32,14 +32,16 @@ let messages = {
                 game: "Partido",
             },
             badges: {
-                kills: "¡Mayor asesino de una partida!",
-                damage: "¡Mayor daño en una partida!",
-                assists: "¡Mayor asistencias en una partida!",
-                tanked: "¡Mayor cantidad de daño recibido en una partida!",
-                kda: "¡Mejor KDA del equipo!",
-                games: "¡Jugador con más partida jugadas!",
-                heal: "¡Mayor curacion en una partida!",
-                towerDamage : "¡Mayor daño a torres en una partida!"
+                kills: { title: "¡Asesino!", desc: "Mayor asesino de una partida" },
+                damage: { title: "¡Destructor!", desc: "Mayor daño en una partida" },
+                assists: { title: "¡Dame la mano!", desc: "Mayor asistencias en una partida" },
+                tanked: { title: "¡Tanque!", desc: "Mayor cantidad de daño recibido en una partida" },
+                kda: { title: "¡Sobreseguro!", desc: "Mejor KDA del equipo" },
+                games: { title: "¡Veterano!", desc: "Jugador con más partida jugadas" },
+                heal: { title: "¡Hospital con patas!", desc: "Mayor curacion en una partida" },
+                towerDamage : { title: "¡Demodelor!", desc: "Mayor daño a torres en una partida" },
+                spam : { title: "¡Spammer!", desc: "Mayor cantidad de habilidades lanzadas" },
+                pings : { title: "ShoutCaller!", desc: "Mayor cantidad de pings usados" }
             }
         },
         matches: {
@@ -47,6 +49,7 @@ let messages = {
             side0: "Azul",
             side1: "Rojo",
             matchList: {
+                "30032025" : "División 5 | Split 2 | Periodo 2 | Hextech Series 2024/25 Etapa: GRUPO C  Grupo: 1  Ronda: 2 ",
                 "23032025" : "División 5 | Split 2 | Periodo 2 | Hextech Series 2024/25 Etapa: GRUPO C  Grupo: 1  Ronda: 1 ",
                 "23022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 3 ",
                 "16022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 2 ",

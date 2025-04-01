@@ -20,7 +20,7 @@ export default function PlayerChamps( { playedChamps } ) {
                 <div className="flex flex-col justify-center">
                     <p className="text-nowrap"> {champ.times} { gameText } </p>
                     <div className="flex flex-row gap-1">
-                        <p className="text-nowrap">{100 / champ.times * champ.wins}%</p> 
+                        <p className="text-nowrap">{ Math.round( 100 / champ.times * champ.wins )}%</p> 
                         <p className="text-base text-green-400/80"> {champ.wins}V </p>
                         <p className="text-base text-red-400/80"> { champ.times - champ.wins}D </p>
                     </div>

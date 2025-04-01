@@ -1,5 +1,6 @@
 import {formatMatchDate} from "@/util/dates";
 import {teams} from "./teams";
+import match3003205 from "@/data/matches/Division5 Split2 periodo2 Ronda2 2025.json"
 import match2303205 from "@/data/matches/Division5 Split2 periodo2 2025.json"
 import match2302205 from "@/data/matches/23022025.json"
 import match1602205 from "@/data/matches/16022025.json"
@@ -12,7 +13,14 @@ import forgotten2 from "@/data/matches/forgotten 2 pandepueblo.json"
 import forgotten1 from "@/data/matches/forgotten 1 remenants.json"
 
 export const matchList = [
-	
+	{
+		date: formatMatchDate("23/03/2025 8:00PM GMT+1"),
+		name: "30032025",
+		win: false,
+		info: match3003205,
+		blue: teams.factorKubata,
+		red: teams.RHT,
+	},
 	{
 		date: formatMatchDate("23/03/2025 8:00PM GMT+1"),
 		name: "23032025",

@@ -18,8 +18,6 @@ export async function GET(request) {
 	} )
   } );
 
-  console.log( most );
-
   Object.keys( most ).forEach( ( statKey ) => {
     finalObj[ most[statKey].name ].badges.push( statKey )
   })
@@ -52,6 +50,8 @@ function statsObj({player}) {
 	const totalTaken = sumOf( playedGames, "TOTAL_DAMAGE_TAKEN" );
 	const totalHeal = sumOf( playedGames, "TOTAL_HEAL" );
 	const totalTowerDamage = sumOf( playedGames, "TOTAL_DAMAGE_DEALT_TO_TURRETS");
+	const totalCast = sumOfMultiple( playedGames, ["SPELL1_CAST", "SPELL2_CAST", "SPELL3_CAST", "SPELL3_CAST"  ] );
+	const pings = sumOfMultiple( playedGames, ["ALL_IN_PINGS", "ASSIST_ME_PINGS", "BAIT_PINGS", "BASIC_PINGS", "COMMAND_PINGS", "DANGER_PINGS", "ENEMY_MISSING_PINGS", "ENEMY_VISION_PINGS", "GET_BACK_PINGS", "HOLD_PINGS", "NEED_VISION_PINGS", "ON_MY_WAY_PINGS", "PUSH_PINGS", "RETREAT_PINGS" ] );
 
     //Betters
 
@@ -129,13 +129,25 @@ function statsObj({player}) {
 		playedChamps,
 		playedTotalGames,
 		totalTowerDamage,
+		totalCast,
+		pings,
     	badges: []
 	};
+}
+
+function sumOfMultiple( array, propArray ) {
+
+	let tempNumber = 0;
+	propArray.forEach( prop => {
+		tempNumber += array
+		.map((elem) => elem[prop] )
+		.reduce((accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0);
+	})
+    return tempNumber;
 }
 
 function sumOf( array, prop ) {
     return array
     .map((elem) => elem[prop] )
     .reduce((accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0);
-
 }
