@@ -1,14 +1,10 @@
 'use client'
 
+import { home } from '@/data/navBar';
 import { createContext, useReducer } from 'react';
 
 const initialMenu = {
-    menu: { 
-        symbol: '#', //Mainpage
-        oldBlog: {},
-        blog: {},
-        page: {},
-    },
+    menu: home,
     showValue: false,
 } 
 

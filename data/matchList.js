@@ -1,9 +1,9 @@
-import {formatMatchDate} from "@/util/dates";
 import {teams} from "./teams";
-import match3003205 from "@/data/matches/Division5 Split2 periodo2 Ronda2 2025.json"
-import match2303205 from "@/data/matches/Division5 Split2 periodo2 2025.json"
-import match2302205 from "@/data/matches/23022025.json"
-import match1602205 from "@/data/matches/16022025.json"
+import match18052025 from "@/data/matches/Division5 Split3 periodo1 2025.json"
+import match30032025 from "@/data/matches/Division5 Split2 periodo2 Ronda2 2025.json"
+import match23032025 from "@/data/matches/Division5 Split2 periodo2 2025.json"
+import match23022025 from "@/data/matches/23022025.json"
+import match16022025 from "@/data/matches/16022025.json"
 import cale4 from "@/data/matches/cale community 4 Stargaming.json"
 import cale3 from "@/data/matches/cale community 3 IRK.json"
 import cale2 from "@/data/matches/cale community 2 Team Solo Clowns.json"
@@ -14,26 +14,34 @@ import forgotten1 from "@/data/matches/forgotten 1 remenants.json"
 
 export const matchList = [
 	{
-		date: formatMatchDate("23/03/2025 8:00PM GMT+1"),
+		date: "23/03/2025 8:00PM GMT+1",
+		name: "20052025",
+		win: true,
+		info: match18052025,
+		blue: teams.masones,
+		red: teams.factorKubata,
+	},
+	{
+		date: "23/03/2025 8:00PM GMT+1",
 		name: "30032025",
 		win: false,
-		info: match3003205,
+		info: match30032025,
 		blue: teams.factorKubata,
 		red: teams.RHT,
 	},
 	{
-		date: formatMatchDate("23/03/2025 8:00PM GMT+1"),
+		date: "23/03/2025 8:00PM GMT+1",
 		name: "23032025",
 		win: false,
-		info: match2303205,
+		info: match23032025,
 		blue: teams.factorKubata,
 		red: teams.RTG,
 	},
 	{
-		date: formatMatchDate("23/02/2025 8:00PM GMT+1"),
+		date: "23/02/2025 8:00PM GMT+1",
 		name: "23022025",
 		win: false,
-		info : match2302205,
+		info : match23022025,
 		blue: teams.diverbot,
 		red: teams.factorKubata,
 		POV: {
@@ -42,10 +50,10 @@ export const matchList = [
 		}
 	},
 	{
-		date: formatMatchDate("16/02/2025 8:00PM GMT+1"),
+		date: "16/02/2025 8:00PM GMT+1",
 		name: "16022025",
 		win: true,
-		info: match1602205,
+		info: match16022025,
 		blue: teams.raimon,
 		red: teams.factorKubata,
 		POV: {
@@ -54,7 +62,7 @@ export const matchList = [
 		}
 	},
 	{
-		date: formatMatchDate("09/02/2025 8:00PM GMT+1"),
+		date: "09/02/2025 8:00PM GMT+1",
 		name: "09022025",
 		win: false,
 		info: null,
@@ -62,7 +70,7 @@ export const matchList = [
 		red: teams.factorKubata
 	},
 	{
-		date: formatMatchDate("09/02/2025 8:00PM GMT+1"),
+		date: "09/02/2025 8:00PM GMT+1",
 		name: "cale community 4 Stargaming",
 		win: false,
 		info: cale4,
@@ -70,7 +78,7 @@ export const matchList = [
 		red: teams.starGaming,
 	},
 	{
-		date: formatMatchDate("09/02/2025 8:00PM GMT+1"),
+		date: "09/02/2025 8:00PM GMT+1",
 		name: "cale community 3 IRK",
 		win: false,
 		info: cale3,
@@ -78,7 +86,7 @@ export const matchList = [
 		red: teams.irk,
 	},
 	{
-		date: formatMatchDate("09/02/2025 8:00PM GMT+1"),
+		date: "09/02/2025 8:00PM GMT+1",
 		name: "cale community 2 Team Solo Clowns",
 		win: false,
 		info: cale2,
@@ -86,7 +94,7 @@ export const matchList = [
 		red: teams.TSC,
 	},
 	{
-		date: formatMatchDate("09/02/2025 8:00PM GMT+1"),
+		date: "09/02/2025 8:00PM GMT+1",
 		name: "cale communnity 1 diverbot papea",
 		win: false,
 		info: cale1,
@@ -94,7 +102,7 @@ export const matchList = [
 		red: teams.diverbot,
 	},
 	{
-		date: formatMatchDate("09/02/2025 8:00PM GMT+1"),
+		date: "09/02/2025 8:00PM GMT+1",
 		name: "forgotten 3 synchronyzed",
 		win: false,
 		info: forgotten3,
@@ -102,7 +110,7 @@ export const matchList = [
 		red: teams.factorKubata,
 	},
 	{
-		date: formatMatchDate("09/02/2025 8:00PM GMT+1"),
+		date: "09/02/2025 8:00PM GMT+1",
 		name: "forgotten 2 pandepueblo",
 		win: false,
 		info: forgotten2,
@@ -110,7 +118,7 @@ export const matchList = [
 		red: teams.factorKubata,
 	},
 	{
-		date: formatMatchDate("09/02/2025 8:00PM GMT+1"),
+		date: "09/02/2025 8:00PM GMT+1",
 		name: "forgotten 1 remenants",
 		win: false,
 		info: forgotten1,

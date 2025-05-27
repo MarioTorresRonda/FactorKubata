@@ -4,13 +4,15 @@ import DinamicColors from "./DinamicColors"
 import NavBarItem from "./NavBarItem"
 import menus from "@/data/navBar"
 import { faList as icon } from "@fortawesome/free-solid-svg-icons"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { MenuContext } from "@/store/menu-context"
 import MediaMode from "./MediaMode"
 import FAI from "./FAI"
 import { usePathname } from "next/navigation"
 import FK from "@/public/FK.png"
 import Image from "next/image"
+
+import NavBarModal from "./NavBarModal"
 
 export default function NavBar() {
 
@@ -33,7 +35,7 @@ export default function NavBar() {
                 setSymbol(menus[key].symbol);
             }
         });
-    }, [path])
+    }, [path]);
 
     const hiddenClasses = "max-h-0 scale-y-0 opacity-0";
     const showClasses = "max-h-[140px] scale-y-100 opacity-100";
@@ -57,7 +59,9 @@ export default function NavBar() {
             </div>
             <div className={`${ showValue ? showClasses : hiddenClasses } ${forceClasses} w-full transition-all flex justify-end self-center flex-col sm:flex-row sm:gap-6`} >
                 { Object.keys( menus ).map( (key) => { return <NavBarItem selected={symbol == menus[key].symbol} key={key} newMenu={menus[key]} /> } )  }
+                <NavBarModal />
             </div>
+
         </div>
     )
 }

@@ -9,5 +9,9 @@ export function useNavigate() {
         router.push(newMenu.url +"/"+ extraRoute );
     }
 
-    return { navigate };
+    function refresh() {
+        window.location.reload()
+    }
+
+    return { navigate, refresh };
 }

@@ -64,6 +64,7 @@ function statsObj({player}) {
 	let mostFarm = 0;
 	let mostFarmMin = 0;
 	let mostGold = 0;
+	let mostWards = 0;
 	let mostTowerDamage = 0;
 	let playedChampsObj = {}
 	let playedChamps = []
@@ -84,6 +85,8 @@ function statsObj({player}) {
 		mostFarm = mostFarm < minionsKilled ? minionsKilled : mostFarm;
 		mostFarmMin = mostFarmMin < minionsMin ? minionsMin : mostFarmMin;
 		mostGold = mostGold < Number(player.GOLD_EARNED) ? Number(player.GOLD_EARNED) : mostGold;
+		mostWards = mostWards < Number(player.VISION_WARDS_BOUGHT_IN_GAME) ? Number(player.VISION_WARDS_BOUGHT_IN_GAME) : mostWards;
+		
 
 		if ( playedChampsObj[player.SKIN] ) {
 			const times = playedChampsObj[player.SKIN].times;
@@ -131,6 +134,7 @@ function statsObj({player}) {
 		totalTowerDamage,
 		totalCast,
 		pings,
+		mostWards,
     	badges: []
 	};
 }

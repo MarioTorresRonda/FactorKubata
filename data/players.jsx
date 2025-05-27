@@ -31,15 +31,29 @@ export const players = [
     player: teams.factorKubata.players.mid
 },
 {
+    name: "FK Bubazila",
+    role: adc,
+    imgSrc : noImg,
+    player: teams.factorKubata.players.adcSub
+},
+{
+    name: "FK Arcadic",
+    role: supp,
+    imgSrc : noImg,
+    player: teams.factorKubata.players.jungleSub
+},
+{
     name: "Bor Hacter",
     role: adc,
     imgSrc : hacterPlayer,
+    sub: true,
     player: teams.factorKubata.players.adc
 },
 {
     name: "FK Moi",
     role: supp,
     imgSrc : moiPlayer,
+    sub: true,
     player: teams.factorKubata.players.supp
 },
 {
@@ -48,19 +62,5 @@ export const players = [
     imgSrc : noImg,
     old: true,
     player: teams.factorKubata.players.oldSupp
-},
-{
-    name: "FK Arcadic",
-    role: jungle,
-    imgSrc : noImg,
-    sub: true,
-    player: teams.factorKubata.players.jungleSub
-},
-{
-    name: "FK Bubazila",
-    role: adc,
-    imgSrc : noImg,
-    sub: true,
-    player: teams.factorKubata.players.adcSub
 },
 ];

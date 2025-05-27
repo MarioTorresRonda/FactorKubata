@@ -3,9 +3,10 @@
 import {Roboto_Condensed} from "next/font/google";
 
 import Message from "@/components/fragments/Message";
-import { matchList } from "@/data/matchList";
 import { useNavigate } from "@/hooks/useNavigate";
 import Match from "../matches/Match";
+import { fetchMatchList } from "@/http";
+import { useFetch } from "@/hooks/useFetch";
 
 const font = Roboto_Condensed({subsets: ["latin"]});
 
@@ -17,6 +18,14 @@ export default function Matches() {
 	function onHandleSeeMore() {
 		navigate( { url: "matches" } )
 	}
+
+    const {
+        isFetching, 
+        fetchedData : matchList,
+        error,
+        setFetchedData : setMatchList
+    } = useFetch( fetchMatchList, null, [], [] );
+
 
     return (
         <div className="flex flex-col w-full justify-center items-center gap-4">

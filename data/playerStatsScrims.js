@@ -25,7 +25,7 @@ export const stats = {
 			{name: "Ambessa", times: 1, wins: 0},
 			{name: "TahmKench", times: 1, wins: 0},
 		],
-		playedTotalGames: 8,
+		playedTotalGames: 100,
 		totalTowerDamage: 24076,
 		totalCast: 2294,
 		pings: 55,

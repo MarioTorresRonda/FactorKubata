@@ -15,6 +15,7 @@ let messages = {
         },
         team: {
             title: "Equipo",
+            scrims: "Entrenamientos",
             players: {
                 better: "Mejor",
                 total: "Total",
@@ -41,7 +42,8 @@ let messages = {
                 heal: { title: "¡Hospital con patas!", desc: "Mayor curacion en una partida" },
                 towerDamage : { title: "¡Demodelor!", desc: "Mayor daño a torres en una partida" },
                 spam : { title: "¡Spammer!", desc: "Mayor cantidad de habilidades lanzadas" },
-                pings : { title: "ShoutCaller!", desc: "Mayor cantidad de pings usados" }
+                pings : { title: "ShoutCaller!", desc: "Mayor cantidad de pings usados" },
+                wards : { title: '¡Ojo omnisciente!', desc: "Mayor cantidad de centinelas comprados" },
             }
         },
         matches: {
@@ -49,6 +51,7 @@ let messages = {
             side0: "Azul",
             side1: "Rojo",
             matchList: {
+                "20052025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 25 Etapa: GRUPO A  Grupo: 1  Ronda: 1 ",
                 "30032025" : "División 5 | Split 2 | Periodo 2 | Hextech Series 2024/25 Etapa: GRUPO C  Grupo: 1  Ronda: 2 ",
                 "23032025" : "División 5 | Split 2 | Periodo 2 | Hextech Series 2024/25 Etapa: GRUPO C  Grupo: 1  Ronda: 1 ",
                 "23022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 3 ",
@@ -71,6 +74,13 @@ let messages = {
         cancel: 'Cancelar',
         seeAll: 'Ver todos...',
         dateFormat: 'es-es',
+        admin: {
+            title: "Acceso al administrador",
+            desc: "Hay informacion privada protegida por una contraseña.",
+            to: "Introduce la contraseña: ",
+            back: "No tengo contraseña",
+            accept: "Acceder."
+        },
         riskyUrl: {
             title: "Ten cuidado",
             desc: "Vas a navegar fuera de mi portfolio, hacia otro dominio. Siempre intento tener cuidado de las URL que publico, pero a veces los dominios cambian de dueño. No confies en nadie.",

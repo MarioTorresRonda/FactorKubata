@@ -3,5 +3,7 @@
       "*.css": "tailwindcss"
     },
     "css.lint.unknownAtRules": "ignore",
-    "css.customData": [".vscode/css_custom_data.json"]
+    "css.customData": [
+      ".vscode/css_custom_data.json"
+    ]
 }

@@ -1,4 +1,4 @@
-import { faCalculator, faDroplet, faShield, faFlag, faMultiply, faPlus, faTowerCell, faBolt, faBell } from "@fortawesome/free-solid-svg-icons";
+import { faCalculator, faDroplet, faShield, faFlag, faMultiply, faPlus, faTowerCell, faBolt, faBell, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export const badges = {
     kills : { id: "mostKills", icon: faDroplet, color: "bg-red-600" },
@@ -11,4 +11,5 @@ export const badges = {
     heal : { id: "mostHeal", icon: faPlus, color: "bg-green-500" },
     spam : { id: "totalCast", icon: faBolt, color: "bg-blue-500" },
     pings : { id: "pings", icon: faBell, color: "bg-green-500" },
+    wards : { id: "mostWards", icon: faEye, color: "bg-green-600" },
 }

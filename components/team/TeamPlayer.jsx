@@ -1,22 +1,17 @@
 import Image from "next/image";
 
-import bg1 from "@/public/backgrounds/1V.jpeg";
-import bg2 from "@/public/backgrounds/2V.jpeg";
-import bg3 from "@/public/backgrounds/3V.jpeg";
-import bg4 from "@/public/backgrounds/4V.jpeg";
-const backgroundList = [bg1, bg2, bg3, bg4];
-
 import {Roboto_Condensed} from "next/font/google";
 const font = Roboto_Condensed({subsets: ["latin"]});
 import PlayerPanels from "./PlayerPanels";
 import PlayerChamps from "./PlayerChamps";
 import Message from "../fragments/Message";
 import { stats } from "@/data/playerStats";
+import { stats as statsScrims } from "@/data/playerStatsScrims";
 import FAI from "../fragments/FAI";
 import { badges } from "@/data/badges";
 import Tooltip from "../fragments/Tooltip";
 
-export default function TeamPlayer({player}) {
+export default function TeamPlayer({ player, background, scrims }) {
 
 	const leftMainClass = "self-start";
 	const leftImageClass = "flex flex-row-reverse justify-start mr-4 gap-4";
@@ -30,7 +25,7 @@ export default function TeamPlayer({player}) {
 
 	const animateAll = "duration-300 transition-all";
 
-	const statsObject = stats[player.name] 
+	const statsObject = !scrims ? stats[player.name] : statsScrims[player.name];
 	const gameText = statsObject.playedTotalGames > 1 ? <Message code={["home", "team", "players", "games"]} /> : <Message code={["home", "team", "players", "game"]} />
 				
 
@@ -38,7 +33,7 @@ export default function TeamPlayer({player}) {
 		<div className={`h-[500px] w-4/5 group ${leftMainClass} ${rightMainClass} text-white`}>
 			<div className={`relative h-[400px] overflow-hidden mr-4 ${leftImageClass} ${rightImageClass}`}>
 				<div className={`absolute w-full -z-10 h-full  ${leftInsideImageClass} ${rightInsideImageClass} ${animateAll}`}>
-					<Image src={backgroundList[Math.trunc(Math.random() * backgroundList.length)]} fill={true} alt="background" />
+					<Image src={background} fill={true} alt="background" />
 				</div>
 				<div
 					className={`absolute w-full bg-black/50 -z-10 h-full ${leftInsideImageClass} ${rightInsideImageClass} ${animateAll}`}

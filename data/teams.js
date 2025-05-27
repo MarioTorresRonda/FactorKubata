@@ -9,6 +9,7 @@ import sch from "@/public/teams/SCH.png";
 import pdp from "@/public/teams/PDP.jpg";
 import rht from "@/public/teams/RHT.png";
 import rtg from "@/public/teams/RTG.png";
+import masones from "@/public/teams/Masones.jpg";
 
 export const teams = {
     factorKubata : {
@@ -135,6 +136,17 @@ export const teams = {
             mid : { name : "manolocabezagueb", puuid: "f4cf2bf3-05fd-5183-b278-3e62c6b88f7e" },
             adc : { name : "JC ARIES XXIX", puuid: "7ccec3d1-5edd-5887-a5dd-666388b949ea" },
             supp : { name : "El Oso Latinoso", puuid: "965d21e8-2218-5f17-85e3-0b27c2afef2a" },
+        }
+    },
+    masones: {
+        name: "Masones",
+        icon: masones,        
+        players: {
+            top : { name : "sargenton", puuid: "09b0f2fd-1d01-55ae-940f-e2a1a673f016" },
+            jungle : { name : "aitorfisan", puuid: "5ddf8db9-8cd2-5a66-ab71-70d56b29ec51" },
+            mid : { name : "Eclipse", puuid: "d2766af4-5383-59d1-aa73-c5e7dd28fd7e" },
+            adc : { name : "sekionse", puuid: "611f13f2-4e84-59b4-a913-0cc98bbfef12" },
+            supp : { name : "K4RNI", puuid: "be0407c3-c4e9-5c8d-b34b-398eb4022cbe" },
         }
     }
 }

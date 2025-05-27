@@ -18,7 +18,7 @@ import { itemsIDS } from "@/data/formattedItems";
 export default function TeamView( { team, side } ) {
 
     const [infoShownIndex, setInfoShownIndex] = useState(0)
-    const infoArray = [ { name: "GOLD_EARNED", icon: goldIcon }, { name : "MINIONS_KILLED", icon: csIcon }, { name: "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS", icon: damageIcon } ]
+    const infoArray = [ { name: "GOLD_EARNED", icon: goldIcon }, { name : [ "MINIONS_KILLED", "NEUTRAL_MINIONS_KILLED" ], icon: csIcon }, { name: "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS", icon: damageIcon } ]
     const getText = useMessageText();
     const router = useRouter()
 
@@ -79,6 +79,14 @@ export default function TeamView( { team, side } ) {
         return playerName
     }
 
+    function getInfoShow( player, names ) {
+        if ( Array.isArray( names ) ) {
+            return names.map( name => player[name] ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
+        }else{
+            return player[names];
+        }
+    }
+
     let teamKills = team.players.map( player => player.CHAMPIONS_KILLED ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
     let teamDeaths = team.players.map( player => player.NUM_DEATHS ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
     let teamAssists = team.players.map( player => player.ASSISTS ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
@@ -109,7 +117,7 @@ export default function TeamView( { team, side } ) {
                     </div>
                     <KDA kills={player.CHAMPIONS_KILLED} deaths={player.NUM_DEATHS} assists={player.ASSISTS} className={"w-[12%] justify-center " + table[2] } />
                     <div className={"w-[14%] text-center " + table[3] }> 
-                        <p> { player[infoShown.name] } </p> 
+                        <p> { getInfoShow( player, infoShown.name ) } </p> 
                     </div>
                     <div className={"w-[35%] bg-stone-900/10 flex "+ table[4] }>
                         { items.map( (item) => {
