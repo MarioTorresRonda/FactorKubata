@@ -4,10 +4,10 @@ import { cookies } from "next/headers";
 export async function GET(request) {
 
   const cookieStore = await cookies()
-  const token = cookieStore.get('token')
+  const token = cookieStore.get('token');
   let newMatchList = matchList;
 
-  if ( token.value != "yulMason123" ) {
+  if ( !token || token.value != "yulMason123" ) {
     newMatchList = matchList.map( ( match ) => { 
         return { 
             date : match.date, 

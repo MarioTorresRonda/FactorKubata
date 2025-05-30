@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { matchList } from "@/data/matchList";
 import { players } from "@/data/players";
-import { badges } from "@/data/badges";
+import { badges } from "@/data/badges"; 
+
+const fs = require('fs');
 
 export async function GET(request) {
 
@@ -22,7 +24,9 @@ export async function GET(request) {
     finalObj[ most[statKey].name ].badges.push( statKey )
   })
   
-  return new Response( `export const stats = ${ JSON.stringify( finalObj ) }`, {status: 200});
+	fs.writeFileSync('./data/playerStats.js', `export const stats = ${ JSON.stringify( finalObj ) }` );
+
+  return new Response( `OK. filed updated`, {status: 200});
 }
 
 function statsObj({player}) {

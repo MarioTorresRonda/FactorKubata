@@ -44,7 +44,7 @@ export default function NavBarModal() {
         > 
             <div className="flex flex-col gap-4">
                 <Message code={["commons", "admin", "desc"]}></Message>
-                <PrettyInput onChange={ (event) => { onHandleChange(event) }} className="w-[300px]" value={passwordValue} />
+                <PrettyInput type="password" onChange={ (event) => { onHandleChange(event) }} className="w-[300px]" value={passwordValue} />
             </div>
         </Modal>
     </div> )
