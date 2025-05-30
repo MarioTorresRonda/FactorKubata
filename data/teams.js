@@ -10,6 +10,7 @@ import pdp from "@/public/teams/PDP.jpg";
 import rht from "@/public/teams/RHT.png";
 import rtg from "@/public/teams/RTG.png";
 import masones from "@/public/teams/Masones.jpg";
+import nox from "@/public/teams/NOX.jpg";
 
 export const teams = {
     factorKubata : {
@@ -147,6 +148,17 @@ export const teams = {
             mid : { name : "Eclipse", puuid: "d2766af4-5383-59d1-aa73-c5e7dd28fd7e" },
             adc : { name : "sekionse", puuid: "611f13f2-4e84-59b4-a913-0cc98bbfef12" },
             supp : { name : "K4RNI", puuid: "be0407c3-c4e9-5c8d-b34b-398eb4022cbe" },
+        }
+    },
+    nox: {
+        name: "NOX Legion",
+        icon: nox,        
+        players: {
+            top : { name : "Danius", puuid: "47fc8f20-7622-5199-93b6-2ec2d963e2cc" },
+            jungle : { name : "ΘVERSEER", puuid: "1be23f85-82df-502e-90ff-89b71ce06f91" },
+            mid : { name : "かわうそ", puuid: "d3f20894-8815-5d64-bc65-840b684690c2" },
+            adc : { name : "MinusLC", puuid: "15762bb4-bf96-5ccc-b04e-0126c8ec1a9e" },
+            supp : { name : "Demian969", puuid: "24f0e4f1-3817-5923-8e01-01713e57d779" },
         }
     }
 }

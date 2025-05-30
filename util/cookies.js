@@ -15,6 +15,5 @@ export function getCookie(cname) {
 }
 
 export function removeCookie(cname) {
-  console.log( "removed" );
   document.cookie=`${cname}=;;max-age=0`
 }

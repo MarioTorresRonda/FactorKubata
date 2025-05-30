@@ -51,7 +51,9 @@ let messages = {
             side0: "Azul",
             side1: "Rojo",
             matchList: {
-                "20052025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 25 Etapa: GRUPO A  Grupo: 1  Ronda: 1 ",
+                "07062025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 2025 Etapa: GRUPO A  SEMIFINAL ",
+                "25052025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 2025 Etapa: GRUPO A  Grupo: 1  Ronda: 2 ",
+                "20052025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 2025 Etapa: GRUPO A  Grupo: 1  Ronda: 1 ",
                 "30032025" : "División 5 | Split 2 | Periodo 2 | Hextech Series 2024/25 Etapa: GRUPO C  Grupo: 1  Ronda: 2 ",
                 "23032025" : "División 5 | Split 2 | Periodo 2 | Hextech Series 2024/25 Etapa: GRUPO C  Grupo: 1  Ronda: 1 ",
                 "23022025" : "División 5 | Split 2 | Periodo 1 | Hextech Series 2024/25 Etapa: GRUPO D  Grupo: 1  Ronda: 3 ",

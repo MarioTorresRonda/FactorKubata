@@ -1,4 +1,5 @@
 import {teams} from "./teams";
+import match25052025 from "@/data/matches/Division5 Split3 periodo1 Ronda 2 2025.json"
 import match18052025 from "@/data/matches/Division5 Split3 periodo1 2025.json"
 import match30032025 from "@/data/matches/Division5 Split2 periodo2 Ronda2 2025.json"
 import match23032025 from "@/data/matches/Division5 Split2 periodo2 2025.json"
@@ -14,15 +15,37 @@ import forgotten1 from "@/data/matches/forgotten 1 remenants.json"
 
 export const matchList = [
 	{
-		date: "23/03/2025 8:00PM GMT+1",
+		date: "08/06/2025 8:00PM GMT+1",
+		name: "07062025",
+		red: teams.factorKubata,
+		blue: teams.factorKubata,
+		win : null
+	},
+	{
+		date: "25/05/2025 8:00PM GMT+1",
+		name: "25052025",
+		win: true,
+		info: match25052025,
+		blue: teams.nox,
+		red: teams.factorKubata,
+		POV: {
+			JarvanIV : "https://youtu.be/RcLzeYx8UUA"
+		}
+	},
+	{
+		date: "18/05/2025 8:00PM GMT+1",
 		name: "20052025",
 		win: true,
 		info: match18052025,
 		blue: teams.masones,
 		red: teams.factorKubata,
+		POV: {
+			Udyr: "https://youtu.be/28G59TUFqwI"
+		}
+
 	},
 	{
-		date: "23/03/2025 8:00PM GMT+1",
+		date: "30/03/2025 8:00PM GMT+1",
 		name: "30032025",
 		win: false,
 		info: match30032025,
