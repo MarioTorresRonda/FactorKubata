@@ -9,14 +9,15 @@ export async function GET(request) {
 
   if ( !token || token.value != "yulMason123" ) {
     newMatchList = matchList.map( ( match ) => { 
-        return { 
-            date : match.date, 
-            name : match.name, 
-            win : match.win, 
-            info : match.info, 
-            blue : match.blue, 
-            red : match.red
-        } 
+        //Not game played, no need to delete povs
+        if ( !match.games ) {
+          return match; 
+        }
+
+        match.games.map( ( game ) => {
+          game.pov = [];
+        })
+        return match;
     } )
   }
   

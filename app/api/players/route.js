@@ -7,43 +7,60 @@ const fs = require('fs');
 
 export async function GET(request) {
 
-  const finalObj = {};
-  const most = {...badges }
+	const finalObj = {};
+	const finalObjsScrims = {};
+	const most = {...badges }
 
-  players.forEach( player => {
-    finalObj[player.name] = statsObj({player});
-    Object.keys(most).forEach( stat => {
-	  if ( !most[stat].value || most[stat].value < finalObj[player.name][most[stat].id] ) {
-		most[stat].value = finalObj[player.name][most[stat].id];
-		most[stat].name = player.name;
-	  }
-	} )
-  } );
+	players.forEach( player => {
 
-  Object.keys( most ).forEach( ( statKey ) => {
-    finalObj[ most[statKey].name ].badges.push( statKey )
-  })
+		finalObj[player.name] = statsObj({ player, scrim : false});
+		finalObjsScrims[player.name] = statsObj({ player, scrim : true});
+
+		//Badges
+		Object.keys(most).forEach( stat => {
+		if ( !most[stat].value || most[stat].value < finalObj[player.name][most[stat].id] ) {
+			most[stat].value = finalObj[player.name][most[stat].id];
+			most[stat].name = player.name;
+		}
+		} )
+	} );
+
+	Object.keys( most ).forEach( ( statKey ) => {
+		finalObj[ most[statKey].name ].badges.push( statKey )
+	})
   
 	fs.writeFileSync('./data/playerStats.js', `export const stats = ${ JSON.stringify( finalObj ) }` );
+	fs.writeFileSync('./data/playerStatsScrims.js', `export const stats = ${ JSON.stringify( finalObjsScrims ) }` );
 
-  return new Response( `OK. filed updated`, {status: 200});
+	return new Response( `OK. filed updated`, {status: 200});
 }
 
-function statsObj({player}) {
+function statsObj({ player, scrim }) {
 
-	const playedGames = matchList.map((match) => {
-			var game;
-			if (match.info) {
-				match.info.participants.forEach((participant) => {
+
+	const playedGames = [];
+
+	matchList.forEach((match) => {
+		match.games.forEach( (game) => {
+			if ( !scrim && game.scrim  ) {
+				return;
+			}
+
+			var playedGame;
+			if (game.info) {
+				game.info.participants.forEach((participant) => {
 					if (participant.PUUID == player.player.puuid && participant.TEAM_POSITION == player.role.roleId ) {
-						game = participant;
-						game.gameDuration = match.info.gameDuration;
+						playedGame = participant;
+						playedGame.gameDuration = game.info.gameDuration;
 					}
 				});
-				return game;
+				if ( playedGame ) {
+					playedGames.push( playedGame );
+				}
 			}
-		})
-		.filter((notUndefined) => notUndefined !== undefined);
+
+		} )	
+	});
 
   	//Totals
   	const kills = sumOf( playedGames, "CHAMPIONS_KILLED" );

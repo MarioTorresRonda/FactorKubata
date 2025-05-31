@@ -50,6 +50,7 @@ let messages = {
             title: "Partidos",
             side0: "Azul",
             side1: "Rojo",
+            nullTeam: "Secreto",
             matchList: {
                 "07062025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 2025 Etapa: GRUPO A  SEMIFINAL ",
                 "25052025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 2025 Etapa: GRUPO A  Grupo: 1  Ronda: 2 ",

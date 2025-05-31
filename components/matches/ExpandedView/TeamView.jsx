@@ -65,12 +65,14 @@ export default function TeamView( { team, side } ) {
         const puuid = player.PUUID;
         let playerName;
         
-        Object.values( team.team.players ).forEach( teamPlayer => {
-            if ( teamPlayer.puuid == puuid ) {
-                playerName = teamPlayer.name;
-                return;
-            }
-        });
+        if ( team.team ) {
+            Object.values( team.team.players ).forEach( teamPlayer => {
+                if ( teamPlayer.puuid == puuid ) {
+                    playerName = teamPlayer.name;
+                    return;
+                }
+            });
+        }
 
         if ( !playerName ) {
             playerName = player.NAME;
