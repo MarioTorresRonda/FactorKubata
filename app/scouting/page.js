@@ -39,8 +39,6 @@ export default function Home() {
         }, 300);
     }
 
-    console.log( rivals );
-
     return (
         <main className="mb-32 w-full h-full flex flex-col items-center justify-center mt-8">
             <p className={`text-[52px] font-bold  ${font.className}`}>

@@ -1,8 +1,11 @@
 import { createCollection, getCollection } from '@/util/mongoDB';
+import { LoLApi, readSecrets } from '@/util/Secrets';
 import { Mastery, Ranked } from '@/util/trimmedObjs';
 import { BSON } from 'mongodb';
 
 export async function GET(request) {
+
+  const api = readSecrets( LoLApi );
 
   const searchParams = request.nextUrl.searchParams;
   const name = searchParams.get('gameName');
@@ -18,7 +21,7 @@ export async function GET(request) {
     puuid = isCached.puuid;
     id = isCached._id;
   }else{
-    let data = await fetch(`https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${name}/${tag}?api_key=RGAPI-a7cb4a39-5c68-4e42-921e-134a55053692`)
+    let data = await fetch(`https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${name}/${tag}?api_key=${api}`)
     let json = await data.json();
     
     if ( json.status ) {
@@ -36,7 +39,7 @@ export async function GET(request) {
   let rankedSoloQ = player.soloQ;
   let rankedFlexQ = player.flexQ;
   if ( !rankedSoloQ || !rankedFlexQ ) {
-    let data = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}?api_key=RGAPI-a7cb4a39-5c68-4e42-921e-134a55053692`)
+    let data = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}?api_key=${api}`)
     let json = await data.json();
 
     if ( json.status ) {
@@ -65,7 +68,7 @@ export async function GET(request) {
 
   let masteries = player.masteries;
   if ( !masteries || !player.lastMasteriesUpdate || player.lastMasteriesUpdate > new Date( new Date().getTime() - 28800000 ) ) {
-    let data = await fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}?api_key=RGAPI-a7cb4a39-5c68-4e42-921e-134a55053692`)
+    let data = await fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}?api_key=${api}`)
     let json = await data.json();
 
     if ( json.status ) {
@@ -90,7 +93,7 @@ export async function GET(request) {
 
   let matches = player.matches;
   if ( !matches || !player.lastMatchesUpdate || player.lastMatchesUpdate > new Date( new Date().getTime() - 28800000 ) ) {
-    let data = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=100&type=ranked&api_key=RGAPI-a7cb4a39-5c68-4e42-921e-134a55053692`)
+    let data = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=100&type=ranked&api_key=${api}`)
     let json = await data.json();
 
     if ( json.status ) {

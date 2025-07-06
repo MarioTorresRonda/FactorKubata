@@ -1,4 +1,5 @@
 import { getCollection } from '@/util/mongoDB';
+import { LoLApi, readSecrets } from '@/util/Secrets';
 import { MatchPlayer } from '@/util/trimmedObjs';
 
 export async function GET(request) {
@@ -10,7 +11,9 @@ export async function GET(request) {
     let match = await matchesCollection.findOne( { matchId : matchId } );
 
     if ( !match ) {
-      let data = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=RGAPI-a7cb4a39-5c68-4e42-921e-134a55053692`)
+      
+      const api = readSecrets( LoLApi );
+      let data = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${api}`)
       let json = await data.json();
 
       if ( json.httpStatus ) {
