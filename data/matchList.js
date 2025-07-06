@@ -29,6 +29,7 @@ export const matchList = [
 			{
 				win: null,
 				blue: teams.factorKubata,
+				red: teams.TAX
 			},
 		],
 	},
@@ -51,15 +52,15 @@ export const matchList = [
 		date: "21/05/2025 7:00PM GMT+1",
 		games: [
 			{
-				win: true,
+				win: false,
 				info: scrim_21052025_1,
-				blue: teams.factorKubata,
+				red: teams.factorKubata,
 				scrim: true,
 			},
 			{
-				win: false,
+				win: true,
 				info: scrim_21052025_2,
-				red: teams.factorKubata,
+				blue: teams.factorKubata,
 				scrim: true,
 			},
 		],
@@ -165,7 +166,7 @@ export const matchList = [
 		name: "16022025",
 		games: [
 			{
-				win: false,
+				win: true,
 				info: match16022025,
 				blue: teams.raimon,
 				red: teams.factorKubata,

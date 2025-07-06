@@ -7,6 +7,8 @@ import { useNavigate } from "@/hooks/useNavigate";
 import Match from "../matches/Match";
 import { fetchMatchList } from "@/http";
 import { useFetch } from "@/hooks/useFetch";
+import { useState } from "react";
+import { getCookie } from "@/util/cookies";
 
 const font = Roboto_Condensed({subsets: ["latin"]});
 
@@ -14,6 +16,7 @@ const font = Roboto_Condensed({subsets: ["latin"]});
 export default function Matches() {
     
     const { navigate } = useNavigate();
+    const [matchListBody, setMatchListBody] = useState( { items: 3, scrims : false, token : "" } )
 
 	function onHandleSeeMore() {
 		navigate( { url: "matches" } )
@@ -24,7 +27,7 @@ export default function Matches() {
         fetchedData : matchList,
         error,
         setFetchedData : setMatchList
-    } = useFetch( fetchMatchList, null, [], [] );
+    } = useFetch( fetchMatchList, matchListBody, [], [] );
 
 
     return (

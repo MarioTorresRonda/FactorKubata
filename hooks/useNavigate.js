@@ -10,6 +10,7 @@ export function useNavigate() {
     }
 
     function refresh() {
+        router.refresh();
         window.location.reload()
     }
 

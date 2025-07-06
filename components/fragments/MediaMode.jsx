@@ -33,7 +33,7 @@ export default function MediaMode() {
             <div className={`absolute rounded-[100px] dark:bg-[--myColorStartSimple] bg-[--myColorEndSimple] ${bigCircleAnimation} opacity-20 dark:opacity-10`}>
             </div>
             <div className="absolute self-center top-2">
-                <Tooltip className="" text={["commons", "configuration", mediaText]}>
+                <Tooltip className="" text={getText(["commons", "configuration", mediaText])}>
                     <FAI
                         icon={icon}
                         className={`w-[35px] h-[35px] text-slate-500 dark:text-stone-700`}

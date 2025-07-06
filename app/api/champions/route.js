@@ -7,9 +7,8 @@ export async function GET(request) {
   let individuals = "";
   let finalObj = "export const champions = {";
   Object.keys( json.data ).forEach( ( champion ) => {
-
     imports += `import ${champion}Image from "@/data/lolData/img/champion/${champion}.png";\n`
-    individuals += `export const ${champion} = { image: ${champion}Image }; \n`
+    individuals += `export const ${champion} = { image: ${champion}Image, key: ${json.data[champion].key} }; \n`
     finalObj += `${champion} : ${champion}, \n`
   } );
   finalObj += "}"

@@ -1,25 +1,53 @@
 import { matchList } from "@/data/matchList";
+import { password, readSecrets } from "@/util/Secrets";
 import { cookies } from "next/headers";
 
 export async function GET(request) {
 
-  const cookieStore = await cookies()
-  const token = cookieStore.get('token');
-  let newMatchList = matchList;
+  const searchParams = request.nextUrl.searchParams;
+  let newMatchList = [...matchList];
 
-  if ( !token || token.value != "yulMason123" ) {
-    newMatchList = matchList.map( ( match ) => { 
+  const token = searchParams.get('token');
+  const pass = readSecrets( password );
+  if ( token != pass ) {
+    newMatchList = [...newMatchList.map( ( match ) => { 
+
+        const newMatch = {...match};
+
         //Not game played, no need to delete povs
-        if ( !match.games ) {
-          return match; 
+        if ( !newMatch.games ) {
+          return newMatch; 
         }
 
-        match.games.map( ( game ) => {
-          game.pov = [];
-        })
-        return match;
-    } )
+        newMatch.games = [...newMatch.games.map( ( game ) => {
+          const newGame = {...game};
+          newGame.POV = {};
+          return newGame;
+        })]
+        return newMatch;
+    } ) ];
+  }
+
+  const scrims = searchParams.get('scrims');
+  if ( !scrims || scrims === "false" ) {
+    
+
+    newMatchList = newMatchList.filter( (match) => {
+      let isScrim = false;
+      match.games.forEach( (game) => {
+        if ( game.scrim ) {
+          isScrim = true;
+          return;
+        }
+      });
+      return !isScrim;
+    } );
   }
   
+  const items = searchParams.get('items');
+  if ( items && Number(items) && Number(items) > 0 ) {
+    newMatchList = newMatchList.slice( 0, items );
+  }
+
   return new Response( JSON.stringify( newMatchList ), {status: 200});
 }

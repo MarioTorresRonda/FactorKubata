@@ -1,0 +1,234 @@
+export class Mastery {
+  constructor( { championId, championLevel, championPoints, lastPlayTime } ) {
+    this.championId = championId
+    this.championLevel = championLevel
+    this.championPoints = championPoints
+    this.lastPlayTime = lastPlayTime
+  }
+}
+
+export class Ranked{
+  constructor( { queueType, tier, rank, wins, losses } ) {
+    this.queueType = queueType
+    this.tier = tier
+    this.rank = rank
+    this.wins = wins
+    this.losses = losses
+  }
+}
+
+export class MatchPlayerChallenges{
+    constructor( base ) {
+        this.abilityUses = base.abilityUses;
+        this.acesBefore15Minutes = base.acesBefore15Minutes;
+        this.alliedJungleMonsterKills = base.alliedJungleMonsterKills;
+        this.baronTakedowns = base.baronTakedowns;
+        this.bountyGold = base.bountyGold;
+        this.buffsStolen = base.buffsStolen;
+        this.completeSupportQuestInTime = base.completeSupportQuestInTime;
+        this.controlWardsPlaced = base.controlWardsPlaced;
+        this.damagePerMinute = base.damagePerMinute;
+        this.doubleAces = base.doubleAces;
+        this.dragonTakedowns = base.dragonTakedowns;
+        this.earliestBaron = base.earliestBaron;
+        this.earliestDragonTakedown = base.earliestDragonTakedown;
+        this.earlyLaningPhaseGoldExpAdvantage = base.earlyLaningPhaseGoldExpAdvantage;
+        this.effectiveHealAndShielding = base.effectiveHealAndShielding;
+        this.enemyChampionImmobilizations = base.enemyChampionImmobilizations;
+        this.enemyJungleMonsterKills = base.enemyJungleMonsterKills;
+        this.epicMonsterKillsNearEnemyJungler = base.epicMonsterKillsNearEnemyJungler;
+        this.epicMonsterKillsWithin30SecondsOfSpawn = base.epicMonsterKillsWithin30SecondsOfSpawn;
+        this.epicMonsterSteals = base.epicMonsterSteals;
+        this.epicMonsterStolenWithoutSmite = base.epicMonsterStolenWithoutSmite;
+        this.firstTurretKilled = base.firstTurretKilled;
+        this.fullTeamTakedown = base.fullTeamTakedown;
+        this.gameLength = base.gameLength;
+        this.getTakedownsInAllLanesEarlyJungleAsLaner = base.getTakedownsInAllLanesEarlyJungleAsLaner;
+        this.goldPerMinute = base.goldPerMinute;
+        this.hadOpenNexus = base.hadOpenNexus;
+        this.immobilizeAndKillWithAlly = base.immobilizeAndKillWithAlly;
+        this.jungleCsBefore10Minutes = base.jungleCsBefore10Minutes;
+        this.junglerTakedownsNearDamagedEpicMonster = base.junglerTakedownsNearDamagedEpicMonster;
+        this.kTurretsDestroyedBeforePlatesFall = base.kTurretsDestroyedBeforePlatesFall;
+        this.kda = base.kda;
+        this.killAfterHiddenWithAlly = base.killAfterHiddenWithAlly;
+        this.killParticipation = base.killParticipation;
+        this.killedChampTookFullTeamDamageSurvived = base.killedChampTookFullTeamDamageSurvived;
+        this.killingSprees = base.killingSprees;
+        this.killsNearEnemyTurret = base.killsNearEnemyTurret;
+        this.killsOnOtherLanesEarlyJungleAsLaner = base.killsOnOtherLanesEarlyJungleAsLaner;
+        this.killsUnderOwnTurret = base.killsUnderOwnTurret;
+        this.killsWithHelpFromEpicMonster = base.killsWithHelpFromEpicMonster;
+        this.knockEnemyIntoTeamAndKill = base.knockEnemyIntoTeamAndKill;
+        this.laneMinionsFirst10Minutes = base.laneMinionsFirst10Minutes;
+        this.laningPhaseGoldExpAdvantage = base.laningPhaseGoldExpAdvantage;
+        this.maxCsAdvantageOnLaneOpponent = base.maxCsAdvantageOnLaneOpponent;
+        this.maxKillDeficit = base.maxKillDeficit;
+        this.maxLevelLeadLaneOpponent = base.maxLevelLeadLaneOpponent;
+        this.moreEnemyJungleThanOpponent = base.moreEnemyJungleThanOpponent;
+        this.multiKillOneSpell = base.multiKillOneSpell;
+        this.multiTurretRiftHeraldCount = base.multiTurretRiftHeraldCount;
+        this.multikills = base.multikills;
+        this.multikillsAfterAggressiveFlash = base.multikillsAfterAggressiveFlash;
+        this.outerTurretExecutesBefore10Minutes = base.outerTurretExecutesBefore10Minutes;
+        this.outnumberedKills = base.outnumberedKills;
+        this.outnumberedNexusKill = base.outnumberedNexusKill;
+        this.perfectDragonSoulsTaken = base.perfectDragonSoulsTaken;
+        this.perfectGame = base.perfectGame;
+        this.pickKillWithAlly = base.pickKillWithAlly;
+        this.playedChampSelectPosition = base.playedChampSelectPosition;
+        this.quickCleanse = base.quickCleanse;
+        this.quickFirstTurret = base.quickFirstTurret;
+        this.quickSoloKills = base.quickSoloKills;
+        this.riftHeraldTakedowns = base.riftHeraldTakedowns;
+        this.saveAllyFromDeath = base.saveAllyFromDeath;
+        this.soloBaronKills = base.soloBaronKills;
+        this.soloKills = base.soloKills;
+        this.stealthWardsPlaced = base.stealthWardsPlaced;
+        this.survivedSingleDigitHpCount = base.survivedSingleDigitHpCount;
+        this.survivedThreeImmobilizesInFight = base.survivedThreeImmobilizesInFight;
+        this.takedownOnFirstTurret = base.takedownOnFirstTurret;
+        this.takedowns = base.takedowns;
+        this.takedownsAfterGainingLevelAdvantage = base.takedownsAfterGainingLevelAdvantage;
+        this.takedownsBeforeJungleMinionSpawn = base.takedownsBeforeJungleMinionSpawn;
+        this.takedownsFirstXMinutes = base.takedownsFirstXMinutes;
+        this.takedownsInAlcove = base.takedownsInAlcove;
+        this.takedownsInEnemyFountain = base.takedownsInEnemyFountain;
+        this.teamBaronKills = base.teamBaronKills;
+        this.teamDamagePercentage = base.teamDamagePercentage;
+        this.teamElderDragonKills = base.teamElderDragonKills;
+        this.teamRiftHeraldKills = base.teamRiftHeraldKills;
+        this.tookLargeDamageSurvived = base.tookLargeDamageSurvived;
+        this.turretPlatesTaken = base.turretPlatesTaken;
+        this.turretTakedowns = base.turretTakedowns;
+        this.turretsTakenWithRiftHerald = base.turretsTakenWithRiftHerald;
+        this.twoWardsOneSweeperCount = base.twoWardsOneSweeperCount;
+        this.visionScoreAdvantageLaneOpponent = base.visionScoreAdvantageLaneOpponent;
+        this.visionScorePerMinute = base.visionScorePerMinute;
+        this.voidMonsterKill = base.voidMonsterKill;
+        this.wardTakedowns = base.wardTakedowns;
+        this.wardTakedownsBefore20M = base.wardTakedownsBefore20M;
+        this.wardsGuarded = base.wardsGuarded;
+    }
+}
+
+export class MatchPlayerChamps{
+    constructor( matchPlayer ) {
+        this.championId = matchPlayer.championId;
+        this.puuid = matchPlayer.puuid;
+    }
+}
+
+export class MatchPlayer{
+    constructor( matchPlayer ) {
+        this.allInPings = matchPlayer.allInPings;
+        this.assistMePings = matchPlayer.assistMePings;
+        this.basicPings = matchPlayer.basicPings;
+        this.assists = matchPlayer.assists;
+        this.baronKills = matchPlayer.baronKills;
+        this.challenges = new MatchPlayerChallenges( matchPlayer.challenges );
+        this.champExperience = matchPlayer.champExperience;
+        this.champLevel = matchPlayer.champLevel;
+        this.championId = matchPlayer.championId;
+        this.championName = matchPlayer.championName;
+        this.commandPings = matchPlayer.commandPings;
+        this.consumablesPurchased = matchPlayer.consumablesPurchased;
+        this.damageDealtToBuildings = matchPlayer.damageDealtToBuildings;
+        this.damageDealtToObjectives = matchPlayer.damageDealtToObjectives;
+        this.damageDealtToTurrets = matchPlayer.damageDealtToTurrets;
+        this.damageSelfMitigated = matchPlayer.damageSelfMitigated;
+        this.dangerPings = matchPlayer.dangerPings;
+        this.deaths = matchPlayer.deaths;
+        this.detectorWardsPlaced = matchPlayer.detectorWardsPlaced;
+        this.doubleKills = matchPlayer.doubleKills;
+        this.dragonKills = matchPlayer.dragonKills;
+        this.enemyMissingPings = matchPlayer.enemyMissingPings;
+        this.enemyVisionPings = matchPlayer.enemyVisionPings;
+        this.firstBloodAssist = matchPlayer.firstBloodAssist;
+        this.firstBloodKill = matchPlayer.firstBloodKill;
+        this.firstTowerAssist = matchPlayer.firstTowerAssist;
+        this.firstTowerKill = matchPlayer.firstTowerKill;
+        this.gameEndedInEarlySurrender = matchPlayer.gameEndedInEarlySurrender;
+        this.getBackPings = matchPlayer.getBackPings;
+        this.goldEarned = matchPlayer.goldEarned;
+        this.goldSpent = matchPlayer.goldSpent;
+        this.holdPings = matchPlayer.holdPings;
+        this.individualPosition = matchPlayer.individualPosition;
+        this.inhibitorKills = matchPlayer.inhibitorKills;
+        this.inhibitorTakedowns = matchPlayer.inhibitorTakedowns;
+        this.inhibitorsLost = matchPlayer.inhibitorsLost;
+        this.item0 = matchPlayer.item0;
+        this.item1 = matchPlayer.item1;
+        this.item2 = matchPlayer.item2;
+        this.item3 = matchPlayer.item3;
+        this.item4 = matchPlayer.item4;
+        this.item5 = matchPlayer.item5;
+        this.item6 = matchPlayer.item6;
+        this.itemsPurchased = matchPlayer.itemsPurchased;
+        this.killingSprees = matchPlayer.killingSprees;
+        this.kills = matchPlayer.kills;
+        this.lane = matchPlayer.lane;
+        this.largestCriticalStrike = matchPlayer.largestCriticalStrike;
+        this.largestKillingSpree = matchPlayer.largestKillingSpree;
+        this.largestMultiKill = matchPlayer.largestMultiKill;
+        this.longestTimeSpentLiving = matchPlayer.longestTimeSpentLiving;
+        this.magicDamageDealt = matchPlayer.magicDamageDealt;
+        this.magicDamageDealtToChampions = matchPlayer.magicDamageDealtToChampions;
+        this.magicDamageTaken = matchPlayer.magicDamageTaken;			
+        this.needVisionPings = matchPlayer.needVisionPings;
+        this.neutralMinionsKilled = matchPlayer.neutralMinionsKilled;
+        this.nexusTakedowns = matchPlayer.nexusTakedowns;
+        this.objectivesStolen = matchPlayer.objectivesStolen;
+        this.objectivesStolenAssists = matchPlayer.objectivesStolenAssists;
+        this.onMyWayPings = matchPlayer.onMyWayPings;
+        this.pentaKills = matchPlayer.pentaKills;
+        this.perks = matchPlayer.perks;				
+        this.physicalDamageDealt = matchPlayer.physicalDamageDealt;
+        this.physicalDamageDealtToChampions = matchPlayer.physicalDamageDealtToChampions;
+        this.physicalDamageTaken = matchPlayer.physicalDamageTaken;
+        this.pushPings = matchPlayer.pushPings;
+        this.puuid = matchPlayer.puuid;
+        this.quadraKills = matchPlayer.quadraKills;
+        this.retreatPings = matchPlayer.retreatPings;
+        this.riotIdGameName = matchPlayer.riotIdGameName;
+        this.riotIdTagline = matchPlayer.riotIdTagline;
+        this.sightWardsBoughtInGame = matchPlayer.sightWardsBoughtInGame;
+        this.spell1Casts = matchPlayer.spell1Casts;
+        this.spell2Casts = matchPlayer.spell2Casts;
+        this.spell3Casts = matchPlayer.spell3Casts;
+        this.spell4Casts = matchPlayer.spell4Casts;
+        this.subteamPlacement = matchPlayer.subteamPlacement;
+        this.summoner1Casts = matchPlayer.summoner1Casts;
+        this.summoner1Id = matchPlayer.summoner1Id;
+        this.summoner2Casts = matchPlayer.summoner2Casts;
+        this.summoner2Id = matchPlayer.summoner2Id;
+        this.teamId = matchPlayer.teamId;
+        this.teamPosition = matchPlayer.teamPosition;
+        this.timeCCingOthers = matchPlayer.timeCCingOthers;
+        this.totalAllyJungleMinionsKilled = matchPlayer.totalAllyJungleMinionsKilled;
+        this.totalDamageDealt = matchPlayer.totalDamageDealt;
+        this.totalDamageDealtToChampions = matchPlayer.totalDamageDealtToChampions;
+        this.totalDamageShieldedOnTeammates = matchPlayer.totalDamageShieldedOnTeammates;
+        this.totalDamageTaken = matchPlayer.totalDamageTaken;
+        this.totalEnemyJungleMinionsKilled = matchPlayer.totalEnemyJungleMinionsKilled;
+        this.totalHeal = matchPlayer.totalHeal;
+        this.totalHealsOnTeammates = matchPlayer.totalHealsOnTeammates;
+        this.totalMinionsKilled = matchPlayer.totalMinionsKilled;
+        this.totalTimeCCDealt = matchPlayer.totalTimeCCDealt;
+        this.totalTimeSpentDead = matchPlayer.totalTimeSpentDead;
+        this.totalUnitsHealed = matchPlayer.totalUnitsHealed;
+        this.tripleKills = matchPlayer.tripleKills;
+        this.trueDamageDealt = matchPlayer.trueDamageDealt;
+        this.trueDamageDealtToChampions = matchPlayer.trueDamageDealtToChampions;
+        this.trueDamageTaken = matchPlayer.trueDamageTaken;
+        this.turretKills = matchPlayer.turretKills;
+        this.turretTakedowns = matchPlayer.turretTakedowns;
+        this.turretsLost = matchPlayer.turretsLost;
+        this.visionClearedPings = matchPlayer.visionClearedPings;
+        this.visionScore = matchPlayer.visionScore;
+        this.visionWardsBoughtInGame = matchPlayer.visionWardsBoughtInGame;
+        this.wardsKilled = matchPlayer.wardsKilled;
+        this.wardsPlaced = matchPlayer.wardsPlaced;
+        this.win = matchPlayer.win;
+    }
+}

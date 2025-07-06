@@ -32,8 +32,5 @@ export default function DinamicColors() {
 
     }, [time, update]) 
 
-    return (
-        <div> 
-        </div>
-    )
+    return (<></>)
 }

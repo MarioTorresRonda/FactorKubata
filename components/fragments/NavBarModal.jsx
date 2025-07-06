@@ -30,11 +30,11 @@ export default function NavBarModal() {
         setPasswordValue( event.target.value )
     }
     
-    return ( <div className="h-10 aspect-square dark:bg-stone-700 bg-stone-200 rounded-md">
+    return ( <div className="h-10 w-10 aspect-square dark:bg-stone-700 bg-stone-200 rounded-md  self-end">
         <button onClick={onHandleClick} className="w-full h-full">
-            <FAI className="m-2" icon={signInIcon}/> 
+                <FAI className="m-2" icon={signInIcon}/> 
         </button>
-            <Modal
+        <Modal
             title={getText(["commons", "admin", "title"])}
             submit={true}
             onSubmit={onHandleSubmit}

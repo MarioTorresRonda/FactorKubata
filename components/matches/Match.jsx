@@ -8,11 +8,11 @@ import FAI from "@/components/fragments/FAI";
 import { faEyeSlash as showIcon } from "@fortawesome/free-solid-svg-icons"
 import { parseMatchDate } from "@/util/dates";
 import { useState } from "react";
-import ExpandedView from "./ExpandedView";
-import MatchSide, { side } from "./MatchSide";
+import MatchSide from "./MatchSide";
 import MatchCountdown from "./MatchCountdown";
 import MatchGames from "./MatchGames";
-import { matchColorByWins } from "@/util/MatchUtils";
+import { matchColorByWins, side } from "@/util/MatchUtils";
+import MatchDate from "./MatchDate";
 
 export default function Match({match, mainPanel}) {
     const [shown, setShown] = useState(false);
@@ -75,7 +75,7 @@ export default function Match({match, mainPanel}) {
     }
 
     return (
-        <div className="lg:w-2/3 *:transition-all duration-300"
+        <div className="w-full lg:w-2/3 *:transition-all duration-300 animate-fromTop"
             style={{perspective: "1000px", transformStyle: "preserve-3d"}} 
             onMouseEnter={onHandleHover}
             onMouseLeave={onHandleLeave} >
@@ -83,10 +83,10 @@ export default function Match({match, mainPanel}) {
                 className={`${backgroundColor} shadow-md shadow-gray-800 dark:shadow-black text-stone-900`}
                 style={hoverStyle}
                 >
-                <div className="h-12 px-4 flex flex-row justify-center items-center text-xl">
-                    <div>
+                <div className="h-12 px-4 w-full md:text-xl text-base">
+                    <p className="w-full pt-3 md:pt-2 text-center whitespace-nowrap text-ellipsis overflow-hidden ">
                         <Message code={["home", "matches", "matchList", match.name]} />
-                    </div>
+                    </p>
                 </div>
                 <HorizontalBar className="w-full h-[2px]" />
                 <div className="h-20 flex flex-row gap-2 justify-center items-center w-full">
@@ -97,12 +97,12 @@ export default function Match({match, mainPanel}) {
                     />
                     { !gamesPlayed && <MatchCountdown match={match} />}
                     { ( !shown && gamesPlayed ) &&
-                    <div className="h-10 w-[4%] flex justify-center items-center">
-                        <button onClick={onHandleShown} className="h-10 w-10 border-black border-2 flex justify-center items-center hover:bg-stone-300">
+                    <div className="h-10 w-10 flex justify-center items-center ">
+                        <button onClick={onHandleShown} className="w-full h-full border-black border-2 flex justify-center items-center hover:bg-stone-300">
                             { <FAI className="h-4" icon={showIcon}></FAI> }
                         </button>
                     </div> }
-                    { shown && <div className="w-[4%] text-center"> {result} </div>}
+                    { shown && <div className="w-min text-nowrap mx-2 text-center"> {result} </div>}
                     <MatchSide 
                         className={`h-12 ${ match.win == null ? "w-[44%]" : "w-[48%]" }`}  
                         teamSide={side.red}
@@ -111,7 +111,7 @@ export default function Match({match, mainPanel}) {
                 </div>
                 { mainPanel && shown && <MatchGames  games={ match.games } /> }
                 <div className="h-12 px-4 flex flex-row justify-center items-center text-xl w-full">
-                    <div> { parseMatchDate( match.date ) } </div>
+                     <MatchDate date={match.date} />
                 </div>
             </div>
         </div>

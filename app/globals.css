@@ -158,4 +158,6 @@ dialog[open]::backdrop {
   animation: backdrop-fade-in 0.7s ease-out forwards;
 }
 
-
+.mastery-row{
+  height: mod( 40% / 50 );
+}

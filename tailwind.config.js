@@ -9,6 +9,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./data/**/*.{js,ts,jsx,tsx,mdx}",
+    "./util/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     fontFamily: {
@@ -62,7 +63,7 @@ module.exports = {
       animation: {
         opacityLoad: 'opacityLoad 4s',
         overflowLoad: 'overflowLoad 4s',
-        fromTop: 'fromTop 300ms',
+        fromTop: 'fromTop 300ms ease-out',
         toBottom: 'toBottom 200ms',
         highlight : 'highlight 1200ms',
         tooltipAnimation : 'tooltipAnimation 800ms',

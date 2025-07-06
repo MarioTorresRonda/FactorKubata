@@ -50,7 +50,6 @@ let messages = {
             title: "Partidos",
             side0: "Azul",
             side1: "Rojo",
-            nullTeam: "Secreto",
             matchList: {
                 "07062025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 2025 Etapa: GRUPO A  SEMIFINAL ",
                 "25052025" : "División 5 | Split 3 | Periodo 1 | Hextech Series 2025 Etapa: GRUPO A  Grupo: 1  Ronda: 2 ",
@@ -68,6 +67,39 @@ let messages = {
                 "forgotten 2 pandepueblo" : "Forgotten Tournament | Playoffs | Ronda 2 ",
                 "forgotten 1 remenants" : "Forgotten Tournament | Playoffs | Ronda 1 ",
 
+            }
+        },
+        scouting: {
+            title: "Analisis",
+            teams: "Rivales",
+            add: "Añadir Rival",
+            close: "Cerrar Añadir Rival",
+            name: "Nombre",
+            addPlayer: "Añadir jugador",
+            saveTeam: "Guardar Equipo",
+            player: {
+                name: "Jugador",
+                tag: "Tag",
+                role: "Rol"
+            },
+            roles: {
+                TOP: "Superior",
+                JUNGLE: "Jungla",
+                MIDDLE: "Medio",
+                BOTTOM: "Tirador",
+                UTILITY: "Soporte"
+            },
+            mastery: {
+                onlyRole: "Personajes del Rol",
+                level: "Nivel",
+                points: "Puntos",
+                games: "~ Partidas"
+            },
+            matches: {
+                totalGames: "Todas las partidas",
+                totalBans: "Todos los bans",
+                notLoaded: "Esperando al servidor:",
+                matches: "partidas."
             }
         }
     },
@@ -101,7 +133,20 @@ let messages = {
             changeColor2 : "Cambiar Color 2.",
             lightMode: "Cambiar al modo claro.",
             darkMode: "Cambiar al modo oscuro.",
-        }
+        },
+        time: {
+            live: "En proceso",
+            ago: " Hace {0}.",
+            minute: [ "Minuto", "Minutos" ],
+            hour: [ "Hora", "Horas" ],
+            day: [ "Dia", "Dias" ],
+            week: [ "Semana", "Semanas" ],
+            month: [ "Mes", "Meses" ],
+            year: [ "Año", "Años" ],
+        },
+        orders : [
+            "K", "M", "G", "T", "P", "E"
+        ]
     }
 }
 export default messages;

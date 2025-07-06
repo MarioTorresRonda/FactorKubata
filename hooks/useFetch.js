@@ -7,19 +7,27 @@ export function useFetch( fetchFn, body, defaultValue, dependencies ) {
     const [fetchedData, setFetchedData] = useState( defaultValue );
 
     useEffect(() => {
+        
+        const controller = new AbortController();
+        const signal = controller.signal;
+      
         async function fetchData() {
           setIsFetching(true);
           try {
-            const data = await fetchFn( body );
+            const data = await fetchFn( body, { signal } );
             setFetchedData(data);
           } catch (error) {
-            setError({ message: error.message || 'Failed to fetch data.' });
+            if ( !controller.signal.aborted ) {
+              setError({ message: error.message || 'Failed to fetch data.' });
+            }
           }
     
           setIsFetching(false);
         }
-    
+
         fetchData();
+
+        return () => controller.abort();
       }, [fetchFn, body, ...dependencies]);
 
     return {

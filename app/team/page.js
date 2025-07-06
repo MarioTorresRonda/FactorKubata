@@ -32,7 +32,7 @@ export default function Home() {
 				<SliderCheck onClick={onClickScrims} value={scrims} className="h-6 w-12" />
 			</div>
 			<div className="flex flex-col gap-6 w-full"> { players.map( (player, index) => {
-				return <TeamPlayer key={player.name} player={player} background={backgrounds[index]} scrims={scrims} />
+				return <TeamPlayer key={player.name} player={player} background={backgrounds[index]} scrims={scrims} odd={index % 2 == 0} />
 			}) } </div>
 		</main>
 	);

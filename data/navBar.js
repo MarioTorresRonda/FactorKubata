@@ -19,7 +19,14 @@ const matches = {
     symbol: "&"
 }
 
-const navVarList = { home, team, matches }
+const scouting = {
+    title:["home", "scouting", "title"],
+    num:"04",
+    url:"/scouting",
+    symbol: "~"
+}
 
-export { home, team, matches }
+const navVarList = { home, team, matches, scouting }
+
+export { home, team, matches, scouting }
 export default navVarList;

@@ -4,27 +4,22 @@ export const matchColors = {
     lose:  "bg-red-300"
 }
 
-
 export function matchColorByWins( leftTeamWins, rightTeamWins, leftTeamIsMain ) {
 
     if ( leftTeamWins == rightTeamWins ) {
         return matchColors.draw
     }
     if ( leftTeamWins > rightTeamWins ) {
-        if ( leftTeamIsMain  ) {
-            return matchColors.win
-        }else{
-            return matchColors.lose
-        }
+        return leftTeamIsMain ? matchColors.win : matchColors.lose;
     }
-    if ( leftTeamIsMain ) {
-        return matchColors.lose
-    }else{
-        return matchColors.win
-    }
+    return leftTeamIsMain ? matchColors.lose : matchColors.win;
 }
 
 export function matchColorByValue( isWin ) {
 
     return isWin ? matchColors.win : matchColors.lose;
+}
+export const side = {
+    blue: 100,
+    red: 200
 }
