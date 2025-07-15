@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import menus from "@/data/navBar"
-import { password, readSecrets } from "@/util/Secrets";
+import { keys, readSecrets } from "@/util/Secrets";
 
 export async function GET(request) {
 
@@ -8,7 +8,7 @@ export async function GET(request) {
   const token = searchParams.get('token');
   let newNavBar = {...menus};
 
-  const pass = readSecrets( password );
+  const pass = readSecrets( keys.password );
   if ( token != pass ) {
     newNavBar.scouting = undefined;
   }

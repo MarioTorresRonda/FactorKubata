@@ -1,41 +1,18 @@
-import { MongoClient } from "mongodb";
-import { promises as fs } from 'fs';
-import { mongoDB, readSecrets } from "./Secrets";
+import MongoDatabases from "./MongoDatabases";
 
-let cachedClient = null;
 let cachedDb = null;
 
-export async function mongoClientConexion() {
-    if ( cachedClient == null ) {
-        var conexion = readSecrets( mongoDB );
-        cachedClient = await MongoClient.connect( conexion );
-        console.log( "Nueva conexion creada" );
-    }else{
-        //console.log( "Conexion cacheada" );
-    }
-    return cachedClient;
-}
-
 export async function getCollection( collectionName ) {
-    const client = await mongoClientConexion();
+    const database = await MongoDatabases.getDatabase("factorKubata");
 
-    if ( !cachedDb ) {
-        cachedDb = client.db("factorKubata");
-        console.log( "Nueva conexion DB" );
-    }else{
-        //console.log( "BD cacheada" );
-    }
-    
-    const collection = cachedDb.collection(collectionName);
+    const collection = database.collection(collectionName);
     return collection;
 }
 
 export async function createCollection( collection ) {
+    const database = await MongoDatabases.getDatabase("factorKubata");
+    await database.createCollection( collection )
 
-    const client = await mongoClientConexion();
-    const db = client.db("factorKubata");
-    await db.createCollection( collection )
-
-    const userCollection = db.collection(collection);
-    return userCollection;
+    const newCollection = database.collection(collection);
+    return newCollection;
 }

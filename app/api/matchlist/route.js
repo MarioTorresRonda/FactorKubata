@@ -1,6 +1,5 @@
 import { matchList } from "@/data/matchList";
-import { password, readSecrets } from "@/util/Secrets";
-import { cookies } from "next/headers";
+import { keys, readSecrets } from "@/util/Secrets";
 
 export async function GET(request) {
 
@@ -8,7 +7,7 @@ export async function GET(request) {
   let newMatchList = [...matchList];
 
   const token = searchParams.get('token');
-  const pass = readSecrets( password );
+  const pass = readSecrets( keys.password );
   if ( token != pass ) {
     newMatchList = [...newMatchList.map( ( match ) => { 
 

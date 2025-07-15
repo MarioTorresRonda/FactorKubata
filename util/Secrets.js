@@ -1,13 +1,23 @@
 import { readFileSync as readSync } from 'fs';
 
-export const mongoDB = "mongodb.client";
-export const password = "code.secret";
-export const LoLApi = "lol.api";
+export const secrets = "factorKubata.secrets";
+export const keys = { 
+    password : "code", 
+    logRoute: "logRoute", 
+    logs : "logActive", 
+    lol: "lolApi", 
+    DB : "mongoDB" }
 
-export function readSecrets( secret ) {
+let secretsJSON; 
+
+export function readSecrets( code ) {
+    
     try{
-        return readSync(`/etc/${secret}`, 'utf8');
+        if ( !secretsJSON ) {
+            secretsJSON = JSON.parse( readSync(`/etc/${secrets}`, 'utf8') )
+        }
+        return secretsJSON[code];
     }catch( e ) {
-        throw new Error(`Error leyendo el fichero de secretos: ${secret}  e:` + e ); 
+        throw new Error(`Error leyendo el codigo de secretos: ${code}  e:` + e ); 
     }
 }

@@ -1,11 +1,12 @@
+import { ERROR, log } from '@/util/logs';
 import { createCollection, getCollection } from '@/util/mongoDB';
-import { LoLApi, readSecrets } from '@/util/Secrets';
+import { keys, readSecrets } from '@/util/Secrets';
 import { Mastery, Ranked } from '@/util/trimmedObjs';
 import { BSON } from 'mongodb';
 
 export async function GET(request) {
 
-  const api = readSecrets( LoLApi );
+  const api = readSecrets( keys.lol );
 
   const searchParams = request.nextUrl.searchParams;
   const name = searchParams.get('gameName');
@@ -43,6 +44,7 @@ export async function GET(request) {
     let json = await data.json();
 
     if ( json.status ) {
+      log( ERROR, "An error have appear while obtaining rankeds " + json.status )
       return new Response( "Something went wrong loading rankeds", {status: 404});
     }
     
@@ -72,6 +74,7 @@ export async function GET(request) {
     let json = await data.json();
 
     if ( json.status ) {
+      log( ERROR, "An error have appear while obtaining masteries " + json.status )
       return new Response( "Something went wrong loading masteries", {status: 404});
     }
 
@@ -97,6 +100,7 @@ export async function GET(request) {
     let json = await data.json();
 
     if ( json.status ) {
+      log( ERROR, "An error have appear while obtaining matches " + json.status )
       return new Response( "Something went wrong loading matches", {status: 404});
     }
 

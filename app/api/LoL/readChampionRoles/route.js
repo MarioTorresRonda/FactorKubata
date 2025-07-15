@@ -1,5 +1,6 @@
 import { champions } from '@/data/formattedChampions';
 import { roles } from '@/data/roles';
+import { log, WARNING } from '@/util/logs';
 import { getCollection } from '@/util/mongoDB';
 import { MatchPlayer } from '@/util/trimmedObjs';
 var he = require('he');
@@ -78,7 +79,7 @@ async function fetchChampionList( role ) {
                         if ( eFC ) {
                             championJSON.key = eFC.key;
                         }else{
-                            console.log( "Champion", championSplit[index], "not found" );
+                            log( WARNING, "Champion", championSplit[index], "not found" )
                         }
                     }
                 }
