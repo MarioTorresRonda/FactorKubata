@@ -3,6 +3,7 @@ import { roles } from '@/data/roles';
 import { log, WARNING } from '@/util/logs';
 import { getCollection } from '@/util/mongoDB';
 import { MatchPlayer } from '@/util/trimmedObjs';
+import { NextResponse } from 'next/server';
 var he = require('he');
 
 const especialChamps = {
@@ -107,5 +108,5 @@ export async function GET(request) {
         await championsCollection.insertOne( champions );
     }
    
-    return new Response( JSON.stringify( champions ) , {status: 200});
+    return NextResponse.json( champions, {status: 200});
 }

@@ -1,4 +1,5 @@
 import { getCollection } from '@/util/mongoDB';
+import { NextResponse } from 'next/server';
 
 export async function GET(request) {
   
@@ -8,26 +9,39 @@ export async function GET(request) {
   let teamsCollection = await getCollection("teams");
   let team = await teamsCollection.findOne( { teamName : teamName } );
   if ( !team ) {
-    return new Response( "Team does not exists", {status: 400});
+    return NextResponse.json( { message: "Team does not exists" }, {status: 400});
   }
 
   const playersCollection = await getCollection("players"); 
   const players = await Promise.all( Object.values( team.players ).map( async ( player ) => {
-    const { puuid } = await playersCollection.findOne( { gameName: player.name, tagLine : player.tag }, { _id: 0, puuid: 1 } )
-    player.puuid = puuid;
+    const { matches } = await playersCollection.findOne( { gameName: player.name, tagLine : player.tag }, { _id: 0, matches: 1 } )
+    player.matchList = matches;
     return {...player};
   } ) )
 
-  const matchIds = []
-  const matchesCollection = await getCollection("matches"); 
-  const matchesFound = await matchesCollection.aggregate([
-    {
-      $match: { "metadata.participants" : { $all : players.map( player => player.puuid ) } }
+  const allMatchIds = {}
+  players.forEach( ( player )  => {
+    player.matchList.forEach( matchId => {
+      if ( allMatchIds[matchId] ) {
+        allMatchIds[matchId]++;
+      }else{
+        allMatchIds[matchId] = 1;
+      }
+    } )
+  });
+
+  let matchIds = [];
+  Object.keys( allMatchIds ).forEach( ( matchId ) => {
+    if ( allMatchIds[matchId] > 1 ) {
+      matchIds.push( matchId );
     }
-  ]);
-  for await (const match of matchesFound) {
-      matchIds.push(match.matchId);
-  }
+  } );
+
+  matchIds = matchIds.sort( (a, b) => {
+    const trimmedA = Number( a.substr( "EUW1_".length ) );
+    const trimmedB = Number( b.substr( "EUW1_".length ) );
+    return trimmedB - trimmedA;
+  } );
   
-  return new Response( JSON.stringify( matchIds ), {status: 200});
+  return NextResponse.json( matchIds, {status: 200});
 }

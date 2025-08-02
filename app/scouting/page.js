@@ -29,7 +29,7 @@ export default function Home() {
         isFetching, 
         fetchedData : rivals,
         error,
-        setFetchedData : setMatchList
+        setFetchedData : setRivals
     } = useFetch( fetchTeams, teamsBody, [], [] );
 
     function onHandleNewRival() {
@@ -63,11 +63,13 @@ export default function Home() {
                     <NewRival ref={newRivalRef}/> 
                 </div>
                 { isFetching && <div className="w-full"> Loading... </div> }
-                { error && <div className="w-full bg-red-400"> Error: { error }  </div> }
-                { !isFetching && (
+                { error && <div className="w-full bg-red-400 text-stone-800 py-4"> 
+                    <p className="text-center"> Error: { error.message } </p>
+                    </div> }
+                { !error && !isFetching && (
                     <div className="w-full flex flex-col px-2 py-4 gap-4">
                         { rivals.map( (rival) => {
-                            return <Rival key={rival.teamName} rival={rival} />
+                            return <Rival key={rival.teamName} rival={rival} setRivals={setRivals} />
                         } ) }
                     </div>
                 ) }

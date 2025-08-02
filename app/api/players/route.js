@@ -32,7 +32,7 @@ export async function GET(request) {
 	fs.writeFileSync('./data/playerStats.js', `export const stats = ${ JSON.stringify( finalObj ) }` );
 	fs.writeFileSync('./data/playerStatsScrims.js', `export const stats = ${ JSON.stringify( finalObjsScrims ) }` );
 
-	return new Response( `OK. filed updated`, {status: 200});
+	return NextResponse.json( { message: `OK. filed updated` }, {status: 200});
 }
 
 function statsObj({ player, scrim }) {

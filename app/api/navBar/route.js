@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import menus from "@/data/navBar"
 import { keys, readSecrets } from "@/util/Secrets";
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
 
@@ -13,5 +14,5 @@ export async function GET(request) {
     newNavBar.scouting = undefined;
   }
 
-  return new Response( JSON.stringify( newNavBar ), {status: 200});
+  return NextResponse.json( newNavBar, {status: 200});
 }

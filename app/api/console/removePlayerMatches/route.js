@@ -1,4 +1,5 @@
 import { getCollection } from "@/util/mongoDB";
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
     
@@ -10,10 +11,10 @@ export async function GET(request) {
     
     const player = await playersCollection.findOne( { puuid: puuid } );
     if ( !player ) {
-        return new Response( "Player does not exist", {status: 400});
+        return NextResponse.json( { message : "Player does not exist" }, {status: 400});
     }
 
     const firstDelete = await matchesCollection.deleteMany( { matchId : { $in : player.matches } } );
 
-    return new Response( JSON.stringify( { firstDelete } ), {status: 200});
+    return NextResponse.json( { firstDelete }, {status: 200});
 }

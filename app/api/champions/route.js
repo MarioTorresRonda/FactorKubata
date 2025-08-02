@@ -14,5 +14,5 @@ export async function GET(request) {
   finalObj += "}"
   
 
-  return new Response(imports + "\n" + individuals + "\n" + finalObj, {status: 200});
+  return NextResponse.json(imports + "\n" + individuals + "\n" + finalObj, {status: 200});
 }

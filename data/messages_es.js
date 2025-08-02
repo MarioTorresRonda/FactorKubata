@@ -77,6 +77,9 @@ let messages = {
             name: "Nombre",
             addPlayer: "Añadir jugador",
             saveTeam: "Guardar Equipo",
+            deleteTeam: "Guardar Equipo",
+            deleteTeamC: "Guardar Equipo",
+            deleteTeamD: "Equipo #1 Eliminado",
             player: {
                 name: "Jugador",
                 tag: "Tag",

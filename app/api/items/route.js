@@ -28,5 +28,5 @@ export async function GET(request) {
   finalIds += "}"
   
 
-  return new Response( imports + "\n" + individuals + "\n" + finalObj + "\n" + finalIds , {status: 200});
+  return NextResponse.json( imports + "\n" + individuals + "\n" + finalObj + "\n" + finalIds , {status: 200});
 }

@@ -1,4 +1,5 @@
 import { getCollection } from '@/util/mongoDB';
+import { NextResponse } from 'next/server';
 
 export async function GET(request) {
     
@@ -7,5 +8,5 @@ export async function GET(request) {
     const firstDelete = await matchesCollection.deleteMany( { info: null } );
     const secondDelete = await matchesCollection.deleteMany( { status : { $ne : null } } );
 
-    return new Response( JSON.stringify( { firstDelete, secondDelete } ), {status: 200});
+    return NextResponse.json( { firstDelete, secondDelete }, {status: 200});
 }

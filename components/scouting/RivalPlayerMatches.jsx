@@ -47,9 +47,9 @@ export default function RivalPlayerMatches( { matches, player, puuid, onlyRole, 
     }, [puuid, resultMatches]);
 
     return <>
+        { resultMatches && resultMatches.notFetched.length > 0 && <p> <Message code={["home", "scouting", "matches", "notLoaded"]} /> { resultMatches.notFetched.length } <Message code={["home", "scouting", "matches", "matches"]} /> </p> }
         <RivalPlayerMatchesChamps matches={loadedMatches} onlyRole={onlyRole} role={player.role}/>
         <RivalPlayerMatchesBans matches={loadedMatches} onlyRole={onlyRole} role={player.role}/>
         <RivalPlayerMatchesMultiple matches={loadedMatches} matchesIMP={matchesIMP} />
-        { resultMatches && resultMatches.notFetched.length > 0 && <p> <Message code={["home", "scouting", "matches", "notLoaded"]} /> { resultMatches.notFetched.length } <Message code={["home", "scouting", "matches", "matches"]} /> </p> }
     </>
 }

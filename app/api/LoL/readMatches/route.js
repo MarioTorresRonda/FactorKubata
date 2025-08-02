@@ -1,6 +1,7 @@
 import { getCollection } from '@/util/mongoDB';
 import { keys, readSecrets } from '@/util/Secrets';
 import { MatchPlayerChamps } from '@/util/trimmedObjs';
+import { NextResponse } from 'next/server';
 
 const baseAggregation = { 
   matchId : 1, 
@@ -16,7 +17,7 @@ export async function GET(request) {
     const matchList = matchQuery.split(";");
 
     if ( matchList.join("") == "" ) {
-      return new Response( "MatchList empty", {status: 400});
+      return NextResponse.json( { message : "MatchList empty" }, {status: 400});
     }
 
     const matchesCollection = await getCollection("matches");  
@@ -90,7 +91,7 @@ export async function GET(request) {
       notFetched: Object.keys( notFetchedMatches )
     }
 
-  return new Response( JSON.stringify( result ), {status: 200});
+  return NextResponse.json( result, {status: 200});
 }
 
 async function addMatch( matchesCollection, matchId ) {

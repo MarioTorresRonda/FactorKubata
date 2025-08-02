@@ -1,6 +1,7 @@
 import { getCollection } from '@/util/mongoDB';
 import { keys, readSecrets } from '@/util/Secrets';
 import { MatchPlayer } from '@/util/trimmedObjs';
+import { NextResponse } from 'next/server';
 
 export async function GET(request) {
   
@@ -17,10 +18,7 @@ export async function GET(request) {
       let json = await data.json();
 
       if ( json.httpStatus ) {
-        if (  json.httpStatus == 429 ) {
-          return new Response( json.message, {status: 429});
-        }
-        return new Response( json.message, { status : json.httpStatus });
+        return NextResponse.json( { message : json.message }, { status : json.httpStatus });
       }
 
       json.info.participants = json.info.participants.map( participant =>  new MatchPlayer( participant ) );
@@ -31,5 +29,5 @@ export async function GET(request) {
       await matchesCollection.insertOne( json );
     }
 
-    return new Response( JSON.stringify( match ), {status: 200});
+    return NextResponse.json( match, {status: 200});
 }

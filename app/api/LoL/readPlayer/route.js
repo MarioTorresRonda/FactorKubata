@@ -3,6 +3,7 @@ import { createCollection, getCollection } from '@/util/mongoDB';
 import { keys, readSecrets } from '@/util/Secrets';
 import { Mastery, Ranked } from '@/util/trimmedObjs';
 import { BSON } from 'mongodb';
+import { NextResponse } from 'next/server';
 
 export async function GET(request) {
 
@@ -26,7 +27,7 @@ export async function GET(request) {
     let json = await data.json();
     
     if ( json.status ) {
-      return new Response( "Player do not exist", {status: 404});
+      return NextResponse.json( { message : "Player do not exist" }, {status: 404});
     }
     
     json.lastUpdate = new Date();
@@ -39,13 +40,14 @@ export async function GET(request) {
 
   let rankedSoloQ = player.soloQ;
   let rankedFlexQ = player.flexQ;
-  if ( !rankedSoloQ || !rankedFlexQ ) {
+  //If had passes 8 hours from the last refresh
+  if ( !rankedSoloQ || !rankedFlexQ || player.lastRankedUpdate.getTime() + 28800000 < new Date().getTime() ) {
     let data = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}?api_key=${api}`)
     let json = await data.json();
 
     if ( json.status ) {
       log( ERROR, "An error have appear while obtaining rankeds " + json.status )
-      return new Response( "Something went wrong loading rankeds", {status: 404});
+      return NextResponse.json( { message : "Something went wrong loading rankeds" }, {status: 404});
     }
     
     player.lastRankedUpdate = new Date();
@@ -69,13 +71,13 @@ export async function GET(request) {
   }
 
   let masteries = player.masteries;
-  if ( !masteries || !player.lastMasteriesUpdate || player.lastMasteriesUpdate > new Date( new Date().getTime() - 28800000 ) ) {
+  if ( !masteries || !player.lastMasteriesUpdate || ( player.lastMasteriesUpdate.getTime() - 28800000 ) < new Date().getTime() ) {
     let data = await fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}?api_key=${api}`)
     let json = await data.json();
 
     if ( json.status ) {
       log( ERROR, "An error have appear while obtaining masteries " + json.status )
-      return new Response( "Something went wrong loading masteries", {status: 404});
+      return NextResponse.json( { message : "Something went wrong loading masteries" }, {status: 404});
     }
 
     json = json.filter( mastery => mastery.championPoints > 10000 );
@@ -95,13 +97,13 @@ export async function GET(request) {
   }
 
   let matches = player.matches;
-  if ( !matches || !player.lastMatchesUpdate || player.lastMatchesUpdate > new Date( new Date().getTime() - 28800000 ) ) {
+  if ( !matches || !player.lastMatchesUpdate || ( player.lastMatchesUpdate.getTime() - 28800000 ) < new Date() ) {
     let data = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=100&type=ranked&api_key=${api}`)
     let json = await data.json();
 
     if ( json.status ) {
       log( ERROR, "An error have appear while obtaining matches " + json.status )
-      return new Response( "Something went wrong loading matches", {status: 404});
+      return NextResponse.json( { message : "Something went wrong loading matches" }, {status: 404});
     }
 
     if ( !matches ) {
@@ -129,6 +131,11 @@ export async function GET(request) {
     fieldUpdated.push("Matches")
   }
 
-  return new Response( JSON.stringify( player ) + ( debug ? "\n" + JSON.stringify( fieldUpdated ) : "" ), {status: 200});
+  const response = { player };
+  if ( debug ) {
+    response.fieldUpdated = fieldUpdated;
+  }
+
+  return NextResponse.json( response, {status: 200});
 
 }

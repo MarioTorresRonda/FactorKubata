@@ -33,6 +33,8 @@ export default function NavBar() {
     } = useFetch( fetchNavBar, navBarBody, {}, [] );
 
 
+    console.log( menus );
+
     useEffect(() => {
         setNavBarBody( { token : getCookie("token") } );
     }, [])

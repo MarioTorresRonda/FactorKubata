@@ -1,5 +1,6 @@
 import { matchList } from "@/data/matchList";
 import { keys, readSecrets } from "@/util/Secrets";
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
 
@@ -48,5 +49,5 @@ export async function GET(request) {
     newMatchList = newMatchList.slice( 0, items );
   }
 
-  return new Response( JSON.stringify( newMatchList ), {status: 200});
+  return NextResponse.json( newMatchList, {status: 200});
 }

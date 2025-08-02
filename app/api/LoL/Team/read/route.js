@@ -1,4 +1,5 @@
 import { getCollection } from '@/util/mongoDB';
+import { NextResponse } from 'next/server';
 
 export async function GET(request) {
   
@@ -11,13 +12,13 @@ export async function GET(request) {
       let teamsCollection = await getCollection("teams");
       let team = await teamsCollection.findOne( { teamName : teamName } );
       if ( team && playerSearch != "null" && playerSearch != "undefined" && playerSearch != "" && playerSearch ) {
-        return new Response( JSON.stringify( { message: "Team already exist"} ), {status: 400});
+        return NextResponse.json( { message: "Team already exist"}, {status: 400});
       }
       if ( !team ) {
         let json = playerSearch;
 
         if ( !json || json.length == 0 || json == "null" || json == "undefined" ) {
-          return new Response( JSON.stringify( { message: "Team does not exist"} ), {status: 400});
+          return NextResponse.json( { message: "Team does not exist"}, {status: 400});
         }
 
         team = {};
@@ -26,8 +27,8 @@ export async function GET(request) {
         await teamsCollection.insertOne( team );
       }
       
-      return new Response( JSON.stringify( team ), {status: 200});
+      return NextResponse.json( team, {status: 200});
     }catch( e ) {
-      return new Response( e, {status: 400});
+      return NextResponse.json( e, {status: 400});
     }
 }
