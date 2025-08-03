@@ -23,6 +23,16 @@ async function apiCall( url, signal ) {
     return await response.json();
 }
 
+export async function fetchChampionList( body, signal ) {
+    const resData = await apiCall( "/api/LoLData/champions" , signal);
+    return resData;
+}
+
+export async function fetchItemsList( body, signal ) {
+    const resData = await apiCall( "/api/LoLData/items" , signal);
+    return resData;
+}
+
 export async function fetchMatchList( { items, scrims, token }, signal ) {
 
     const resData = await apiCall( `/api/matchlist?items=${items}&scrims=${scrims}&token=${token}`,  signal );

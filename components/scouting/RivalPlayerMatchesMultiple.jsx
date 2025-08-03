@@ -1,6 +1,5 @@
-import { championsKeys } from "@/data/formattedChampionsKeys";
-import Image from "next/image";
 import Message from "../fragments/Message";
+import ChampionImage from "../fragments/ChampionImage";
 
 export default function RivalPlayerMatchesMultiple( { matches, puuid, matchesIMP } ) {
 
@@ -19,11 +18,7 @@ export default function RivalPlayerMatchesMultiple( { matches, puuid, matchesIMP
                 const champId = matchFound.info.participants[0].championId;
                 return <div className="flex flex-row" key={matchFound.matchId}> 
                     <div className="aspect-square w-[50px] max-w[50px] max-h-[50px] relative">
-                        <Image 
-                            fill={true} 
-                            alt={champId} 
-                            src={ championsKeys[champId].image } 
-                        />
+                        <ChampionImage fill={true} championId={champId} />
                     </div>
                     <p> { matchId } </p>
                 </div> 

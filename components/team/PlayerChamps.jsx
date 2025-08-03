@@ -1,6 +1,5 @@
-import { champions } from "@/data/formattedChampions"
-import Image from "next/image"
 import Message from "../fragments/Message"
+import ChampionImage from "../fragments/ChampionImage"
 
 export default function PlayerChamps( { playedChamps } ) {
     
@@ -19,7 +18,7 @@ export default function PlayerChamps( { playedChamps } ) {
             
             return ( <div key={champ.name} className="text-xl w-20 flex flex-row gap-2"> 
                 <div className="min-w-20 h-20 md:min-w-16 md:h-16 relative">
-                    <Image fill="true" alt={champ.name} src={ champions[champ.name].image }></Image>
+                    <ChampionImage fill="true"  championId={champ.name} />
                     <div className="flex md:hidden">
                         <div className="absolute w-full h-full bg-stone-950/40"> </div>
                         <div className="absolute w-full h-full flex flex-col justify-evenly items-center"> 

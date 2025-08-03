@@ -10,7 +10,6 @@ export default function ExpandedView({ blue, red }) {
 
     const getText = useMessageText();
 
-
 	return (
 		<div className="flex sm:flex-row flex-col justify-between text-sm">
 			<TeamView team={blue} side={getText(["home", "matches", "side0" ])} />

@@ -1,7 +1,5 @@
-import { championsKeys } from "@/data/formattedChampionsKeys";
 import { useFetch } from "@/hooks/useFetch"
 import { fetchMatches } from "@/http";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import Message from "../fragments/Message";
