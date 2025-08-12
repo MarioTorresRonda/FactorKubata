@@ -53,7 +53,7 @@ export default function RivalPlayerMasteries( { masteries, player, onlyRole } ) 
             { masteries.map( mastery => {
                 return <div key={mastery.championId} className={`flex flex-row gap-2 h-full ${levelColor(mastery.championLevel)}`}>
                     <div className="aspect-square w-[50px] h-[50px] max-w[50px] max-h-[50px] relative">
-                        <ChampionImage  fill={true} championId={mastery.championId} />
+                        <ChampionImage fill={true} championId={mastery.championId} />
                         <div className="absolute top-0 bottom-0 left-0 right-0 bg-stone-900/50 text-white dark:bg-stone-900/70 text-center pt-3 font-bold text-xl">
                             {mastery.championLevel}
                         </div>

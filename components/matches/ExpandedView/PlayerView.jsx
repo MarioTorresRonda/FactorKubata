@@ -4,8 +4,8 @@ import Image from "next/image";
 import PlayerName from "./PlayerName"
 import KDA from "./KDA"
 
-import { itemsIDS } from "@/data/formattedItems";
 import ChampionImage from "@/components/fragments/ChampionImage";
+import ItemImage from "@/components/fragments/ItemImage";
 
 export default function PlayerView( { team, player, infoShown, mainClass, infoClass, itemsClass, textClass } ) {
 
@@ -35,7 +35,7 @@ export default function PlayerView( { team, player, infoShown, mainClass, infoCl
                     { items.map( (item, index) => {
                         return (
                             <div className="flex-1 relative min-w-[14.2%] aspect-square" key={item + index}>
-                                { item != 0 && <Image fill={true} alt={item} src={itemsIDS[item].image}></Image> }
+                                { item != 0 && <ItemImage fill={true} itemId={item} /> }
                             </div>
                         )
                     } ) }
