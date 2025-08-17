@@ -1,36 +1,43 @@
-import { champions } from '@/data/formattedChampions';
 import { roles } from '@/data/roles';
 import { log, WARNING } from '@/util/logs';
 import { getCollection } from '@/util/mongoDB';
 import { MatchPlayer } from '@/util/trimmedObjs';
 import { NextResponse } from 'next/server';
-var he = require('he');
+import he from 'he';
+import { getChampions } from '../../LoLData/champions/route';
+import { getVersion } from '../../LoLData/version/route';
 
-const especialChamps = {
-    "Jarvan IV": champions.JarvanIV,
-    "Kha'Zix":  champions.Khazix,
-    "Xin Zhao": champions.XinZhao,
-    "Master Yi": champions.MasterYi,
-    "Nunu & Willump": champions.Nunu,
-    "Lee Sin": champions.LeeSin,
-    "Wukong": champions.MonkeyKing,
-    "Rek'Sai": champions.RekSai,
-    "Bel'Veth": champions.Belveth,
-    "Dr. Mundo": champions.DrMundo,
-    "Cho'Gath": champions.Chogath,
-    "K'Sante": champions.KSante,
-    "Twisted Fate": champions.TwistedFate,
-    "LeBlanc": champions.Leblanc,
-    "Aurelion Sol": champions.AurelionSol,
-    "Vel'Koz": champions.Velkoz,
-    "Miss Fortune": champions.MissFortune,
-    "Kai'Sa": champions.Kaisa,
-    "Kog'Maw": champions.KogMaw,
+function especialChamps( champions )  {
+    return {
+        "Jarvan IV": champions.JarvanIV,
+        "Kha'Zix":  champions.Khazix,
+        "Xin Zhao": champions.XinZhao,
+        "Master Yi": champions.MasterYi,
+        "Nunu & Willump": champions.Nunu,
+        "Lee Sin": champions.LeeSin,
+        "Wukong": champions.MonkeyKing,
+        "Rek'Sai": champions.RekSai,
+        "Bel'Veth": champions.Belveth,
+        "Dr. Mundo": champions.DrMundo,
+        "Cho'Gath": champions.Chogath,
+        "K'Sante": champions.KSante,
+        "Twisted Fate": champions.TwistedFate,
+        "LeBlanc": champions.Leblanc,
+        "Aurelion Sol": champions.AurelionSol,
+        "Vel'Koz": champions.Velkoz,
+        "Miss Fortune": champions.MissFortune,
+        "Kai'Sa": champions.Kaisa,
+        "Kog'Maw": champions.KogMaw
+    }
 };
 
 async function fetchChampionList( role ) {
 
     const separator = "|"
+
+    let version = await getVersion();
+    const [ champions ] = await getChampions( version );
+    const especialChampsObj = especialChamps( champions );
 
     let data = await fetch(`https://op.gg/en/lol/champions?position=${role}`);
     let page = await data.text();
@@ -76,7 +83,7 @@ async function fetchChampionList( role ) {
                         championJSON.key = formattedChampion.key;
 
                     }else {
-                        const eFC = especialChamps[championSplit[index]];
+                        const eFC = especialChampsObj[championSplit[index]];
                         if ( eFC ) {
                             championJSON.key = eFC.key;
                         }else{
@@ -94,19 +101,25 @@ async function fetchChampionList( role ) {
 }
 
 export async function GET(request) {
-  
-    const searchParams = request.nextUrl.searchParams;
-    const role = searchParams.get('role');
+    
+    try{
 
-    const championsCollection = await getCollection("champions");  
-    let champions = await championsCollection.findOne( { role : role } );
-
-    if ( !champions ) {
-        champions = { role: role }
-        const championsJSON = await fetchChampionList( role );
-        champions.list = championsJSON;
-        await championsCollection.insertOne( champions );
+        const searchParams = request.nextUrl.searchParams;
+        const role = searchParams.get('role');
+        
+        const championsCollection = await getCollection("champions");  
+        let champions = await championsCollection.findOne( { role : role } );
+        
+        if ( !champions || !champions.lastUpdate || ( !champions.lastUpdate < ((new Date().getTime() ) - ( 1000 * 60 * 60 * 24 ) ) ) ) {
+            champions = { role: role }
+            const championsJSON = await fetchChampionList( role );
+            champions.list = championsJSON;
+            champions.lastUpdate = new Date().getTime();
+            await championsCollection.insertOne( champions );
+        }
+        
+        return NextResponse.json( champions, {status: 200});
+    }catch(e) {
+      return NextResponse.json( e, {status: 400});
     }
-   
-    return NextResponse.json( champions, {status: 200});
 }
