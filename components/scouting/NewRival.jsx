@@ -1,14 +1,15 @@
-import { forwardRef, useImperativeHandle, useState } from "react"
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react"
 import Message from "../fragments/Message"
 import PrettyInput from "../fragments/PrettyInput"
 import PrettySelect from "../fragments/PrettySelect"
 import { roles, top } from "@/data/roles"
 import FAI from "../fragments/FAI"
 import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons"
-import { createTeam, fetchTeam } from "@/http"
 import { toast } from "react-toastify"
 import { scouting } from "@/data/navBar"
 import { useNavigate } from "@/hooks/useNavigate"
+import { getCookie } from "@/util/cookies"
+import { createTeam } from "@/data/fetch/team"
 
 const player = {
     name: "",
@@ -19,10 +20,15 @@ const player = {
 export default forwardRef( function NewRival( {}, ref ) {
     const [players, setPlayers] = useState({ 0 : {...player} });
     const [name, setName] = useState("");
+    const [token, setToken] = useState("");
     const { navigate } = useNavigate();
 
     let controller = new AbortController();
     let signal = controller.signal;
+
+    useEffect(() => {
+        setToken( getCookie("token") );
+    }, [])
 
     useImperativeHandle(ref, () => ({
 
@@ -47,7 +53,7 @@ export default forwardRef( function NewRival( {}, ref ) {
         controller = new AbortController();
         signal = controller.signal;
         try{
-            let rival = await createTeam( { teamName : name, players : players }, signal );
+            let rival = await createTeam( { teamName : name, players, token }, signal );
             if ( rival.teamName ) {
                 navigate(scouting, encodeURIComponent( rival.teamName ) )
             }
@@ -55,6 +61,8 @@ export default forwardRef( function NewRival( {}, ref ) {
             toast( e.toString(), { type:"error", theme:"colored" } );
         }
     }
+
+
 
     function onHandleUpdateTeamName(event) {
         setName( event.target.value );

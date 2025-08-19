@@ -3,9 +3,10 @@
 import Message from "@/components/fragments/Message";
 import SliderCheck from "@/components/fragments/SliderCheck";
 import RivalTeam from "@/components/scouting/RivalTeam";
+import { fetchTeam } from "@/data/fetch/team";
 import { useFetch } from "@/hooks/useFetch";
-import { fetchTeam } from "@/http";
-import { useState } from "react";
+import { getCookie } from "@/util/cookies";
+import { useEffect, useState } from "react";
 
 export default function Page( { params } ) {
 
@@ -19,6 +20,14 @@ export default function Page( { params } ) {
         error,
         setFetchedData : setMatchList
     } = useFetch( fetchTeam, teamsBody, null, [] );
+
+    useEffect(() => {
+        setTeamsBody(  oldTeamsBody => { 
+            const newTeamsBody = {...oldTeamsBody};
+            newTeamsBody.token = getCookie("token");
+            return newTeamsBody;
+        });
+    }, [])
 
     function onHandleRoleClick() {
         setOnlyRole( !onlyRole )

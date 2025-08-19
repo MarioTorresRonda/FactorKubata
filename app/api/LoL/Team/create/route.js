@@ -1,13 +1,20 @@
 import { getCollection } from '@/util/mongoDB';
+import { keys, readSecrets } from '@/util/Secrets';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
   
     const searchParams = request.nextUrl.searchParams;
+    const token = searchParams.get('token');
+    const pass = readSecrets( keys.password );
     const teamName = decodeURIComponent( searchParams.get('teamName') );
     const playerSearch = decodeURIComponent( searchParams.get('playerSearch') );
 
     try{
+
+        if ( token != pass ) {
+            return NextResponse.json( { message: "User is not logged in"}, {status: 400});
+        }
 
         if ( await checkNameExist(teamName) ) {
             return NextResponse.json( { message: "Team already exist"}, {status: 400});

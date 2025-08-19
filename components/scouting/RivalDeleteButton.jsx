@@ -1,14 +1,26 @@
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import FAI from "../fragments/FAI";
-import { deleteTeam } from "@/http";
 import { toast } from "react-toastify"
 import { useMessageText } from "@/hooks/useMessageText";
+import { useEffect, useState } from "react";
+import { getCookie } from "@/util/cookies";
+import { deleteTeam } from "@/data/fetch/team";
 
 export default function RivalDeleteButton( {teamName, setRivals} ) {
     
     let controller = new AbortController();
     let signal = controller.signal;
     const getText = useMessageText();
+
+    const [teamsBody, setTeamsBody] = useState({ teamName })
+
+    useEffect(() => {
+        setTeamsBody( oldTeamsBody => { 
+            const newTeamsBody = {...oldTeamsBody};
+            newTeamsBody.token = getCookie("token");
+            return newTeamsBody;
+        });
+    }, [])
 
     async function onClick( event ) {
         event.preventDefault();
@@ -18,7 +30,7 @@ export default function RivalDeleteButton( {teamName, setRivals} ) {
         controller = new AbortController();
         signal = controller.signal;
         try{
-            let res = await deleteTeam( { teamName } );
+            let res = await deleteTeam( teamsBody );
             if ( res ) {
                 setRivals( oldRivals => {
                     const newRivals = [];

@@ -9,13 +9,14 @@ import bg2 from "@/public/backgrounds/2V.jpeg";
 import bg3 from "@/public/backgrounds/3V.jpeg";
 import bg4 from "@/public/backgrounds/4V.jpeg";
 import Message from "@/components/fragments/Message";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NewRival from "@/components/scouting/NewRival";
 import FAI from "@/components/fragments/FAI";
 import { faPlus, faSubtract } from "@fortawesome/free-solid-svg-icons";
-import { fetchTeams } from "@/http";
 import Rival from "@/components/scouting/Rival";
 import { useFetch } from "@/hooks/useFetch";
+import { getCookie } from "@/util/cookies";
+import { fetchTeams } from "@/data/fetch/team";
 
 const font = Roboto_Condensed({subsets: ["latin"]});
 
@@ -31,6 +32,10 @@ export default function Home() {
         error,
         setFetchedData : setRivals
     } = useFetch( fetchTeams, teamsBody, [], [] );
+
+    useEffect(() => {
+      setTeamsBody( { token : getCookie("token") } );
+    }, []);
 
     function onHandleNewRival() {
         setAdding( !adding );

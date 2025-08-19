@@ -22,7 +22,7 @@ export default function NavBarModal() {
     }
     function onHandleSubmit() {
         if ( passwordValue ) {
-            document.cookie = `token=${passwordValue}`;
+            document.cookie = `token=${passwordValue};path=/;`;
             refresh()
         }
     }

@@ -45,28 +45,11 @@ export async function fetchMatchList( { items, scrims, token }, signal ) {
     return resData;
 }
 
-export async function fetchNavBar( {token}, signal ) {
+export async function fetchNavBar( { token }, signal ) {
     
     const resData = await apiCall(`/api/navBar?token=${token}`, signal);
 
     return resData;
-}
-
-export async function fetchTeam( { teamName }, signal ) {
-    
-    const resData = await apiCall(`${lolApi}/Team/read?teamName=${encodeURIComponent(teamName)}`, signal);
-
-    return resData;
-}
-
-export async function createTeam( { teamName, players }, signal ) {
-    const resData = await apiCall(`${lolApi}/Team/create?teamName=${encodeURIComponent(teamName)}&playerSearch=${ encodeURIComponent( JSON.stringify( players ) ) }`, signal);
-    return resData;
-}
-
-export async function deleteTeam( { teamName }, signal ) {
-    const resData = await apiCall(`${lolApi}/Team/delete?teamName=${encodeURIComponent(teamName)}`, signal);
-    return resData.updated.acknowledged;
 }
 
 export async function fetchPlayer( { name, tag }, signal ) {
@@ -79,13 +62,6 @@ export async function fetchPlayer( { name, tag }, signal ) {
 export async function fetchRoleChamps( { role }, signal ) {
     
     const resData = await apiCall(`${lolApi}/readChampionRoles?role=${ encodeURIComponent( role ) }`, signal)
-
-    return resData;
-}
-
-export async function fetchTeams({}, signal ) {
-    
-    const resData = await apiCall(`${lolApi}/readTeams`, signal)
 
     return resData;
 }
