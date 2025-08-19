@@ -18,7 +18,6 @@ export async function GET(request) {
 export async function getChampions( version ) {
   
   let data = await fetch(`http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`);
-  console.log( `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json` )
   let json = await data.json();
   let championsNameList = json.data;
   let championsNameListTrimmed = {};

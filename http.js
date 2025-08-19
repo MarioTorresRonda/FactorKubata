@@ -52,14 +52,19 @@ export async function fetchNavBar( {token}, signal ) {
     return resData;
 }
 
-export async function fetchTeam( { teamName, players }, signal ) {
+export async function fetchTeam( { teamName }, signal ) {
     
-    const resData = await apiCall(`${lolApi}/Team/read?teamName=${encodeURIComponent(teamName)}&playerSearch=${ encodeURIComponent( JSON.stringify( players ) ) }`, signal);
+    const resData = await apiCall(`${lolApi}/Team/read?teamName=${encodeURIComponent(teamName)}`, signal);
 
     return resData;
 }
 
-export async function deleteTeam( { teamName, players }, signal ) {
+export async function createTeam( { teamName, players }, signal ) {
+    const resData = await apiCall(`${lolApi}/Team/create?teamName=${encodeURIComponent(teamName)}&playerSearch=${ encodeURIComponent( JSON.stringify( players ) ) }`, signal);
+    return resData;
+}
+
+export async function deleteTeam( { teamName }, signal ) {
     const resData = await apiCall(`${lolApi}/Team/delete?teamName=${encodeURIComponent(teamName)}`, signal);
     return resData.updated.acknowledged;
 }

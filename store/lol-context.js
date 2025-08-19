@@ -1,7 +1,7 @@
 'use client'
 
 import { fetchChampionList, fetchItemsList } from '@/http';
-import { createContext, useCallback, useReducer, useState } from 'react';
+import { createContext, useCallback, useReducer } from 'react';
 
 const initialLoL = {
     champions : {},
@@ -34,7 +34,7 @@ export default function LoLContextProvider( {children} ) {
         if ( !championId ) {
             throw new Error("championId on getChampions was null")
         }
-
+        
         if ( Number.isInteger( Number( championId ) ) ) {
             if ( lolState.championsKeys[championId] ) {
                 return lolState.championsKeys[championId];
@@ -44,20 +44,18 @@ export default function LoLContextProvider( {children} ) {
                 return lolState.champions[championId];
             }
         }
-
-        console.log( lolState, championId, Number.isInteger( Number( championId ) ) );
-
+        
         const response = await fetchChampionList();
         lolDispatch({
             type: "ADD_CHAMPS",
             payload: {
                 response
             },
-        }) 
+        });
 
-        return Number.isInteger( championId ) ? response.championsKeyListTrimmed[championId] : response.championsNameListTrimmed[championId];
+        return Number.isInteger( Number( championId ) ) ? response.championsKeyListTrimmed[championId] : response.championsNameListTrimmed[championId];
 
-    }, [ lolState.champions, lolState.championsKeys ]  );
+    }, [ lolState ]  );
 
     const getItems = useCallback( async ( itemId ) => {
 

@@ -5,8 +5,10 @@ import PrettySelect from "../fragments/PrettySelect"
 import { roles, top } from "@/data/roles"
 import FAI from "../fragments/FAI"
 import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons"
-import { fetchTeam } from "@/http"
+import { createTeam, fetchTeam } from "@/http"
 import { toast } from "react-toastify"
+import { scouting } from "@/data/navBar"
+import { useNavigate } from "@/hooks/useNavigate"
 
 const player = {
     name: "",
@@ -17,6 +19,7 @@ const player = {
 export default forwardRef( function NewRival( {}, ref ) {
     const [players, setPlayers] = useState({ 0 : {...player} });
     const [name, setName] = useState("");
+    const { navigate } = useNavigate();
 
     let controller = new AbortController();
     let signal = controller.signal;
@@ -44,7 +47,10 @@ export default forwardRef( function NewRival( {}, ref ) {
         controller = new AbortController();
         signal = controller.signal;
         try{
-            let res = await fetchTeam( { teamName : name, players : players }, signal );
+            let rival = await createTeam( { teamName : name, players : players }, signal );
+            if ( rival.teamName ) {
+                navigate(scouting, encodeURIComponent( rival.teamName ) )
+            }
         }catch(e) {
             toast( e.toString(), { type:"error", theme:"colored" } );
         }
