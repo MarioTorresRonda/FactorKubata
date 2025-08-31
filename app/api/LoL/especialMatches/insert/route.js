@@ -11,46 +11,37 @@ export async function POST(request) {
     const token = searchParams.get('token');
 
     const body = request.json();
-    const date = body.date;
     const name = body.name;
-    const games = body.games;
+    const players = body.players;
+    const image = body.image;
 
     const pass = readSecrets( keys.password );
 
     try{
         
-        if ( pass != token ) {
-            return NextResponse.json( { message: "User don't have enough permissions"}, {status: 400});
-        }
+      if ( pass != token ) {
+          return NextResponse.json( { message: "User don't have enough permissions"}, {status: 400});
+      }
 
-        if ( date == null || typeof date.getMonth() != 'function' || Number.isNaN( date.getMonth ) ) {
-            return NextResponse.json( { message: "Date is empty or not correct"}, {status: 400});
-        }
+      if ( name == null || typeof name != "string" || name.trim() == "" ) {
+          return NextResponse.json( { message: "Name is empty or not correct"}, {status: 400});
+      }
+      if ( name.length > 50 ) {
+          return NextResponse.json( { message: "Name can not be longer than 50 characters"}, {status: 400});
+      }
+
+      if ( players == null || !Array.isArray( players ) ) {
+          return NextResponse.json( { message: "Players list is empty or not correct"}, {status: 400});
+      }
+
+      if ( players.length <= 5 ) {
+          return NextResponse.json( { message: "Players list have less than 5 players"}, {status: 400});
+      }
+
+      let especialMatchesTeamsCollection = await getCollection("especialMatchesTeams");
+      await especialMatchesTeamsCollection.insertOne( { name: body.name, players: body.players, image: body.image } );
         
-        if ( name == null || typeof name != "string" || name.trim() == "" ) {
-            return NextResponse.json( { message: "Name is empty or not correct"}, {status: 400});
-        }
-        if ( name.length > 50 ) {
-            return NextResponse.json( { message: "Name can not be longer than 50 characters"}, {status: 400});
-        }
-
-        if ( !Array.isArray( games ) || games.length == 0 ) {
-            return NextResponse.json( { message: "games is empty or have 0 games inside"}, {status: 400});
-        }
-        
-        games.forEach( ( game, index ) =>  {
-          if (  !game.blue || !game.red  ) {
-            return NextResponse.json( { message: `game ${index} have no blue or red team.`}, {status: 400});
-          }
-          if ( !game.info ) {
-            return NextResponse.json( { message: `game ${index} have empty data.`}, {status: 400});
-          }
-        } )
-
-      let especialMatchesCollection = await getCollection("especialMatches");
-      await especialMatchesCollection.insertOne( body );
-      
-      return NextResponse.json( team, {status: 200});
+      return NextResponse.json( { result: true }, {status: 200});
     }catch( e ) {
       return NextResponse.json( e, {status: 400});
     }

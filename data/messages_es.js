@@ -66,8 +66,22 @@ let messages = {
                 "forgotten 3 synchronyzed" : "Forgotten Tournament | Playoffs | Ronda 3 ",
                 "forgotten 2 pandepueblo" : "Forgotten Tournament | Playoffs | Ronda 2 ",
                 "forgotten 1 remenants" : "Forgotten Tournament | Playoffs | Ronda 1 ",
-
-            }
+            },
+            addMatch: "Añadir Enfrentamiento",
+            addMatchGames: "Partidos",
+            addMatchAddGame: "Añadir Partido",
+            addMatchAddGameFile: "Archivo",
+            addMatchTeamSide: "Equipo",
+            addMatchTeamSelect: "Seleccionar",
+            addMatchTeamSelectNew: "Nuevo...",
+            addMatchTeamSelectAnon: "Anonimo",
+            addMatchTeamName: "Nombre",
+            addMatchTeamUUID: "UUID",
+            addMatchTeamPlayer: "Jugador",
+            maxLimitGames: "Un enfrentamiento no puede tener más de 10 partidos",
+            maxLimitPlayers: "Un equipo no puede tener mas de 15 jugadores",
+            badFormatGame: "El formato de la partida no es correcta",
+            saveTeam: "Guardar Equipo",
         },
         scouting: {
             title: "Analisis",
@@ -149,7 +163,10 @@ let messages = {
         },
         orders : [
             "K", "M", "G", "T", "P", "E"
-        ]
+        ],
+        clipboard: {
+            copy: "Se ha copiado al portapapeles."
+        }
     }
 }
 export default messages;

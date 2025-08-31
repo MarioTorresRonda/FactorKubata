@@ -35,7 +35,7 @@ export async function fetchItemsList( body, signal ) {
 
 export async function fetchMatchList( { items, scrims, token }, signal ) {
 
-    const resData = await apiCall( `/api/matchlist?items=${items}&scrims=${scrims}&token=${token}`,  signal );
+    const resData = await apiCall( `${lolApi}/especialMatches?items=${items}&scrims=${scrims}&token=${token}`,  signal );
 
     resData.map( (match) => {
         match.date = formatMatchDate(match.date);

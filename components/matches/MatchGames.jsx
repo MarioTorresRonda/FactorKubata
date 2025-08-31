@@ -1,5 +1,6 @@
 import { matchColorByValue } from "@/util/MatchUtils";
 import ExpandedView from "./ExpandedView"
+import { teamPlayers } from "@/util/matches";
 
 export default function MatchGames( { games } ) {
 
@@ -10,24 +11,7 @@ export default function MatchGames( { games } ) {
     return <div>
         { games.map( (game, index) => {
 
-            const bluePlayers = [], redPlayers = [];
-            let result = "";
-
-            game.info.participants.forEach(element => {
-                if ( game.POV && game.POV[ element.SKIN ] ) {
-                    element.POV = game.POV[ element.SKIN ];
-                }
-                if ( element.TEAM == "100" ) {
-                    bluePlayers.push( element );
-                }
-                if ( element.TEAM == "200" ) {
-                    redPlayers.push( element );
-                }
-            });
-            result += bluePlayers.map( player => player.CHAMPIONS_KILLED ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
-            result += "-";
-            result += redPlayers.map( player => player.CHAMPIONS_KILLED ).reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue), 0 );
-        
+            const { bluePlayers, redPlayers, result } = teamPlayers( game.info.participants );
             const blueSide = { team: game.blue, players: bluePlayers };
             const redSide ={ team: game.red, players: redPlayers };
 
