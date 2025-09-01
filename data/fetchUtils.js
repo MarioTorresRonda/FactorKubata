@@ -1,7 +1,7 @@
 export const lolApi = `/api/LoL`;
 
-export async function apiCall( url, signal ) {
-    const response = await fetch( url, signal);
+export async function apiCall( url, body ) {
+    const response = await fetch( url, body);
     
     if ( !response.ok ) {
         let error = new Error('Failed server call');; 
@@ -18,4 +18,17 @@ export async function apiCall( url, signal ) {
     }
 
     return await response.json();
+}
+
+export function postBodyJSON( body, json ) {
+    
+    return {
+        ...body,
+        method: 'POST',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify( json )
+    }
 }

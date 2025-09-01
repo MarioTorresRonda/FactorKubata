@@ -1,4 +1,5 @@
 import { getCollection } from '@/util/mongoDB';
+import { keys, readSecrets } from '@/util/Secrets';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
@@ -14,11 +15,14 @@ export async function GET(request) {
       }
 
       let especialMatchesCollection = await getCollection("especialMatchesTeams");
-      let matchTeams = await especialMatchesCollection.aggregate( [] );
-      
-      return NextResponse.json( matchTeams, {status: 200});
+      const teams = []
+      const findResult = await especialMatchesCollection.aggregate( [] );
+      for await (const team of findResult) {
+          teams.push(team);
+      }      
+      return NextResponse.json( teams, {status: 200});
     }catch( e ) {
-      return NextResponse.json( e, {status: 400});
+      return NextResponse.json( {message: e.message }, {status: 400});
     }
     
 }
