@@ -9,10 +9,10 @@ import AddMatchPlayer from "./AddMatchPlayer"
 import { toast } from "react-toastify"
 import { useMessageText } from "@/hooks/useMessageText"
 import { useFetch } from "@/hooks/useFetch"
-import { createEspecialTeam, fetchEspecialTeams } from "@/data/fetch/especialsTeams"
+import { createEspecialTeam } from "@/data/fetch/especialsTeams"
 import { getCookie } from "@/util/cookies"
 
-export default function AddMatchTeamSave( { players, teamName, setTeams } ) {
+export default function AddMatchTeamSave( { players, teamName, image, setTeams } ) {
             
     let controller = new AbortController();
     let signal = controller.signal;
@@ -36,14 +36,15 @@ export default function AddMatchTeamSave( { players, teamName, setTeams } ) {
             controller = new AbortController();
             signal = controller.signal;
             try{
-                let res = await createEspecialTeam( { token, teamName, players }, { signal } );
+                let res = await createEspecialTeam( { token, teamName, players, image }, { signal } );
                 if ( res.result ) {
                     setTeams( oldTeams => {
                         const newTeams = [ ...oldTeams ];
-                        newTeams.push( { id: res.id, name: teamName, players } );
+                        console.log( res._id );
+                        newTeams.push( { _id: res._id, name: teamName, players } );
                         return newTeams;
                     } );
-                    toast( getText(["home", "scouting", "deleteTeamD"]).replace("#1", teamName ), { type:"success", theme:"colored" } );
+                    toast( getText(["home", "matches", "saveTeamD"]).replace("#1", teamName ), { type:"success", theme:"colored" } );
                 }
             }catch(e) {
                 toast( e.toString(), { type:"error", theme:"colored" } );

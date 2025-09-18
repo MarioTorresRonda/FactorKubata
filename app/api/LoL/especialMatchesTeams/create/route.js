@@ -14,6 +14,7 @@ export async function POST(request) {
     const body = await request.json();
     const name = body.name;
     const players = body.players;
+    const image = body.image;
 
     const pass = readSecrets( keys.password );
 
@@ -33,6 +34,9 @@ export async function POST(request) {
         if ( !Array.isArray( players ) || players.length == 0 ) {
             return NextResponse.json( { message: "games is empty or have 0 games inside"}, {status: 400});
         }
+        if ( image.length > 1000000 ) {
+            return NextResponse.json( { message: "Image can not be bigger than 1Mb"}, {status: 400});
+        }
         
         let errorPlayers = null;
         players.some( ( player, index ) =>  {
@@ -50,7 +54,7 @@ export async function POST(request) {
         }
 
       let especialTeamsCollection = await getCollection("especialMatchesTeams");
-      const _id = await especialTeamsCollection.insertOne( { name, players } );
+      const _id = (await especialTeamsCollection.insertOne( { name, players, image } )).insertedId;
       
       return NextResponse.json( { result: true, _id }, {status: 200});
     }catch( e ) {

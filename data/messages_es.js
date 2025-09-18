@@ -82,6 +82,11 @@ let messages = {
             maxLimitPlayers: "Un equipo no puede tener mas de 15 jugadores",
             badFormatGame: "El formato de la partida no es correcta",
             saveTeam: "Guardar Equipo",
+            saveTeamD: "El equipo #1 sse ha guardado",
+            editTeam: "Editar Equipo",
+            stopEditTeam: "Cancelar Edicion",
+            deleteTeam: "Borrar Equipo",
+            iconTeam: "Icono",
         },
         scouting: {
             title: "Analisis",

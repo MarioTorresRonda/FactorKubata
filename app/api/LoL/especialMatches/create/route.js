@@ -10,10 +10,9 @@ export async function POST(request) {
     const searchParams = request.nextUrl.searchParams;
     const token = searchParams.get('token');
 
-    const body = request.json();
+    const body = await request.json();
     const name = body.name;
     const players = body.players;
-    const image = body.image;
 
     const pass = readSecrets( keys.password );
 
@@ -39,8 +38,9 @@ export async function POST(request) {
       }
 
       let especialMatchesTeamsCollection = await getCollection("especialMatchesTeams");
-      await especialMatchesTeamsCollection.insertOne( { name: body.name, players: body.players, image: body.image } );
-        
+      const response = await especialMatchesTeamsCollection.insertOne( { name: body.name, players: body.players, image: body.image } );
+      console.log( response );  
+
       return NextResponse.json( { result: true }, {status: 200});
     }catch( e ) {
       return NextResponse.json( e, {status: 400});
