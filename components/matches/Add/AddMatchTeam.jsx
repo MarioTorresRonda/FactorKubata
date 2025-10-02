@@ -16,34 +16,20 @@ import AddMatchTeamEdit from "./AddMatchTeamEdit"
 import AddMatchTeamDelete from "./AddMatchTeamDelete"
 import MatchTeamIcon from "../MatchTeamIcon"
 import { toBase64 } from "@/util/img"
+import { anonTeam, getNewID, newTeam } from "./AddMatchFunctions"
 
 const sides = {
     1: "bg-orange-500/20",
     2: "bg-purple-500/20",
 }
 
-function anonTeam( getText ) {
-    return { 
-        id: -2,
-        name: getText( ["home", "matches", "addMatchTeamSelectAnon"] )
-    }
-}
 
-const anonPLayers = [
-    { name: "???", uuid: "-1", id: 0 },
-    { name: "???", uuid: "-1", id: 1 },
-    { name: "???", uuid: "-1", id: 2 },
-    { name: "???", uuid: "-1", id: 3 },
-    { name: "???", uuid: "-1", id: 4 },
-]
 
-export default function AddMatchTeam( { side } ) {
+export default function AddMatchTeam( { side, team, setTeam } ) {
         
     const getText = useMessageText();
 
     const iconTeam = useRef(null)
-    const [ team, setTeam ] = useState( anonTeam(getText) );
-    const [ players, setPlayers ] = useState( anonPLayers );
     const [ editable, setEditable ] = useState(false);
     const [ editing, setEditing ] = useState(false);
     const [ especialMatchesTeamsBody, setEspecialMatchesTeamsBody] = useState( { token : "" } );
@@ -70,50 +56,49 @@ export default function AddMatchTeam( { side } ) {
     function setTeamById( teamId ) {
         if ( teamId == -2 ) {
             setTeam( anonTeam(getText) )
-            setPlayers( anonPLayers );
             setEditing( false );
             setEditable( false );
         }else if ( teamId == -1 ) {
-            setTeam( { id: -1, name: "" } )
-            setPlayers( [] );
+            setTeam( newTeam() )
             setEditing( true );
             setEditable( false );
         }else{
-            const team = teams.find( (team) => { return team._id == teamId} );
-            setTeam( team )
-            setPlayers( team.players );
+            resetTeam( teamId )
             setEditing( false );
             setEditable( true );
         }
     }
 
-    function getNewID() {
-        let newId;
-        do{
-            newId = Math.round(Math.random() * 10000);
-        }while( players.filter( ( player ) => { player.id == newId } ).length == 1 );
-        return newId;
+    function resetTeam( teamId ) {
+        const team = { ...teams.find( (team) => { return team._id == teamId} ) };
+        team.players = team.players.map( player => { return {...player}} );
+        setTeam( team )
     }
 
     function AddNewPlayer() {
-        if ( players.length > 15 ) {
+        if ( team.players.length > 15 ) {
             toast( getText(["home", "matches", "maxLimitPlayers"]), { type:"error", theme:"colored" } );
         }else{
-            setPlayers( oldPlayers => {
-                const newPLayers = [...oldPlayers];
-                newPLayers.push( { name: "", uuid: "", id: getNewID() } );
-                return newPLayers;
+            setTeam( oldTeam => {
+                const newTeam = {...oldTeam}
+                const newPLayers = [...newTeam.players];
+                newPLayers.push( { name: "", uuid: "", id: getNewID( oldTeam.players ) } );
+                newTeam.players = newPLayers;
+                return newTeam;
             } )
         }
     }
 
     function setPlayer( id, newValue, field ) {
-        setPlayers( oldPlayers => {
-            const newPLayers = [...oldPlayers];
+
+        setTeam( oldTeam => {
+            const newTeam = {...oldTeam}
+            const newPLayers = [...newTeam.players];
             const player = newPLayers.filter( ( player ) => { return player.id == id } )[0];
             player[field] = newValue;
-            return newPLayers;
-        } )
+            newTeam.players = newPLayers;
+                return newTeam;
+        } );
     }
 
     function OnHandleUpdateName(event) {
@@ -147,7 +132,7 @@ export default function AddMatchTeam( { side } ) {
             <p className="font-bold text-lg"> <Message code={["home", "matches", "addMatchTeamSide"]} /> {side} </p>
             <div className="flex flex-row">
                 <p> <Message code={["home", "matches", "addMatchTeamSelect"]} /> </p>
-                <PrettySelect className="w-40 rounded-md h-8" value={team.id} onChange={onHandleUpdateRole}>
+                <PrettySelect className="w-40 rounded-md h-8" value={team._id} onChange={onHandleUpdateRole}>
                     { teams.map( (team) => {
                         return <option key={team._id} value={team._id}> {team.name} </option> 
                     } )  }
@@ -169,7 +154,7 @@ export default function AddMatchTeam( { side } ) {
                 <div className="flex flex-row w-full gap-2 items-center px-6 py-2">
                     { editable && 
                         <>
-                            <AddMatchTeamEdit  editing={editing} setEditing={setEditing} />
+                            <AddMatchTeamEdit  editing={editing} setEditing={setEditing} team={team} resetTeam={resetTeam} />
                             { !editing && <AddMatchTeamDelete teamName={team.name} setTeams={setTeams} setTeamById={setTeamById} /> }
                         </>
                     }
@@ -180,7 +165,7 @@ export default function AddMatchTeam( { side } ) {
                                 <FAI className="h-4 w-4" icon={faPlus} />
                                 <Message code={["home", "matches", "addMatchTeamPlayer"]} /> 
                             </button> 
-                            <AddMatchTeamSave players={players} teamName={team.name} image={team.image} setTeams={setTeams} />
+                            <AddMatchTeamSave teamId={team._id} players={team.players} teamName={team.name} image={team.image} setTeams={setTeams} setTeamById={setTeamById} />
                             <button 
                                 className="bg-stone-300 dark:bg-stone-700 p-2 px-3 gap-1 rounded-md flex flex-row items-center justify-center"
                                 onClick={onClickIconTeam}>
@@ -196,7 +181,7 @@ export default function AddMatchTeam( { side } ) {
             </div>
         </div>
         <div className="flex flex-col w-full gap-2 bg-stone-800/20 ">
-            { players.map( (player) => {
+            { team.players.map( (player) => {
                 return <AddMatchPlayer key={player.id} player={player} editing={editing} setPlayer={setPlayer} />
             } ) }
         </div>

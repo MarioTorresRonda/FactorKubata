@@ -15,12 +15,15 @@ import { matchColorByWins, side } from "@/util/MatchUtils";
 import MatchDate from "./MatchDate";
 
 export default function Match({match, mainPanel}) {
+
+    console.log( match );
+
     const [shown, setShown] = useState(false);
     const [hover, setHover] = useState(false)
 
     const firstTeam = match.games[0].blue;
     const secondTeam = match.games[0].red;
-    const firstTeamKubata = firstTeam?.name == teams.factorKubata.name;
+    const firstTeamKubata = firstTeam?.name == "FactorKubata";
     const gamesPlayed = match.games.find( game => game.win !== null );
 
     let firstTeamWins = 0;
@@ -85,7 +88,7 @@ export default function Match({match, mainPanel}) {
                 >
                 <div className="h-12 px-4 w-full md:text-xl text-base">
                     <p className="w-full pt-3 md:pt-2 text-center whitespace-nowrap text-ellipsis overflow-hidden ">
-                        <Message code={["home", "matches", "matchList", match.name]} />
+                        { match.name }
                     </p>
                 </div>
                 <HorizontalBar className="w-full h-[2px]" />

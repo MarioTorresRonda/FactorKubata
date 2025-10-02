@@ -4,9 +4,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import AddMatchGame from "./AddMatchGame";
 
-export default function AddMatchGames() {
+export default function AddMatchGames( { games, setGames, teams } ) {
 
-    const [games, setGames] = useState([]);
 
     function getNewID() {
         let newId;
@@ -46,20 +45,18 @@ export default function AddMatchGames() {
     }
 
     return <div className="flex flex-col bg-stone-600 py-2"> 
-        <div>
+        <div className="flex flex-row w-full gap-4 items-center">
             <p className="text-2xl px-4" > <Message code={["home", "matches", "addMatchGames"]} /> </p>    
-        </div>        
-        <div className="px-4">
             <button 
                 className="bg-stone-300 dark:bg-stone-700 p-2 px-3 gap-1 rounded-md flex flex-row items-center justify-center"
                 onClick={addNewGame}>
                 <FAI className="h-4 w-4" icon={faPlus} />
                 <Message code={["home", "matches", "addMatchAddGame"]} /> 
             </button> 
-        </div>
+        </div>     
         <div className="flex flex-col">
             { games.map( (game) => {
-                return <AddMatchGame key={game.id} game={game} setGame={setGame} removeGame={removeGame} />
+                return <AddMatchGame key={game.id} game={game} setGame={setGame} removeGame={removeGame} teams={teams} />
             } )  }
         </div>
     </div>

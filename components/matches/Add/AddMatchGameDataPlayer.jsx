@@ -4,12 +4,25 @@ import ItemImage from "@/components/fragments/ItemImage";
 import { useMessageText } from "@/hooks/useMessageText";
 import { copyTextToClipboard } from "@/util/clipboard";
 import { faClipboard } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function AddMatchGameDataPLayer( { player } ) {
+export default function AddMatchGameDataPLayer( { player, team } ) {
+
 
     const getText = useMessageText();
-    const teamPlayer = { name: "Prueba" };
+    const [teamPlayer, setTeamPlayer] = useState( { name: "" } )
+    useEffect(() => {
+        if ( team ) {
+            const playerFind = team.players.find( _p => player.PUUID == _p.uuid );
+            if ( playerFind ) {
+                setTeamPlayer( playerFind );
+            }else{
+                setTeamPlayer(  { name: "" } );
+            }
+        }
+    }, [player.PUUID, team])
+    
 
     const items = [ player.ITEM0, player.ITEM1, player.ITEM2, player.ITEM3, player.ITEM4, player.ITEM5, player.ITEM6 ];
 

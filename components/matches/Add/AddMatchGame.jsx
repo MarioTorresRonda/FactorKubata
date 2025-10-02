@@ -5,8 +5,9 @@ import AddMatchGameData from "./AddMatchGameData";
 import { useMessageText } from "@/hooks/useMessageText";
 import FAI from "@/components/fragments/FAI";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import SliderCheck, { SliderColors } from "@/components/fragments/SliderCheck";
 
-export default function AddMatchGame( { game, setGame, removeGame } ) {
+export default function AddMatchGame( { game, setGame, removeGame, teams } ) {
 
     const getText = useMessageText();
     const [isLoading, setIsLoading] = useState(true);
@@ -48,9 +49,13 @@ export default function AddMatchGame( { game, setGame, removeGame } ) {
         setGame( game.id, event.target.value, "file" )
     }
 
+    function onWinChange(event) {
+        setGame( game.id, !game.win, "win" )
+    }
+
     return <div className="flex flex-col w-full">
         <div className="flex flex-col pr-2">
-            <p className="pl-2"> <Message code={["home", "matches", "addMatchAddGameFile"]} />:  </p>
+            <p className="pl-2 ml-2"> <Message code={["home", "matches", "addMatchAddGameFile"]} />:  </p>
             <div className="flex flex-row gap-2">
                 <PrettyInput className="w-full rounded-md" value={game.file} onChange={onFileChange} ></PrettyInput>
                 <button 
@@ -59,11 +64,22 @@ export default function AddMatchGame( { game, setGame, removeGame } ) {
                     <FAI className="h-4 w-4" icon={faTrashAlt} />
                 </button> 
             </div>
+            <div className="flex flex-row gap-1 items-center ml-3">
+                <p className="pl-2"> <Message code={["home", "matches", "addMatchGamesWin"]} />:  </p>
+                <SliderCheck 
+                    onClick={onWinChange} 
+                    value={game.win} 
+                    className="h-6 w-12" 
+                    sliderColor={SliderColors.sliderColor.dark} 
+                    activeColor={SliderColors.activeColor.win}
+                    dotColor={SliderColors.dotColor.lose} 
+                />
+            </div>
         </div>
         <div className="flex flex-row w-full">
             { game.file && isLoading && <p> ...Loading </p> }
             { error && <p> {error} </p> }
-            { !isLoading && !error && gameData && <AddMatchGameData participants={gameData} /> }
+            { !isLoading && !error && gameData && <AddMatchGameData game={game} setGame={setGame} participants={gameData} teams={teams} /> }
         </div>
     </div>
 }

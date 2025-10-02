@@ -3,8 +3,8 @@
 import Message from "@/components/fragments/Message";
 import SliderCheck from "@/components/fragments/SliderCheck";
 import Match from "@/components/matches/Match";
+import { fetchMatchList } from "@/data/fetch/especialMatch";
 import { useFetch } from "@/hooks/useFetch";
-import { fetchMatchList } from "@/http";
 import { getCookie } from "@/util/cookies";
 import {Roboto_Condensed} from "next/font/google";
 import { useEffect, useState } from "react";

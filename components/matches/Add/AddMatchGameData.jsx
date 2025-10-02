@@ -1,16 +1,13 @@
 import { teamPlayers } from "@/util/matches";
 import AddMatchGameDataPLayer from "./AddMatchGameDataPlayer";
+import AddMatchGameDataPlayers from "./AddMatchGameDataPlayers";
 
-export default function AddMatchGameData( { participants } ) {
+export default function AddMatchGameData( { game, setGame, participants, teams } ) {
 
     const { bluePlayers, redPlayers, result } = teamPlayers( participants );
 
     return <div className="w-full flex flex-col sm:flex-row p-2">
-        <div className="w-full sm:w-1/2 flex flex-col bg-blue-600/10">
-            { bluePlayers.map( player => { return <AddMatchGameDataPLayer key={player.UUID} player={player} /> } ) }
-        </div>
-        <div className="w-full sm:w-1/2 flex flex-col bg-red-600/10">
-            { redPlayers.map( player => { return <AddMatchGameDataPLayer key={player.UUID} player={player} /> } ) }
-        </div>
+        <AddMatchGameDataPlayers game={game} setGame={setGame} side="blue" players={bluePlayers} teams={teams} />
+        <AddMatchGameDataPlayers game={game} setGame={setGame} side="red" players={redPlayers} teams={teams} />
     </div>
 }

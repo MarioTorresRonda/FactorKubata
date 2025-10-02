@@ -57,14 +57,13 @@ export async function POST(request) {
 
       let especialTeamsCollection = await getCollection("especialMatchesTeams");
       let team = await especialTeamsCollection.findOne( { name : body.name } );
-      if ( team ) {
-        return NextResponse.json( { message: "Team already exist"}, {status: 400});
+      if ( !team ) {
+        return NextResponse.json( { message: "Team does not exist"}, {status: 400});
       }
 
-
-      const _id = (await especialTeamsCollection.insertOne( { name, players, image } )).insertedId;
+      await especialTeamsCollection.updateOne( { name : team.name }, { $set: { name, players, image } } );
       
-      return NextResponse.json( { result: true, _id }, {status: 200});
+      return NextResponse.json( { result: true, _id : team._id }, {status: 200});
     }catch( e ) {
       return NextResponse.json( { result: false, message: e.message }, {status: 400});
     }

@@ -10,7 +10,6 @@ export async function GET(request) {
 
     return NextResponse.json( { championsNameListTrimmed, championsKeyListTrimmed }, {status: 200});
   } catch(e) {
-    console.log( e );
     return NextResponse.json( { message: e.message }, {status: 400});
   }
 }

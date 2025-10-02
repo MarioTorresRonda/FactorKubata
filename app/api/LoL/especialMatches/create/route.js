@@ -1,4 +1,5 @@
 import { getCollection } from '@/util/mongoDB';
+import { keys, readSecrets } from '@/util/Secrets';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
@@ -12,7 +13,8 @@ export async function POST(request) {
 
     const body = await request.json();
     const name = body.name;
-    const players = body.players;
+    const date = body.date;
+    const games = body.games;
 
     const pass = readSecrets( keys.password );
 
@@ -29,20 +31,33 @@ export async function POST(request) {
           return NextResponse.json( { message: "Name can not be longer than 50 characters"}, {status: 400});
       }
 
-      if ( players == null || !Array.isArray( players ) ) {
-          return NextResponse.json( { message: "Players list is empty or not correct"}, {status: 400});
+      if ( date == null  ) {
+          return NextResponse.json( { message: "Date is empty or not correct"}, {status: 400});
       }
 
-      if ( players.length <= 5 ) {
-          return NextResponse.json( { message: "Players list have less than 5 players"}, {status: 400});
+      for (let gameNum = 0; gameNum < games.length; gameNum++) {
+        const game = games[gameNum];
+
+        if ( !game.blue ) {
+          return NextResponse.json( { message: `the blue side of game ${gameNum+1} is empty `}, {status: 400});
+        }
+
+        if ( !game.red ) {
+          return NextResponse.json( { message: `the red side of game ${gameNum+1} is empty `}, {status: 400});
+        }
+        
+        if ( game.file ) {
+            game.info = game.file;
+            game.file = undefined;
+        }
+
       }
 
-      let especialMatchesTeamsCollection = await getCollection("especialMatchesTeams");
-      const response = await especialMatchesTeamsCollection.insertOne( { name: body.name, players: body.players, image: body.image } );
-      console.log( response );  
+      let especialMatchesCollection = await getCollection("especialMatches");
+      const response = await especialMatchesCollection.insertOne( { name, date, games } );
 
       return NextResponse.json( { result: true }, {status: 200});
     }catch( e ) {
-      return NextResponse.json( e, {status: 400});
+      return NextResponse.json( { result: false, message: e.message }, {status: 400});
     }
 }

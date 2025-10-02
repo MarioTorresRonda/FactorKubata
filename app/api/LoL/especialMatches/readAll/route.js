@@ -1,4 +1,5 @@
 import { getCollection } from '@/util/mongoDB';
+import { keys, readSecrets } from '@/util/Secrets';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
@@ -18,16 +19,24 @@ export async function GET(request) {
       if ( !scrims ) {
         filter.push( { $match: { "games.scrim" :  { $ne : true } }  } )
       }
-      if ( items ) {
-        filter.push( { $limit: items } )
+      if ( items && items != -1 ) {
+        filter.push( { $limit: Number(items) } )
       }
+      filter.push( { $project: { _id: 0 } } )
+      filter.push( { $sort: { date: -1 } } )
+      
 
       let especialMatchesCollection = await getCollection("especialMatches");
-      let matches = await especialMatchesCollection.aggregate( filter );
+      let matchesSearch = await especialMatchesCollection.aggregate( filter );
+      const matches = [];
+      for await (const match of matchesSearch) {
+        matches.push( match );
+      }
       
+
       return NextResponse.json( matches, {status: 200});
     }catch( e ) {
-      return NextResponse.json( e, {status: 400});
+      return NextResponse.json( { result: false, message: e.message }, {status: 400});
     }
     
 }

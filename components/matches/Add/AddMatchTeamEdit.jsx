@@ -2,9 +2,12 @@ import FAI from "@/components/fragments/FAI"
 import Message from "@/components/fragments/Message"
 import { faCross, faEdit, faX } from "@fortawesome/free-solid-svg-icons"
 
-export default function AddMatchTeamEdit( { editing, setEditing } ) {
+export default function AddMatchTeamEdit( { editing, setEditing, team, resetTeam } ) {
 
     async function editTeam() {
+        if ( team._id && editing ) {
+            resetTeam( team._id );
+        };
         setEditing( editing => !editing );
     }
 

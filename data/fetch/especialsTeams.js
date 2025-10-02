@@ -5,14 +5,22 @@ export async function fetchEspecialTeams( { token }, body ) {
     return resData;
 }
 
+export async function fetchEspecialTeamsByName( { name }, body ) {
+    const resData = await apiCall(`${lolApi}/especialMatchesTeams/read?teamName=${name}`, body )
+    return resData;
+}
+
 export async function createEspecialTeam( { token, teamName, players, image }, body ) {
-    console.log( players )
     const resData = await apiCall(`${lolApi}/especialMatchesTeams/create?token=${token}`, postBodyJSON( body, { name: teamName, players, image } ));
+    return resData;
+}
+
+export async function updateEspecialTeam( { token, teamName, players, image }, body ) {
+    const resData = await apiCall(`${lolApi}/especialMatchesTeams/update?token=${token}`, postBodyJSON( body, { name: teamName, players, image } ));
     return resData;
 }
 
 export async function deleteEspecialTeam( { token, teamName }, body ) {
     const resData = await apiCall(`${lolApi}/especialMatchesTeams/delete?token=${token}`, postBodyJSON( body, { name: teamName } ));
-    console.log( resData );
     return resData;
 }

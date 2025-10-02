@@ -5,10 +5,10 @@ import {Roboto_Condensed} from "next/font/google";
 import Message from "@/components/fragments/Message";
 import { useNavigate } from "@/hooks/useNavigate";
 import Match from "../matches/Match";
-import { fetchMatchList } from "@/http";
 import { useFetch } from "@/hooks/useFetch";
 import { useState } from "react";
 import { getCookie } from "@/util/cookies";
+import { fetchMatchList } from "@/data/fetch/especialMatch";
 
 const font = Roboto_Condensed({subsets: ["latin"]});
 

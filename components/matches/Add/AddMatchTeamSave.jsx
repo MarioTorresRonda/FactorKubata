@@ -9,10 +9,10 @@ import AddMatchPlayer from "./AddMatchPlayer"
 import { toast } from "react-toastify"
 import { useMessageText } from "@/hooks/useMessageText"
 import { useFetch } from "@/hooks/useFetch"
-import { createEspecialTeam } from "@/data/fetch/especialsTeams"
+import { createEspecialTeam, updateEspecialTeam } from "@/data/fetch/especialsTeams"
 import { getCookie } from "@/util/cookies"
 
-export default function AddMatchTeamSave( { players, teamName, image, setTeams } ) {
+export default function AddMatchTeamSave( { teamId, players, teamName, image, setTeams, setTeamById } ) {
             
     let controller = new AbortController();
     let signal = controller.signal;
@@ -36,15 +36,34 @@ export default function AddMatchTeamSave( { players, teamName, image, setTeams }
             controller = new AbortController();
             signal = controller.signal;
             try{
-                let res = await createEspecialTeam( { token, teamName, players, image }, { signal } );
-                if ( res.result ) {
-                    setTeams( oldTeams => {
-                        const newTeams = [ ...oldTeams ];
-                        console.log( res._id );
-                        newTeams.push( { _id: res._id, name: teamName, players } );
-                        return newTeams;
-                    } );
-                    toast( getText(["home", "matches", "saveTeamD"]).replace("#1", teamName ), { type:"success", theme:"colored" } );
+                if ( teamId == -1 ) {
+                    let res = await createEspecialTeam( { token, teamName, players, image }, { signal } );
+                    if ( res.result ) {
+                        setTeams( oldTeams => {
+                            const newTeams = [ ...oldTeams ];
+                            newTeams.push( { _id: res._id, name: teamName, players } );
+                            return newTeams;
+                        } );
+                        setTeamById( res._id );
+                        toast( getText(["home", "matches", "saveTeamD"]).replace("#1", teamName ), { type:"success", theme:"colored" } );
+                    }
+                }else{
+                    let res = await updateEspecialTeam( { token, teamName, players, image }, { signal } );
+                    if ( res.result ) {
+                        setTeams( oldTeams => {
+                            const newTeams = [ ...oldTeams ];
+                            oldTeams.forEach( newTeam => {
+                                if ( newTeam._id == res._id ) {
+                                    newTeam.name = teamName;
+                                    newTeam.players = players;
+                                    newTeam.image = image;
+                                }
+                            } );
+                            return newTeams;
+                        } );
+                        setTeamById( res._id );
+                        toast( getText(["home", "matches", "saveTeamD"]).replace("#1", teamName ), { type:"success", theme:"colored" } );
+                    }
                 }
             }catch(e) {
                 toast( e.toString(), { type:"error", theme:"colored" } );

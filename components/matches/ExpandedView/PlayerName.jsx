@@ -8,12 +8,13 @@ export default function PlayerName( { className, team, player } ) {
     const router = useRouter()
 
     function getPlayerName( player ) {
+
         const puuid = player.PUUID;
         let playerName;
-        
+
         if ( team.team ) {
             Object.values( team.team.players ).forEach( teamPlayer => {
-                if ( teamPlayer.puuid == puuid ) {
+                if ( teamPlayer.uuid == puuid ) {
                     playerName = teamPlayer.name;
                     return;
                 }
