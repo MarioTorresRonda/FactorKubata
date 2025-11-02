@@ -1,8 +1,3 @@
-import Image from "next/image";
-import FAI from "../fragments/FAI";
-
-
-import { faFlag as scoreIcon } from "@fortawesome/free-regular-svg-icons"
 import TeamView from "./ExpandedView/TeamView";
 import { useMessageText } from "@/hooks/useMessageText";
 

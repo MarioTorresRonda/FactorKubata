@@ -4,12 +4,12 @@ import Message from "@/components/fragments/Message"
 import PrettyInput from "@/components/fragments/PrettyInput"
 import PrettySelect from "@/components/fragments/PrettySelect"
 import { faImage, faPlus, faSave } from "@fortawesome/free-solid-svg-icons"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import AddMatchPlayer from "./AddMatchPlayer"
 import { toast } from "react-toastify"
 import { useMessageText } from "@/hooks/useMessageText"
 import { useFetch } from "@/hooks/useFetch"
-import { createEspecialTeam, fetchEspecialTeams } from "@/data/fetch/especialsTeams"
+import { fetchEspecialTeams } from "@/data/fetch/especialsTeams"
 import { getCookie } from "@/util/cookies"
 import AddMatchTeamSave from "./AddMatchTeamSave"
 import AddMatchTeamEdit from "./AddMatchTeamEdit"
@@ -17,6 +17,7 @@ import AddMatchTeamDelete from "./AddMatchTeamDelete"
 import MatchTeamIcon from "../MatchTeamIcon"
 import { toBase64 } from "@/util/img"
 import { anonTeam, getNewID, newTeam } from "./AddMatchFunctions"
+import { useEffectEvent } from "react"
 
 const sides = {
     1: "bg-orange-500/20",
@@ -33,27 +34,22 @@ export default function AddMatchTeam( { side, team, setTeam } ) {
     const [ editable, setEditable ] = useState(false);
     const [ editing, setEditing ] = useState(false);
     const [ especialMatchesTeamsBody, setEspecialMatchesTeamsBody] = useState( { token : "" } );
-
-	const {
+    const [ teamId, setTeamId ] = useState(team._id);
+    
+    const {
 		isFetching,
 		fetchedData: teams,
         error,
 		setFetchedData: setTeams,
 	} = useFetch(fetchEspecialTeams, especialMatchesTeamsBody, [], []);
+    
+    const resetTeam = useCallback( (teamId) => {
+        const team = { ...teams.find( (team) => { return team._id == teamId} ) };
+        team.players = team.players.map( player => { return {...player}} );
+        setTeam( team )
+    }, [setTeam, teams], )
 
-    useEffect(() => {
-        setEspecialMatchesTeamsBody( prevMatchListBody => {
-            prevMatchListBody.token = getCookie("token");
-            return {...prevMatchListBody};
-        } )	
-    }, [])
-
-
-    function onHandleUpdateRole(event) {
-        setTeamById( event.target.value )
-    }
-
-    function setTeamById( teamId ) {
+    const setTeamById = useCallback( (teamId) => {
         if ( teamId == -2 ) {
             setTeam( anonTeam(getText) )
             setEditing( false );
@@ -67,12 +63,23 @@ export default function AddMatchTeam( { side, team, setTeam } ) {
             setEditing( false );
             setEditable( true );
         }
-    }
+    }, [getText, resetTeam, setTeam], )
 
-    function resetTeam( teamId ) {
-        const team = { ...teams.find( (team) => { return team._id == teamId} ) };
-        team.players = team.players.map( player => { return {...player}} );
-        setTeam( team )
+    useEffect(() => {
+        setEspecialMatchesTeamsBody( prevMatchListBody => {
+            prevMatchListBody.token = getCookie("token");
+            return {...prevMatchListBody};
+        } )	
+    }, [])
+
+    useEffect(() => {
+        if ( teamId != team._id ) {
+            setTeamById( teamId )
+        }
+    }, [setTeamById, team._id, teamId])
+    
+    function onHandleUpdateTeam(event) {
+        setTeamId( event.target.value )
     }
 
     function AddNewPlayer() {
@@ -132,7 +139,7 @@ export default function AddMatchTeam( { side, team, setTeam } ) {
             <p className="font-bold text-lg"> <Message code={["home", "matches", "addMatchTeamSide"]} /> {side} </p>
             <div className="flex flex-row">
                 <p> <Message code={["home", "matches", "addMatchTeamSelect"]} /> </p>
-                <PrettySelect className="w-40 rounded-md h-8" value={team._id} onChange={onHandleUpdateRole}>
+                <PrettySelect className="w-40 rounded-md h-8" value={team._id} onChange={onHandleUpdateTeam}>
                     { teams.map( (team) => {
                         return <option key={team._id} value={team._id}> {team.name} </option> 
                     } )  }
@@ -155,7 +162,7 @@ export default function AddMatchTeam( { side, team, setTeam } ) {
                     { editable && 
                         <>
                             <AddMatchTeamEdit  editing={editing} setEditing={setEditing} team={team} resetTeam={resetTeam} />
-                            { !editing && <AddMatchTeamDelete teamName={team.name} setTeams={setTeams} setTeamById={setTeamById} /> }
+                            { !editing && <AddMatchTeamDelete teamName={team.name} setTeams={setTeams} setTeamById={setTeamId} /> }
                         </>
                     }
                     { editing && <>
@@ -165,7 +172,7 @@ export default function AddMatchTeam( { side, team, setTeam } ) {
                                 <FAI className="h-4 w-4" icon={faPlus} />
                                 <Message code={["home", "matches", "addMatchTeamPlayer"]} /> 
                             </button> 
-                            <AddMatchTeamSave teamId={team._id} players={team.players} teamName={team.name} image={team.image} setTeams={setTeams} setTeamById={setTeamById} />
+                            <AddMatchTeamSave teamId={team._id} players={team.players} teamName={team.name} image={team.image} setTeams={setTeams} setTeamById={setTeamId} />
                             <button 
                                 className="bg-stone-300 dark:bg-stone-700 p-2 px-3 gap-1 rounded-md flex flex-row items-center justify-center"
                                 onClick={onClickIconTeam}>

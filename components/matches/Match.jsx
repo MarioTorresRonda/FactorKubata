@@ -1,12 +1,9 @@
 'use client'
 
-import Message from "@/components/fragments/Message";
 import HorizontalBar from "@/components/fragments/HorizontalBar";
-import {teams} from "@/data/teams";
 import FAI from "@/components/fragments/FAI";
 
 import { faEyeSlash as showIcon } from "@fortawesome/free-solid-svg-icons"
-import { parseMatchDate } from "@/util/dates";
 import { useState } from "react";
 import MatchSide from "./MatchSide";
 import MatchCountdown from "./MatchCountdown";
@@ -15,8 +12,6 @@ import { matchColorByWins, side } from "@/util/MatchUtils";
 import MatchDate from "./MatchDate";
 
 export default function Match({match, mainPanel}) {
-
-    console.log( match );
 
     const [shown, setShown] = useState(false);
     const [hover, setHover] = useState(false)

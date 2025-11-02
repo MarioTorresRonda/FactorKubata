@@ -11,6 +11,10 @@ export default function MatchGames( { games } ) {
     return <div>
         { games.map( (game, index) => {
 
+            if ( !game.info ) {
+                return <p key={index} className="text-center mb-2 text-2xl"> Sin informacion de la partida. </p>
+            }
+
             const { bluePlayers, redPlayers, result } = teamPlayers( game.info.participants );
             const blueSide = { team: game.blue, players: bluePlayers };
             const redSide ={ team: game.red, players: redPlayers };

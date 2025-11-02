@@ -6,7 +6,7 @@ export async function GET(request) {
   
     const searchParams = request.nextUrl.searchParams;
     const token = searchParams.get('token');
-    const scrims = searchParams.get('scrims');
+    const scrims = searchParams.get('scrims') == "1";
     const items = searchParams.get('items');
     const pass = readSecrets( keys.password );
 
@@ -24,12 +24,22 @@ export async function GET(request) {
       }
       filter.push( { $project: { _id: 0 } } )
       filter.push( { $sort: { date: -1 } } )
-      
 
       let especialMatchesCollection = await getCollection("especialMatches");
       let matchesSearch = await especialMatchesCollection.aggregate( filter );
       const matches = [];
       for await (const match of matchesSearch) {
+        match.games.forEach( game => {
+          game.info = JSON.parse( game.info )
+          if ( game.POV ) {
+            game.info.participants.map( ( participant ) => {
+              const pov = game.POV[participant.SKIN];
+              if ( pov ) {
+                participant.POV = pov;
+              }
+            } )
+          }
+        });
         matches.push( match );
       }
       

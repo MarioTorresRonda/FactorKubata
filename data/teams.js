@@ -29,32 +29,6 @@ export const teams = {
             adcSub : { name : "FK Bubazila", puuid: "865a1e8d-74b7-5055-a95b-4c959996664d" },
         }
     },
-    secrets: {
-        name: "? ? ? ? ?",
-        icon: secreto
-    },
-    diverbot : {
-        name: "Diverbot Papea",
-        icon: diverbot,
-        players: {
-            top : { name : "Nino Nakano R34", puuid: "9f886c17-98ee-5aad-9503-5515486edf64" },
-            jungle : { name : "Segis", puuid: "ca6ff6ee-d101-5e6e-a5b8-50a6af1d8662" },
-            mid : { name : "HugoSexy", puuid: "6d35eaba-1c75-570f-b74a-fd46ff5dfe3b" },
-            adc : { name : "DaNpRoAso", puuid: "8aac087c-aa4a-5b63-b0e0-1f8572e24100" },
-            supp : { name : "Marse", puuid: "dfe47d97-c3a1-50d9-bb78-21170544ad24" },
-        }
-    },
-    raimon : {
-        name: "Raimon",
-        icon: raimon,        
-        players: {
-            top : { name : "NobitaElceros", puuid: "7e7db363-86f6-5b45-89f5-3f673a4f0978" },
-            jungle : { name : "saanteez", puuid: "86b4565d-1feb-5828-a0bd-2323e60e10ea" },
-            mid : { name : "Chuses", puuid: "41987718-bf9e-506e-ac44-e2295073dde6"  },
-            adc : { name : "EasyLove", puuid: "2dc61e62-7ce7-5cf5-bc2e-a037aa42c935" },
-            supp : { name : "doraymonn", puuid: "adbaaf1a-e6de-5b06-9155-ffe4db812178" },
-        }
-    },
     skyfox : {
         name: "OGS Skyfox",
         icon: skyfox,        

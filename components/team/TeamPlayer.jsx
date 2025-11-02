@@ -5,8 +5,6 @@ const font = Roboto_Condensed({subsets: ["latin"]});
 import PlayerPanels from "./PlayerPanels";
 import PlayerChamps from "./PlayerChamps";
 import Message from "../fragments/Message";
-import { stats } from "@/data/playerStats";
-import { stats as statsScrims } from "@/data/playerStatsScrims";
 import FAI from "../fragments/FAI";
 import { badges } from "@/data/badges";
 import Tooltip from "../fragments/Tooltip";
@@ -30,12 +28,12 @@ const rightC = {
 	insideImage : "lg:group-hover:translate-x-3"
 }
 
-export default function TeamPlayer({ player, background, scrims, odd }) {
+export default function TeamPlayer({ stats, player, background, odd }) {
 
 
 	const animateAll = "duration-300 transition-all";
 
-	const statsObject = !scrims ? stats[player.name] : statsScrims[player.name];
+	const statsObject = stats[player.name];
 	const gameText = statsObject.playedTotalGames > 1 ? <Message code={["home", "team", "players", "games"]} /> : <Message code={["home", "team", "players", "game"]} />
 
 

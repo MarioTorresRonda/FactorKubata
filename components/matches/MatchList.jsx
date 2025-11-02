@@ -13,10 +13,9 @@ const font = Roboto_Condensed({subsets: ["latin"]});
 
 export default function MatchList({ AddMatchButton, AddMatchBody }) {
 
-    const [scrims, setScrims] = useState( false );
     const [matchListBody, setMatchListBody] = useState( { items: -1, scrims : false, token : "" } );
-
     const [addMatchActive, setAddMatchActive] = useState(false)
+    const [scrimsValueBefore, setScrimsValueBefore] = useState(matchListBody.scrims)
 
     const {
         isFetching, 
@@ -31,34 +30,46 @@ export default function MatchList({ AddMatchButton, AddMatchBody }) {
             return {...prevMatchListBody};
         } )	
     }, [])
-    
 
+    useEffect(() => {
+        if ( scrimsValueBefore != matchListBody.scrims ) {
+            setTimeout(() => {
+                setScrimsValueBefore( matchListBody.scrims );
+            }, 300);
+        }
+    }, [matchListBody.scrims, scrimsValueBefore])
+    
     function onClickScrims() {
-        setScrims( !scrims );
+
+        setScrimsValueBefore( !matchListBody.scrims );
+
         setTimeout(() => {			
-            setMatchListBody( prevMatchListBody => { 
-                prevMatchListBody.scrims = !scrims;
-                return {...prevMatchListBody};
+            setMatchListBody( prevMatchListBody => {
+                const newMatchListBody = {...prevMatchListBody}
+                newMatchListBody.scrims = !prevMatchListBody.scrims;
+                return {...newMatchListBody};
             } );
+            setScrimsValueBefore( !matchListBody.scrims );
         }, 300);
     }
 
     return (
         <main className="mb-32">
-            <div className="flex flex-col w-full justify-center items-center gap-4">
+            <div className="flex flex-col w-full justify-center items-center gap-4 ">
                 <div className="flex flex-col justify-center">
                     <p className={`text-[52px] font-bold  ${font.className}`}>
                         <Message code={["home", "matches", "title"]} />
                     </p>
                     <div className="flex flex-row gap-4 mb-6 justify-center items-center">
                         <p className="text-lg"> <Message code={["home", "team", "scrims"]} /> </p>
-                        <SliderCheck onClick={onClickScrims} value={scrims} className="h-6 w-12" />
+                        <SliderCheck onClick={onClickScrims} value={matchListBody.scrims} className="h-6 w-12" />
                         <AddMatchButton addMatchActive={addMatchActive} setAddMatchActive={setAddMatchActive} />
                     </div>
                 </div>
                 { addMatchActive && <AddMatchBody /> }
                 { isFetching && <div> loading... </div> }
-                { !isFetching && <div className={`flex flex-col w-full justify-center items-center gap-4 transition-all duration-300  ${  scrims != matchListBody.scrims ? "opacity-0" : "opacity-100" } `}>
+			    { ( !isFetching && error ) && <div className="bg-red-800 text-white "> {error.message} </div> }
+                { !isFetching && <div className={`flex flex-col w-full justify-center items-center gap-4 transition-all duration-300 ${ scrimsValueBefore == matchListBody.scrims ? "opacity-100" : "opacity-0" }  `}>
                     { matchList.map((match) => {
                             return <Match key={match.name} match={match} mainPanel={true} />
                     }) }

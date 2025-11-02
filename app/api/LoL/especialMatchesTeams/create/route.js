@@ -46,9 +46,8 @@ export async function POST(request) {
             errorPlayers = NextResponse.json( { message: `player ${index+1} have empty name.`}, {status: 400});
             return true;
           }
-          if ( !player.uuid || player.uuid.trim() == "" ) {
-            errorPlayers = NextResponse.json( { message: `game ${index+1} have empty uuid.`}, {status: 400});
-            return true;
+          if ( !player.uuid ) {
+            player.uuid= "";
           }
         } );
         if ( errorPlayers ) {

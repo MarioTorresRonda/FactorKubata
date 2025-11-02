@@ -8,6 +8,7 @@ import { anonTeam } from "./AddMatchFunctions";
 import { useMessageText } from "@/hooks/useMessageText";
 import AddMatchSave from "./AddMatchSave";
 import PrettyInput from "@/components/fragments/PrettyInput";
+import SliderCheck, { SliderColors } from "@/components/fragments/SliderCheck";
 
 export default function AddMatch() {
 
@@ -15,6 +16,7 @@ export default function AddMatch() {
     
     const [name, setName] = useState("")
     const [date, setDate] = useState("")
+    const [scrim, setScrim] = useState(false)
     const [ team1, setTeam1 ] = useState( anonTeam(getText) );
     const [ team2, setTeam2 ] = useState( anonTeam(getText) );
     const [games, setGames] = useState([]);
@@ -28,6 +30,10 @@ export default function AddMatch() {
     function OnHandleUpdateDate(event) {
         const date = event.target.value;
         setDate( date );
+    }
+
+    function OnHandleUpdateScrim() {
+        setScrim( !scrim );
     }
 
     return <div className="w-full xl:w-2/3 bg-stone-200 py-2 dark:bg-stone-700 flex flex-col rounded-md"> 
@@ -45,7 +51,18 @@ export default function AddMatch() {
                 <p className=""> <Message code={["home", "matches", "addMatchDate"]} /> </p>
                 <PrettyInput type="date" className="w-60 rounded-md" value={date} onChange={OnHandleUpdateDate} ></PrettyInput>
             </div>
-            <AddMatchSave name={name} date={date} games={games} teams={teamArray} />
+            <div className="flex flex-row gap-1 items-center">
+                <p className=""> <Message code={["home", "matches", "addMatchScrim"]} /> </p>
+                <SliderCheck 
+                    onClick={OnHandleUpdateScrim} 
+                    value={scrim} 
+                    className="h-6 w-12" 
+                    sliderColor={SliderColors.sliderColor.default} 
+                    activeColor={SliderColors.activeColor.default}
+                    dotColor={SliderColors.dotColor.default} 
+                />
+            </div>
+            <AddMatchSave name={name} date={date} scrim={scrim} games={games} teams={teamArray} />
         </div>
         <div className="flex flex-row w-full">
             <AddMatchTeam side={1} team={team1} setTeam={setTeam1} />

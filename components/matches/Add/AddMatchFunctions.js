@@ -6,6 +6,14 @@ export function anonTeam( getText ) {
     }
 }
 
+export function anonTeamAsync() {
+    return { 
+        _id: -2,
+        name:  ["home", "matches", "addMatchTeamSelectAnon"],
+        players : anonPLayers
+    }
+}
+
 const anonPLayers = [
     { name: "???", uuid: "-1", id: 0 },
     { name: "???", uuid: "-1", id: 1 },
@@ -28,5 +36,14 @@ export function getNewID( players ) {
         newId = Math.round(Math.random() * 10000);
     }while( players.filter( ( player ) => { player.id == newId } ).length == 1 );
     return newId;
+}
+
+export function newPOV( POVs ) {
+    return { 
+        champ: "",
+        url: "",
+        id: getNewID( POVs )
+
+     }
 }
 

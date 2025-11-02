@@ -14,6 +14,7 @@ export async function POST(request) {
     const body = await request.json();
     const name = body.name;
     const date = body.date;
+    const scrim = body.scrim;
     const games = body.games;
 
     const pass = readSecrets( keys.password );
@@ -45,10 +46,25 @@ export async function POST(request) {
         if ( !game.red ) {
           return NextResponse.json( { message: `the red side of game ${gameNum+1} is empty `}, {status: 400});
         }
+
+        if ( scrim ) {
+          game.scrim = true;
+        }
         
         if ( game.file ) {
             game.info = game.file;
             game.file = undefined;
+        }
+
+        if ( game.POV ) {
+          const newPOV = {};
+          for (let index = 0; index < game.POV.length; index++) {
+            const pov = game.POV[index];
+            if ( !pov.champ || !pov.url ) {
+              return NextResponse.json( { message: `POV with index ${index} have null values `}, {status: 400});
+            }
+            newPOV[pov.champ] = pov.url;
+          }
         }
 
       }

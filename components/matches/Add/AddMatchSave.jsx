@@ -9,11 +9,10 @@ import AddMatchPlayer from "./AddMatchPlayer"
 import { toast } from "react-toastify"
 import { useMessageText } from "@/hooks/useMessageText"
 import { useFetch } from "@/hooks/useFetch"
-import { createEspecialTeam, updateEspecialTeam } from "@/data/fetch/especialsTeams"
 import { getCookie } from "@/util/cookies"
 import { createEspecialMatch } from "@/data/fetch/especialMatch"
 
-export default function AddMatchSave( { name, date, teams, games } ) {
+export default function AddMatchSave( { name, date, scrim, teams, games } ) {
             
     let controller = new AbortController();
     let signal = controller.signal;
@@ -38,7 +37,7 @@ export default function AddMatchSave( { name, date, teams, games } ) {
             controller = new AbortController();
             signal = controller.signal;
             try{
-                let res = await createEspecialMatch( { token, name, date, games }, { signal } );
+                let res = await createEspecialMatch( { token, name, date, scrim, games }, { signal } );
                 if ( res.result ) {
                     toast( getText(["home", "matches", "saveMatchD"]).replace("#1", name ), { type:"success", theme:"colored" } );
                 }
