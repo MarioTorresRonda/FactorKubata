@@ -8,6 +8,7 @@ export async function fetchMatchList( { items, scrims, token }, signal ) {
 
     for (let i = 0; i < resData.length; i++) {
         const match = resData[i];
+        console.log( match.date );
         match.date = formatMatchDateInput(match.date);
         for (let j = 0; j < match.games.length; j++) {
             const game = match.games[j];
@@ -20,7 +21,7 @@ export async function fetchMatchList( { items, scrims, token }, signal ) {
     return resData;
 }
 
-export async function createEspecialMatch( { token, name, date, games }, body ) {
-    const resData = await apiCall(`${lolApi}/especialMatches/create?token=${token}`, postBodyJSON( body, { name, date, games } ));
+export async function createEspecialMatch( { token, name, date, games, scrim }, body ) {
+    const resData = await apiCall(`${lolApi}/especialMatches/create?token=${token}`, postBodyJSON( body, { name, date, games, scrim } ));
     return resData;
 }

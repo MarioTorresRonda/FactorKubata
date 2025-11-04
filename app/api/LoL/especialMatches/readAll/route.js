@@ -31,7 +31,7 @@ export async function GET(request) {
       for await (const match of matchesSearch) {
         match.games.forEach( game => {
           game.info = JSON.parse( game.info )
-          if ( game.POV ) {
+          if ( game.info && game.POV ) {
             game.info.participants.map( ( participant ) => {
               const pov = game.POV[participant.SKIN];
               if ( pov ) {

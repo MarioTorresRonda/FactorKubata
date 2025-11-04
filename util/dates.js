@@ -64,6 +64,11 @@ export function formatMatchDateInput( dateStr ) {
     }
 
     let [ year, month, day ] = dateStr.split("-");
+    month-= 1;
+    if ( month == 0 ) {
+        month = 12;
+        year -= 1;
+    }
 
     // Create a Date object in UTC
     const date = new Date(Date.UTC(year, month, day, 0, 0));

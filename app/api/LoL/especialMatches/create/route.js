@@ -46,7 +46,7 @@ export async function POST(request) {
         if ( !game.red ) {
           return NextResponse.json( { message: `the red side of game ${gameNum+1} is empty `}, {status: 400});
         }
-
+        console.log( scrim );
         if ( scrim ) {
           game.scrim = true;
         }

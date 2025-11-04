@@ -1,48 +1,49 @@
 import { useMessageText } from "@/hooks/useMessageText";
 import Message from "../fragments/Message";
+import { useState } from "react";
+import { parseMatchDate } from "@/util/dates";
 
 const replaceKey = "{0}";
 
 export default function MatchDate( { date } ) {
 
-    
+    const [expanded, setExpanded] = useState(false)
+
     const getText = useMessageText();
 
     const now = new Date();
+    console.log( date );
     if ( date > now ) {
         return <div> { parseMatchDate( date ) } </div>
     }
 
-    const agoText = getText( ["commons", "time", "ago"] )
-    let timePassed = now.getTime() - date.getTime();
-    timePassed /= 60000;
-    if ( timePassed < 60 ) {
-        let formattedTimePassed = Math.round( timePassed );
-        return <div>  { agoText.replace(replaceKey, `${formattedTimePassed} ${ getText(["commons", "time", "minute"])[formattedTimePassed == 1 ?  0 : 1] }`) } </div>
+    let dateString = "";
+    if ( expanded ) {
+        dateString = parseMatchDate( date );
+    }else{
+        const segments = [ 
+            { operation: 60000, max: 60, text: ["commons", "time", "minute"] },
+            { operation: 60, max: 24, text: ["commons", "time", "hour"] },
+            { operation: 24, max: 30, text: ["commons", "time", "day"] },
+            { operation: 30, max: 12, text: ["commons", "time", "month"] },
+            { operation: 12, max: 100, text: ["commons", "time", "year"] },
+        ]
+
+        let segmentIndex = -1;
+        const agoText = getText( ["commons", "time", "ago"] )
+        let timePassed = now.getTime() - date.getTime();
+        do{
+            segmentIndex++;
+            timePassed /= segments[segmentIndex].operation;
+            if ( timePassed <= segments[segmentIndex].max ) {
+                let formattedTimePassed = Math.round( timePassed );
+                dateString = agoText.replace(replaceKey, `${formattedTimePassed} ${ getText(segments[segmentIndex].text)[formattedTimePassed == 1 ?  0 : 1] }`);
+            }
+        }  while( timePassed > segments[segmentIndex].max )
+
     }
-    timePassed /= 60;
-    if ( timePassed < 60 ) {
-        let formattedTimePassed = Math.round( timePassed );
-        return <div>  { agoText.replace(replaceKey, `${formattedTimePassed} ${ getText(["commons", "time", "hour"])[formattedTimePassed == 1 ?  0 : 1] }`) } </div>
-    }
-    timePassed /= 24;
-    if ( timePassed < 7 ) {
-        let formattedTimePassed = Math.round( timePassed );
-        return <div>  { agoText.replace(replaceKey, `${formattedTimePassed} ${ getText(["commons", "time", "day"])[formattedTimePassed == 1 ?  0 : 1] }`) } </div>
-    }
-    if ( timePassed < 30 ) {
-        timePassed /= 7;
-        let formattedTimePassed = Math.round( timePassed );
-        return <div>  { agoText.replace(replaceKey, `${formattedTimePassed} ${ getText(["commons", "time", "week"])[formattedTimePassed == 1 ?  0 : 1] }`) } </div>
-    }
-    timePassed /= 30;
-    if ( timePassed < 12 ) {
-        let formattedTimePassed = Math.round( timePassed );
-        return <div>  { agoText.replace(replaceKey, `${formattedTimePassed} ${ getText(["commons", "time", "month"])[formattedTimePassed == 1 ?  0 : 1] }`) } </div>
-    }
-    timePassed /= 12;
-    let formattedTimePassed = Math.round( timePassed );
-    return <div>  { agoText.replace(replaceKey, `${formattedTimePassed} ${ getText(["commons", "time", "year"])[formattedTimePassed == 1 ?  0 : 1] }`) } </div>
-    
+
+    return <button onClick={() => { setExpanded( oldExpanded => !oldExpanded ) }}> {dateString} </button>
+
 
 }
