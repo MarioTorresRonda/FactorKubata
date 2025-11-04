@@ -16,7 +16,7 @@ export default function MatchTeamIcon( { name, imgBase64 } ) {
     if ( !imgBase64 ) {
         return <div className="bg-black w-full h-full flex flex-row justify-center items-center ">
             <svg viewBox="0 0 64 64">
-                <text y="60%" x="3.2" textLength="57.6" font-weight="bold" lengthAdjust="spacingAndGlyphs"  fill="yellow" > { acronym } </text>
+                <text y="60%" x="3.2" textLength="57.6" fontWeight="bold" lengthAdjust="spacingAndGlyphs"  fill="yellow" > { acronym } </text>
             </svg>
         </div>
     }else{

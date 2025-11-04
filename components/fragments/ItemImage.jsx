@@ -32,6 +32,11 @@ export default function ItemImage( { itemId, ...props } ) {
         return <></>
     }
 
-    return <Image {...props} alt={item.name} src={item.imgPath} />
+    return <Image
+        {...props} 
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        alt={item.name} 
+        src={item.imgPath}
+    />
     
 }

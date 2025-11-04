@@ -11,7 +11,8 @@ let messages = {
         goalList: { 
             CTD6S12024: "División 6 | Split 1 | Periodo 1",
             CTD5S12024: "División 5 | Split 1 | Periodo 2",
-            CTD5S22025: "División 5 | Split 2 | Periodo 1"
+            CTD5S22025: "División 5 | Split 2 | Periodo 1",
+            CTD5S32025: "División 5 | Split 3 | Periodo 1"
         },
         team: {
             title: "Equipo",

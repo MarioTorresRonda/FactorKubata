@@ -8,7 +8,6 @@ export async function fetchMatchList( { items, scrims, token }, signal ) {
 
     for (let i = 0; i < resData.length; i++) {
         const match = resData[i];
-        console.log( match.date );
         match.date = formatMatchDateInput(match.date);
         for (let j = 0; j < match.games.length; j++) {
             const game = match.games[j];

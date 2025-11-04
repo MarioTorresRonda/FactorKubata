@@ -12,7 +12,6 @@ export default function MatchDate( { date } ) {
     const getText = useMessageText();
 
     const now = new Date();
-    console.log( date );
     if ( date > now ) {
         return <div> { parseMatchDate( date ) } </div>
     }

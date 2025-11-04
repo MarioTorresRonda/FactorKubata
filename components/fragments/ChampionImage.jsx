@@ -30,6 +30,11 @@ export default function ChampionImage( { championId, ...props } ) {
         return <></>
     }
 
-    return <Image {...props} alt={champion.name} src={champion.imgPath} />
+    return <Image 
+        {...props} 
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        alt={champion.name} 
+        src={champion.imgPath}
+    />
     
 }
