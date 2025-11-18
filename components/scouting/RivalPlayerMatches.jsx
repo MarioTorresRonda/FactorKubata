@@ -6,6 +6,7 @@ import Message from "../fragments/Message";
 import RivalPlayerMatchesChamps from "./RivalPlayerMatchesChamps";
 import RivalPlayerMatchesBans from "./RivalPlayerMatchesBans";
 import RivalPlayerMatchesMultiple from "./RivalPlayerMatchesMultiple";
+import RivalPlayerMatchesLastChamps from "./RivalPlayerMatchesLastChamps";
 
 export default function RivalPlayerMatches( { matches, player, puuid, onlyRole, matchesIMP } ) {
 
@@ -45,9 +46,17 @@ export default function RivalPlayerMatches( { matches, player, puuid, onlyRole, 
     }, [puuid, resultMatches]);
 
     return <>
-        { resultMatches && resultMatches.notFetched.length > 0 && <p> <Message code={["home", "scouting", "matches", "notLoaded"]} /> { resultMatches.notFetched.length } <Message code={["home", "scouting", "matches", "matches"]} /> </p> }
-        <RivalPlayerMatchesChamps matches={loadedMatches} onlyRole={onlyRole} role={player.role}/>
-        <RivalPlayerMatchesBans matches={loadedMatches} onlyRole={onlyRole} role={player.role}/>
+        <div className="mx-2">
+            { resultMatches && resultMatches.notFetched.length > 0 && 
+            <p>
+                <Message code={["home", "scouting", "matches", "notLoaded"]} /> 
+                { resultMatches.notFetched.length } 
+                <Message code={["home", "scouting", "matches", "matches"]} />
+            </p> }
+            <RivalPlayerMatchesLastChamps matches={loadedMatches} onlyRole={onlyRole} role={player.role}/>
+            <RivalPlayerMatchesChamps matches={loadedMatches} onlyRole={onlyRole} role={player.role}/>
+            <RivalPlayerMatchesBans matches={loadedMatches} onlyRole={onlyRole} role={player.role}/>
+        </div>
         <RivalPlayerMatchesMultiple matches={loadedMatches} matchesIMP={matchesIMP} />
     </>
 }

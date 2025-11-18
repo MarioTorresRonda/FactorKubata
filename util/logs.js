@@ -18,6 +18,7 @@ export function log( type, ...message ) {
             }
             stream = createWriteStream(fileName, {flags:'a'});
         }
+        message.forEach( _m => JSON.stringify(_m) )
         stream.write( formatMessage( type, message.join(" ") ) );
     }
 }

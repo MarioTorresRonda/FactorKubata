@@ -68,9 +68,10 @@ export async function fetchMatches({ matchList, puuid }, signal ) {
     return resData;
 }
 
-export async function fetchMatchesInMultiplePlayers( { teamName }, signal ) {
+export async function fetchMatchesInMultiplePlayers( { teamName, onlyAsFive }, signal ) {
     
-    const resData = await apiCall(`${lolApi}/readMatchesInMultiplePlayers?teamName=${encodeURIComponent(teamName)}`, signal)
+    console.log( typeof onlyAsFive, onlyAsFive )
+    const resData = await apiCall(`${lolApi}/readMatchesInMultiplePlayers?teamName=${encodeURIComponent(teamName)}&onlyAsFive=${onlyAsFive?1:0}`, signal)
 
     return resData;
 }

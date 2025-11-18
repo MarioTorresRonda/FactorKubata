@@ -49,7 +49,7 @@ export default function RivalPlayerMasteries( { masteries, player, onlyRole } ) 
 
 
     return <>
-        <div className="flex flex-col max-h-[400px] h-[30vh] min-h-[250px] overflow-y-scroll" style={{lineHeightStep: "50px"}} >
+        <div className="flex flex-col max-h-[400px] h-[30vh] min-h-[250px] overflow-y-scroll  mx-2" style={{lineHeightStep: "50px"}} >
             { masteries.map( mastery => {
                 return <div key={mastery.championId} className={`flex flex-row gap-2 h-full ${levelColor(mastery.championLevel)}`}>
                     <div className="aspect-square w-[50px] h-[50px] max-w[50px] max-h-[50px] relative">

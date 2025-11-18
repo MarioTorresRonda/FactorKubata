@@ -27,7 +27,9 @@ function especialChamps( champions )  {
         "Vel'Koz": champions.Velkoz,
         "Miss Fortune": champions.MissFortune,
         "Kai'Sa": champions.Kaisa,
-        "Kog'Maw": champions.KogMaw
+        "Kog'Maw": champions.KogMaw,
+        "Tahm Kench": champions.TahmKench,
+        "Renata Glasc": champions.Renata,
     }
 };
 

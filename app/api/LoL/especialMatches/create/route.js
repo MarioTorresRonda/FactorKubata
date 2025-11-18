@@ -1,6 +1,7 @@
 import { getCollection } from '@/util/mongoDB';
 import { keys, readSecrets } from '@/util/Secrets';
 import { NextResponse } from 'next/server';
+import { createPlayerResume } from '../../playersResume/create/_create';
 
 export async function GET(request) {
     return NextResponse.json( "This method have to be accessed by POST", {status: 405});
@@ -71,6 +72,8 @@ export async function POST(request) {
 
       let especialMatchesCollection = await getCollection("especialMatches");
       const response = await especialMatchesCollection.insertOne( { name, date, games } );
+
+      await createPlayerResume();
 
       return NextResponse.json( { result: true }, {status: 200});
     }catch( e ) {

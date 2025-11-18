@@ -21,16 +21,16 @@ export default function RivalPlayer( { player, onlyRole, onLoad, matchesIMP } ) 
       };
     }, [playerData, onLoad])
 
-    return <div className="min-w-[250px] w-[calc(20%-1rem)] max-w-[320px] flex flex-col gap-4 mx-2" >
-        <div className="flex flex-row justify-between">
+    return <div className="min-w-[250px] w-[calc(20%-1rem)] max-w-[320px] flex flex-col gap-4" >
+        <div className="flex flex-row justify-between mx-2">
             <div className="text-xl font-bold"> { player.name } <span className="opacity-50 text-base"> #{ player.tag } </span> </div>
             <div> <Image src={ rolesObj[player.role].icon  } alt={player.role}></Image> </div>
         </div>
         { isFetching && <div> Loading... </div> }
         { !isFetching && error && <div> {error.message} </div> }
         { playerData && <div className="flex flex-col gap-2">
-            <RivalPlayerRanked  ranked={playerData.soloQ} />
-            <RivalPlayerRanked  ranked={playerData.flexQ} />
+            <RivalPlayerRanked ranked={playerData.soloQ} />
+            <RivalPlayerRanked ranked={playerData.flexQ} />
             <RivalPlayerMasteries masteries={playerData.masteries} player={player} onlyRole={onlyRole} />
             <RivalPlayerMatches matches={playerData.matches} player={player} puuid={playerData.puuid} onlyRole={onlyRole} matchesIMP={matchesIMP} />
         </div> }

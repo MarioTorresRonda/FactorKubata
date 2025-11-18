@@ -23,7 +23,7 @@ function rankColor( tier ) {
 }
 
 export default function RivalPlayerRanked( {ranked} ) {
-    return <div className={`flex flex-col ${rankColor( ranked.tier )} p-2`}>
+    return <div className={`flex flex-col ${rankColor( ranked.tier )} p-2 mx-2`}>
         <div className="flex flex-row justify-between">
             <p> { ranked.queueType == "RANKED_FLEX_SR" ? "Flex" : "SoloQ" } </p>
             <p> {ranked.wins} / {ranked.losses} <span className="opacity-70"> { Math.round( ( 100 / ( ranked.wins + ranked.losses ) ) * ranked.wins ) }% </span> </p>

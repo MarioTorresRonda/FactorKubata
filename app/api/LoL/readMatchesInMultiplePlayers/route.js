@@ -5,6 +5,7 @@ export async function GET(request) {
   
   const searchParams = request.nextUrl.searchParams;
   const teamName = decodeURIComponent( searchParams.get('teamName') );
+  const onlyAsFive = searchParams.get('onlyAsFive') == 1;  
 
   let teamsCollection = await getCollection("teams");
   let team = await teamsCollection.findOne( { teamName : teamName } );
@@ -30,17 +31,13 @@ export async function GET(request) {
     } )
   });
 
+  const allMatchIdsArray = Object.keys( allMatchIds ).map( ( key ) => { return { id: key, count: allMatchIds[key] } } );
+  allMatchIdsArray.sort( (a,b) => b.count - a.count );
   let matchIds = [];
-  Object.keys( allMatchIds ).forEach( ( matchId ) => {
-    if ( allMatchIds[matchId] > 1 ) {
-      matchIds.push( matchId );
+  allMatchIdsArray.forEach( ( matchIdObj ) => {
+    if ( matchIdObj.count >= ( onlyAsFive ? players.length : 2 ) ) {
+      matchIds.push( matchIdObj.id );
     }
-  } );
-
-  matchIds = matchIds.sort( (a, b) => {
-    const trimmedA = Number( a.substr( "EUW1_".length ) );
-    const trimmedB = Number( b.substr( "EUW1_".length ) );
-    return trimmedB - trimmedA;
   } );
   
   return NextResponse.json( matchIds, {status: 200});

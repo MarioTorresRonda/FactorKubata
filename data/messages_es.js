@@ -121,12 +121,15 @@ let messages = {
             },
             mastery: {
                 onlyRole: "Personajes del Rol",
+                AsFive: "Solo como cinco",
                 level: "Nivel",
                 points: "Puntos",
                 games: "~ Partidas"
             },
             matches: {
+                lastGames: "Ultimas Partidas",
                 totalGames: "Todas las partidas",
+                playedTogether: "Jugado juntos",
                 totalBans: "Todos los bans",
                 notLoaded: "Esperando al servidor:",
                 matches: "partidas."
