@@ -33,12 +33,12 @@ export default function RivalPlayerMatchesMultiple( { matches, puuid, matchesIMP
                         <p> { kda } kda. </p>
                     </div>
                     <div className="aspect-square w-[25px] max-w[25px] max-h-[25px] relative">
-                        <Image 
+                        { playerData.teamPosition && <Image 
                             fill={true}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             alt={  playerData.teamPosition } 
                             src={ rolesObj[ playerData.teamPosition ].icon }
-                        />
+                        /> }
                     </div>
                     <div className="flex flex-col w-4 justify-center">
                         <p> Vs </p>
