@@ -11,11 +11,15 @@ import bg4 from "@/public/backgrounds/4.jpeg";
 const font = Roboto_Condensed({subsets: ["latin"]});
 const backgroundList = [ bg1, bg2, bg3, bg4 ];
 
+function StringToFloat( string ) {
+ return Array.from(string).map( char => char.charCodeAt(0) ).reduce( (a, c) => a + c, 0 ) % 100 / 100
+}
+
 export default function Player({elem}) {
 	return (
 		<div className="flex flex-col text-center bg-white-700 items-center relative group *:transition-all *:duration-300">
 			<div className="absolute -z-10 w-[250px] h-[350px] group-hover:scale-90">
-				<Image draggable={false} src={ backgroundList[ Math.trunc(Math.random() * backgroundList.length ) ] } fill={true} alt="background" />
+				<Image draggable={false} src={ backgroundList[ Math.trunc(StringToFloat( elem.name ) * backgroundList.length ) ] } fill={true} alt="background of player" />
 			</div>
             <div className="absolute -z-10 w-[250px] h-[350px] bg-black/50 group-hover:scale-90">
 			</div>

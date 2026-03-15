@@ -60,10 +60,10 @@ export default function Home() {
 				<p className={`text-4xl md:text-[52px] font-bold text-center  ${font.className} mt-14`}>
 					<Message code={["home", "goals"]} />
 				</p>
-				{goalList.map((goal) => {
+				{goalList.map((goal, index) => {
 					return (
-						<>
-							<HorizontalBar className="w-[70%] h-[2px]" />
+						<div key={goal.date} className="flex flex-col w-full justify-center items-center gap-3">
+							{ index > 0 && <HorizontalBar className="w-[70%] h-[2px]" /> }
 							<div className="flex flex-col md:flex-row gap-2 md:justify-between w-2/3 items-center justify-center text-xl">
 								<div> {goal.date} </div>
 								<div className="flex flex-col md:flex-row md:w-1/2 gap-2 md:gap-10 w-full items-center justify-center">
@@ -73,7 +73,7 @@ export default function Home() {
 									</p>
 								</div>
 							</div>
-						</>
+						</div>
 					);
 				})}
 			</div>

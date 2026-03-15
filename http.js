@@ -1,6 +1,3 @@
-import { formatMatchDate } from "./util/dates";
-import { revalidatePath } from 'next/cache'
-
 const lolApi = `/api/LoL`;
 
 async function apiCall( url, signal ) {

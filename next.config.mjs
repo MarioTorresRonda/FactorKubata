@@ -2,23 +2,17 @@
 
 const isProd = process.env.NODE_ENV === 'production'
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-    webpack: (config, options) => {
-        config.module.rules.push({
-            test: /\.txt/i,
-            use: [
-                {
-                    loader: "raw-loader",
-                    options: {
-                        esModule: false,
-                    },
-                },
-            ],
-        });
-        return config;
-    },
+	turbopack: {
+		rules: {
+			'*.txt': {
+				loaders: ['raw-loader'],
+			}
+		}
+	},
     images : {
-            domains: ['ddragon.leagueoflegends.com'],
+        remotePatterns: [new URL('http://ddragon.leagueoflegends.com/**')],
     },
     pageExtensions: isProd ? ['tsx', 'ts', 'js', 'jsx'] : ['tsx', 'ts', 'js', 'jsx', 'dev.js'], 
 };
