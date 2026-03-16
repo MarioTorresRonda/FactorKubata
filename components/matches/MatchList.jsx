@@ -71,7 +71,7 @@ export default function MatchList({ AddMatchButton, AddMatchBody }) {
 			    { ( !isFetching && error ) && <div className="bg-red-800 text-white "> {error.message} </div> }
                 { !isFetching && <div className={`flex flex-col w-full justify-center items-center gap-4 transition-all duration-300 ${ scrimsValueBefore == matchListBody.scrims ? "opacity-100" : "opacity-0" }  `}>
                     { matchList.map((match) => {
-                            return <Match key={match.name} match={match} mainPanel={true} />
+                            return <Match key={match.name + match.date.getTime() } match={match} mainPanel={true} />
                     }) }
                 </div> }
                 

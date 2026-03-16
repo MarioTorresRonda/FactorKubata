@@ -7,6 +7,7 @@ const initialLoL = {
     champions : {},
     championsKeys : {},
     itemsID : {},
+    loaded: false
 } 
 
 export const LoLContext = createContext(null);
@@ -14,6 +15,7 @@ export const LoLContext = createContext(null);
 function lolReducer(state, action) {
 
     if ( action.type == "ADD_CHAMPS" ) {
+        state.loaded = true;
         state.champions = action.payload.response.championsNameListTrimmed;
         state.championsKeys = action.payload.response.championsKeyListTrimmed; 
     }
@@ -25,47 +27,33 @@ function lolReducer(state, action) {
     return state;
 }
 
+function until(condition, { interval = 100, timeout = 5000 } = {}) {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+
+    const check = () => {
+      if (condition()) return resolve();
+      if (Date.now() - start > timeout) return reject(new Error("Timeout"));
+      setTimeout(check, interval);
+    };
+
+    check();
+  });
+}
+
 export default function LoLContextProvider( {children} ) {
 
     const [ lolState, lolDispatch ] = useReducer( lolReducer, initialLoL )
 
-    const getChampions = useCallback( async ( championId ) => {
-
-        if ( !championId ) {
-            throw new Error("championId on getChampions was null")
-        }
-        
-        if ( Number.isInteger( Number( championId ) ) ) {
-            if ( lolState.championsKeys[championId] ) {
-                return lolState.championsKeys[championId];
-            }
-        }else{
-            if ( lolState.champions[championId] ) {
-                return lolState.champions[championId];
-            }
-        }
-        
+    const loadContext = useCallback( async ( championId ) => {
         const response = await fetchChampionList();
+
         lolDispatch({
             type: "ADD_CHAMPS",
             payload: {
                 response
             },
         });
-
-        return Number.isInteger( Number( championId ) ) ? response.championsKeyListTrimmed[championId] : response.championsNameListTrimmed[championId];
-
-    }, [ lolState ]  );
-
-    const getItems = useCallback( async ( itemId ) => {
-
-        if ( !itemId ) {
-            throw new Error("itemsID on getItems was null")
-        }
-
-        if ( lolState.itemsID[itemId] ) {
-            return lolState.itemsID[itemId];
-        }
 
         const controller = new AbortController();
         const signal = controller.signal;
@@ -76,12 +64,43 @@ export default function LoLContextProvider( {children} ) {
                 itemList
             },
         }) 
+    }, [ lolState ]  );
+
+    const getChampions = useCallback( async ( championId ) => {
+
+        if ( !championId ) {
+            throw new Error("championId on getChampions was null")
+        }
+
+        await until(() => lolState.loaded == true, { timeout: 10000 });
         
-        return itemList[itemId];
+        if ( Number.isInteger( Number( championId ) ) ) {
+            if ( lolState.championsKeys[championId] ) {
+                return lolState.championsKeys[championId];
+            }
+        }else{
+            if ( lolState.champions[championId] ) {
+                return lolState.champions[championId];
+            }
+        }        
+    }, [ lolState ]  );
+
+    const getItems = useCallback( async ( itemId ) => {
+
+        if ( !itemId ) {
+            throw new Error("itemsID on getItems was null")
+        }
+
+        await until(() => lolState.loaded == true, { timeout: 10000 });
+
+        if ( lolState.itemsID[itemId] ) {
+            return lolState.itemsID[itemId];
+        }
 
     }, [ lolState.itemsID ]  )
 
     const ctxValue = {
+        loadContext,
         getChampions,
         getItems
     }
