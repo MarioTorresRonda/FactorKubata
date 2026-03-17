@@ -1,13 +1,8 @@
 'use client'
 
 import {Roboto_Condensed} from "next/font/google";
+const font = Roboto_Condensed({subsets: ["latin"]});
 
-const backgroundList = [bg1, bg2, bg3, bg4];
-
-import bg1 from "@/public/backgrounds/1V.jpeg";
-import bg2 from "@/public/backgrounds/2V.jpeg";
-import bg3 from "@/public/backgrounds/3V.jpeg";
-import bg4 from "@/public/backgrounds/4V.jpeg";
 import Message from "@/components/fragments/Message";
 import { useEffect, useRef, useState } from "react";
 import NewRival from "@/components/scouting/NewRival";
@@ -17,8 +12,6 @@ import Rival from "@/components/scouting/Rival";
 import { useFetch } from "@/hooks/useFetch";
 import { getCookie } from "@/util/cookies";
 import { fetchTeams } from "@/data/fetch/team";
-
-const font = Roboto_Condensed({subsets: ["latin"]});
 
 export default function Home() {
 

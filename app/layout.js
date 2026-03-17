@@ -5,6 +5,8 @@ import NavBar from "@/components/fragments/NavBar";
 import OnDocumentReady from "@/components/fragments/OnDocumentReady";
 import { ToastContainer } from "react-toastify";
 
+require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
