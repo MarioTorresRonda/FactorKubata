@@ -22,9 +22,10 @@ export default function RivalPlayer( { player, onlyRole, onLoad, matchesIMP } ) 
     }, [playerData, onLoad])
 
     return <div className="min-w-[250px] w-[calc(20%-1rem)] max-w-[320px] flex flex-col gap-4" >
-        <div className="flex flex-row justify-between mx-2">
-            <div className="text-xl font-bold"> { player.name } <span className="opacity-50 text-base"> #{ player.tag } </span> </div>
-            <div> <Image src={ rolesObj[player.role].icon  } alt={player.role}></Image> </div>
+        <div className="flex flex-row justify-between gap-2 mx-2 text-xl font-bold">
+            <div className="max-w-[75%] text-nowrap overflow-x-clip"> { player.name } </div>
+            <span className="opacity-50 text-base flex-1"> #{ player.tag } </span>
+            <div className=""> <Image src={ rolesObj[player.role].icon  } alt={player.role}></Image> </div>
         </div>
         { isFetching && <div> Loading... </div> }
         { !isFetching && error && <div> {error.message} </div> }

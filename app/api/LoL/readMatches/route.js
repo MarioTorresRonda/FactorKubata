@@ -136,6 +136,9 @@ async function addMatch( matchesCollection, matchId ) {
         }
         return false;
       }
+      if ( matchJSON.info.gameMode != "CLASSIC" ) {
+        return true;
+      }
       matchJSON.matchId = matchId;
       try{
 

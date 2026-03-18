@@ -6,10 +6,13 @@ import { fetchTeam } from "@/data/fetch/team";
 import { useFetch } from "@/hooks/useFetch";
 import { getCookie } from "@/util/cookies";
 import { useEffect, useState } from "react";
+import { use } from 'react'
 
 export default function Page( { params } ) {
 
-    const { teamId } = params;
+
+
+    const { teamId } = use( params );
     const [teamsBody, setTeamsBody] = useState({ teamName: teamId, players: null });
 
     const {

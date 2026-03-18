@@ -29,7 +29,7 @@ export default function RivalPlayerMatchesLastChamps( { matches, role, onlyRole 
             return <div key={matchId} className="aspect-square w-[40px] max-w[40px] max-h-[40px] relative">
                 <ChampionImage fill={true} championId={championId} />
                 <div className="absolute top-0 bottom-0 left-0 right-0 bg-stone-900/50 text-white dark:bg-stone-900/70 text-center pt-5 font-bold text-lg">
-                   { Math.round( (kills + assists) / deaths * 10) / 10 }
+                   {  Math.round( (kills + assists) / ( deaths == 0 ? 1 : deaths ) * 10) / 10 }
                 </div>
             </div>
         } ) }

@@ -23,7 +23,7 @@ export async function getChampions( version ) {
   let championsKeyListTrimmed = {};
   Object.keys(championsNameList).map( name => { 
     const champ = championsNameList[name];
-    championsNameListTrimmed[name] = { key : champ.key, name, imgPath : `http://ddragon.leagueoflegends.com/cdn/15.15.1/img/champion/${name}.png` };
+    championsNameListTrimmed[name] = { key : champ.key, name, imgPath : `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${name}.png` };
     championsKeyListTrimmed[champ.key] = championsNameListTrimmed[name];
   } );
 

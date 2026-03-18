@@ -3,6 +3,8 @@ import jungleIcon from "@/public/roles/Jungle_icon.webp"
 import midIcon from "@/public/roles/Middle_icon.webp"
 import bottomIcon from "@/public/roles/Bottom_icon.webp"
 import supportIcon from "@/public/roles/Support_icon.webp"
+import coachIcon from "@/public/roles/Coach.png"
+
 
 export const top = {
     op: "top",
@@ -33,7 +35,17 @@ export const supp = {
     icon: supportIcon,
 }
 
+export const coach = {
+    op: "coach",
+    roleId: "",
+    icon: coachIcon,
+}
+
 export const roles = [
+    top, jungle, mid, adc, supp, coach
+]
+
+export const mainRoles = [
     top, jungle, mid, adc, supp
 ]
 

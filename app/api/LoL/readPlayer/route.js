@@ -98,7 +98,7 @@ export async function GET(request) {
 
   let matches = player.matches;
   if ( !matches || !player.lastMatchesUpdate || ( player.lastMatchesUpdate.getTime() ) < new Date().getTime() - 28800000 ) {
-    let data = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=40&type=ranked&api_key=${api}`)
+    let data = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=80&type=ranked&api_key=${api}`)
     let json = await data.json();
 
     if ( json.status && json.status != 429 ) {

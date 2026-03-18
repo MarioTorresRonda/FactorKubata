@@ -4,11 +4,14 @@ import jorgePlayer from "@/public/Jorge.png"
 import marioPlayer from "@/public/Mario.png"
 import moiPlayer from "@/public/Moi.png"
 import hacterPlayer from "@/public/Hacter.png"
+import BubaPlayer from "@/public/Buba.png"
+import MarcosPlayer from "@/public/Marcos.png"
+import BorjaPlayer from "@/public/Borja.png"
 import noImg from "@/public/NoImg.png"
 
 
 import { teams } from "./teams"
-import { adc, jungle, mid, supp, top } from "./roles"
+import { adc, coach, jungle, mid, supp, top } from "./roles"
 
 
 export const players = [ 
@@ -33,28 +36,31 @@ export const players = [
 {
     name: "FK Bubazila",
     role: adc,
-    imgSrc : noImg,
+    imgSrc : BubaPlayer,
     player: teams.factorKubata.players.adcSub
 },
 {
     name: "FK Arcadic",
     role: supp,
-    imgSrc : noImg,
+    imgSrc : MarcosPlayer,
     player: teams.factorKubata.players.jungleSub
 },
 {
     name: "Bor Hacter",
     role: adc,
     imgSrc : hacterPlayer,
-    sub: true,
+    old: true,
     player: teams.factorKubata.players.adc
 },
 {
     name: "FK Moi",
-    role: supp,
-    imgSrc : moiPlayer,
-    sub: true,
-    player: teams.factorKubata.players.supp
+    role: coach,
+    imgSrc : moiPlayer
+},
+{
+    name: "FK Harver",
+    role: coach,
+    imgSrc : BorjaPlayer
 },
 {
     name: "FK Rulo",

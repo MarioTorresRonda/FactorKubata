@@ -1,7 +1,7 @@
 import {Roboto_Condensed} from "next/font/google";
 
 import Image from "next/image";
-import homeImage from "@/public/FrontImage.jpg";
+import homeImage from "@/public/mainBG.png";
 import Player from "@/components/home/Player";
 import {players} from "@/data/players";
 import Message from "@/components/fragments/Message";
@@ -9,6 +9,7 @@ import HorizontalBar from "@/components/fragments/HorizontalBar";
 import {goalList} from "@/data/goals";
 import GoalTrophy from "@/components/home/GoalTrophy";
 import Matches from "@/components/home/Matches";
+import { coach, mainRoles } from "@/data/roles";
 
 const font = Roboto_Condensed({subsets: ["latin"]});
 
@@ -18,12 +19,12 @@ export default function Home() {
 			<div className={`flex flex-row justify-center z-0 -mt-4 h-[300px] md:h-[700px] overflow-hidden animate-fromTop relative text-white ${font.className}`}>
 				<Image src={homeImage} alt="homeImg" width={1920} height={1080} className="select-none min-h-[800px] min-w-[1200px] md:w-full md:h-auto absolute"></Image>
 				<div className="w-full h-full bg-stone-900/50 absolute /"></div>
-				<div className=" absolute top-0 bottom-20 left-0 right-0 self-center text-center font-normal mx-2">
-					<p className="text-xl md:text-2xl">
+				<div className=" absolute top-0 bottom-[30rem] left-0 right-0 self-center text-center font-normal mx-2">
+					<p className="text-xl md:text-2xl" >
 						<Message code={["home", "mainText1"]} />
 					</p>
 				</div>
-				<div className=" absolute top-32 bottom-20 left-0 right-0 self-center text-center font-extrabold mx-4">
+				<div className=" absolute top-32 bottom-[30rem] left-0 right-0 self-center text-center font-extrabold mx-4">
 					<p className="text-[36px] md:text-[90px]">
 						<Message code={["home", "mainText2"]} />
 					</p>
@@ -45,14 +46,35 @@ export default function Home() {
 					</p>
 				</div>
 			</div>
+			<p className={`text-4xl md:text-[52px] font-bold text-center  ${font.className} mt-14`}>
+				<Message code={["home", "teamPlayers"]} />
+			</p>
 			<div className="flex w-full justify-center mt-8">
-				<div className="w-2/3 flex flex-wrap justify-center gap-y-5">
+				<div className="w-3/4 flex flex-wrap justify-center gap-y-5">
 					{players.map( (p) => {
-						return (
-							<div key={p.name} className="md:w-1/2 lg:w-1/3 xl:w-1/4 px-3 min-w-[274px]">
+						if ( mainRoles.indexOf( p.role ) != -1 && !p.old && !p.sub ) {
+							return (
+								<div key={p.name} className="md:w-1/2 lg:w-1/3 xl:w-1/5 px-3 min-w-[270px]">
 								<Player elem={p} />
 							</div>
 						);
+					}
+					})}
+				</div>
+			</div>
+			<p className={`text-4xl md:text-[52px] font-bold text-center  ${font.className} mt-14`}>
+				<Message code={["home", "teamCoach"]} />
+			</p>
+			<div className="flex w-full justify-center mt-8">
+				<div className="w-2/3 flex flex-wrap justify-center gap-y-5">
+					{players.map( (p) => {
+						if ( p.role.op == coach.op ) {
+							return (
+								<div key={p.name} className="md:w-1/2 lg:w-1/3 xl:w-1/4 px-3 min-w-[274px]">
+									<Player elem={p} />
+								</div>
+							);
+						}
 					})}
 				</div>
 			</div>

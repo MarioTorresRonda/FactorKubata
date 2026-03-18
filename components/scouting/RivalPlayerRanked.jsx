@@ -1,4 +1,10 @@
 function rankColor( tier ) {
+    if ( tier == "UNRANKED" ) {
+        return "bg-stone-800/50"
+    }
+    if ( tier == "IRON" ) {
+        return "bg-slate-800/50"
+    }
     if ( tier == "BRONZE" ) {
         return "bg-orange-400/50"
     }
@@ -23,6 +29,16 @@ function rankColor( tier ) {
 }
 
 export default function RivalPlayerRanked( {ranked} ) {
+    if ( !ranked ) {
+        ranked = {
+            tier : "UNRANKED",
+            rank : "",
+            wins : 0,
+            losses : 0
+        }
+    }
+
+
     return <div className={`flex flex-col ${rankColor( ranked.tier )} p-2 mx-2`}>
         <div className="flex flex-row justify-between">
             <p> { ranked.queueType == "RANKED_FLEX_SR" ? "Flex" : "SoloQ" } </p>

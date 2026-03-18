@@ -7,6 +7,8 @@ let messages = {
         infoText2: "Somos un grupo de jugadores que están dando sus primeros pasos en el competitivo, pero no por eso vamos a dejar que nos ganen fácilmente (o eso esperamos). En FactorKubata creemos que las partidas se ganan con buenas rotaciones, un ward a tiempo y, por supuesto, tilteando lo menos posible.",
         infoText3: "Si buscas un equipo profesional de alto rendimiento... bueno, aún no llegamos a eso, pero si te gustan las buenas risas, las jugadas inesperadas y un ambiente donde el GGWP se dice de corazón, ¡entonces estás en el lugar correcto!",
         infoText4: "¡Síguenos en esta aventura, donde el objetivo no es solo escalar en la clasificatoria, sino también pasarla bien y, con suerte, no hacer un \"int\" demasiado descarado! 🌟",
+        teamPlayers: "Jugadores",
+        teamCoach: "Entrenadores",
         goals: "Nuestros logros",
         goalList: { 
             CTD6S12024: "División 6 | Split 1 | Periodo 1",

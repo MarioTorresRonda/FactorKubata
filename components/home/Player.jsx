@@ -23,7 +23,7 @@ export default function Player({elem}) {
 			</div>
             <div className="absolute -z-10 w-[250px] h-[350px] bg-black/50 group-hover:scale-90">
 			</div>
-			<div className="overflow-hidden w-[250px] h-[300px] mt-[50px] group-hover:scale-[110%]" >
+			<div className={`overflow-hidden w-[250px] h-[300px] mt-[50px] group-hover:scale-[110%]`} >
 				<Image draggable={false} src={elem.imgSrc} alt={"player" + elem.name}></Image>
 			</div>
 			<div className={`px-4 py-2 bg-stone-300 text-black w-full ${font.className} items-center flex flex-col gap-2 z-10`}>

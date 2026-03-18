@@ -59,7 +59,7 @@ export default function RivalPlayerMasteries( { masteries, player, onlyRole } ) 
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 w-full mr-2">
-                        <div className="flex flex-row justify-between">
+                        <div className="flex flex-row gap-2 justify-between">
                             <p> <Message code={["home", "scouting", "mastery", "points"]} /> {mastery.championPoints } </p>
                             <p className="text-ellipsis" > { Math.round( mastery.championPoints / 800 ) }<Message code={["home", "scouting", "mastery", "games"]} />  </p>
                         </div>

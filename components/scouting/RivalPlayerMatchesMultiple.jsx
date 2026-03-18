@@ -30,7 +30,7 @@ export default function RivalPlayerMatchesMultiple( { matches, puuid, matchesIMP
                     </div>
                     <div className="flex flex-col w-16 items-end">
                         <p> { playerData.kills }/{ playerData.deaths }/{ playerData.assists } </p>
-                        <p> { kda } kda. </p>
+                        <p className="text-nowrap"> { kda } kda. </p>
                     </div>
                     <div className="aspect-square w-[25px] max-w[25px] max-h-[25px] relative">
                         { playerData.teamPosition && <Image 

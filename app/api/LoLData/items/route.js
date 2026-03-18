@@ -13,7 +13,7 @@ export async function GET(request) {
     let championsIDListTrimmed = {};
     Object.keys(itemsIDList).map( itemID => { 
       const item = itemsIDList[itemID];
-      championsIDListTrimmed[itemID] = { name : item.name, imgPath : `http://ddragon.leagueoflegends.com/cdn/15.15.1/img/item/${item.image.full}` };
+      championsIDListTrimmed[itemID] = { name : item.name, imgPath : `http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}` };
     } );
 
     return NextResponse.json( championsIDListTrimmed, {status: 200});

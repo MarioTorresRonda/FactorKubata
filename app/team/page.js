@@ -16,6 +16,7 @@ import bg4 from "@/public/backgrounds/4V.jpeg";
 import { fetchPlayersResume } from "@/data/fetch/playersResume";
 import { useFetch } from "@/hooks/useFetch";
 import { isEmpty } from "@/util/Objects";
+import { mainRoles } from "@/data/roles";
 
 const font = Roboto_Condensed({subsets: ["latin"]});
 
@@ -50,7 +51,9 @@ export default function Home() {
 			{ isFetching && <div> loading... </div> }
 			{ ( !isFetching && error ) && <div className="bg-red-800 text-white "> {error.message} </div> }
 			{ ( !isFetching && !isEmpty( stats ) ) && <div className="flex flex-col gap-6 w-full"> { players.map( (player, index) => {
-				return <TeamPlayer key={player.name} stats={stats.resume} player={player} background={backgrounds[index]} odd={index % 2 == 0} />
+				if ( mainRoles.indexOf( player.role ) != -1 && !player.old && !player.sub ) {
+					return <TeamPlayer key={player.name} stats={stats.resume} player={player} background={backgrounds[index]} odd={index % 2 == 0} />
+				}
 			}) } </div> }
 		</main>
 	);
