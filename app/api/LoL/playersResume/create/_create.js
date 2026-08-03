@@ -17,7 +17,9 @@ export async function createPlayerResume() {
 		matches.push(match);
 	}  
 
-	players.forEach( player => {
+	const activePlayers = players.filter( ( player ) => player.player && !player.old );
+
+	activePlayers.forEach( player => {
 
 		finalObj[player.name] = statsObj({ player, scrim : false, matches});
 		finalObjsScrims[player.name] = statsObj({ player, scrim : true, matches});
